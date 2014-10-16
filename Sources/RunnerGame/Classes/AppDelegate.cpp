@@ -1,7 +1,10 @@
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
+#include "PlayLayer.h"
+#include "LevelsLayer.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
+using namespace CocosDenshion;
 
 AppDelegate::AppDelegate() {
 
@@ -16,19 +19,24 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLView::create("My Game");
+        glview = GLView::create("Egg Catcher");
         director->setOpenGLView(glview);
     }
 
+	Size designSize = Size(800, 480);
+	Size screenSize = glview->getFrameSize();
+	glview->setDesignResolutionSize(designSize.width, designSize.height,ResolutionPolicy::SHOW_ALL);
+
+	//director->setContentScaleFactor(screenSize.width / designSize.width);
     // turn on display FPS
-    director->setDisplayStats(true);
+    director->setDisplayStats(false);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
-
+    auto scene = PlayLayer::createScene("Levels/level1.tmx");
+	//auto scene = LevelsLayer::createScene();
     // run
     director->runWithScene(scene);
 

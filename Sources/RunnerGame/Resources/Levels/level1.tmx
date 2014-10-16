@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="16" tilewidth="70" tileheight="70">
+ <tileset firstgid="1" name="Tile" tilewidth="70" tileheight="70" spacing="2">
+  <image source="tiles_spritesheet.png" width="914" height="936"/>
+ </tileset>
+ <layer name="Background" width="30" height="16">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAooA+lImJ5m6iBhatiTjmYmuhwpavBhEAAAWIMNOA==
+  </data>
+ </layer>
+ <layer name="Foreground" width="30" height="16">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AU0BIoAbEYne10BWJLINals724gBsVzbKFYkKAF4iDqGgvIZCBhpHBTCyYGCACxSDQiiTeiGQPPnOx2UuM/aT6hVr2kmMmsfaSgullLwD/VjVG
+  </data>
+ </layer>
+ <layer name="Tile Layer 3" width="30" height="16">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoGHmQAccxAO4KOAAC90ADF
+  </data>
+ </layer>
+ <objectgroup name="Objects">
+  <object name="Floor" type="Floor" x="-1" y="912" width="284" height="204">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="-65" y="1074" width="2169" height="44">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="DynamicItem" type="Item" x="465" y="691">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="631" y="773" width="279" height="65">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="282.797" y="835.547" width="348.628" height="72.5973" rotation="0.214699">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+   </properties>
+  </object>
+  <object name="Player" type="Player" x="65" y="702" width="43" height="47">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="2"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="HurtCount" value="10"/>
+    <property name="HurtPath" value="player_hurt%d.png"/>
+    <property name="ImageCount" value="4"/>
+    <property name="ImagePath" value="player_idle%d.png"/>
+    <property name="JumpCount" value="8"/>
+    <property name="JumpPath" value="player_jump%d.png"/>
+    <property name="RunCount" value="8"/>
+    <property name="RunPath" value="player_run%d.png"/>
+   </properties>
+  </object>
+  <object name="Monster" type="Monster" x="552" y="765" width="45" height="40">
+   <properties>
+    <property name="CollisionBitmask" value="0"/>
+    <property name="ImageCount" value="3"/>
+    <property name="ImagePath" value="monster%d.png"/>
+   </properties>
+  </object>
+  <object name="EndGame" type="EndGame" x="766" y="700" width="75" height="70">
+   <properties>
+    <property name="AnimationDelay" value="0.5"/>
+    <property name="CollisionBitmask" value="5"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="2"/>
+    <property name="ImagePath" value="flagBlue%d.png"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="552" y="664">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="722" y="581">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="834" y="549">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="343" y="506">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="111" y="606">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
