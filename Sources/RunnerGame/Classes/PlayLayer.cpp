@@ -16,6 +16,8 @@ bool PlayLayer::init()
 	touchListener->onTouchBegan = CC_CALLBACK_2(PlayLayer::onTouchBegan, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
+	scheduleUpdate();
+
 	return true;
 }
 
@@ -71,6 +73,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 bool PlayLayer::onTouchBegan(Touch *touch, Event *unused_event)
 {
 	player->jump(ccp(0, PlayerJump));
+	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("jump",2.0f,false,true);
 	return true;
 }
 
@@ -88,11 +91,10 @@ bool PlayLayer::createMap(string tmxpath)
 		auto properties = object.asValueMap();
 		if (properties["type"].asString() == "Player")
 		{
-			player = Player::create();
-			player->setInfo(properties);
+			player = Player::create(properties);
 			this->addChild(player);
-			player->getAnimator()->playActionByName("idle");
-			player->move(ccp(PlayerSpeed, 0));
+			((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("idle");
+			player->move(ccp(5000, 0));
 			this->getHubLayer()->setPlayer(player);
 		}
 		if (properties["type"].asString() == "Floor")
@@ -108,8 +110,7 @@ bool PlayLayer::createMap(string tmxpath)
 		}
 		if (properties["type"].asString() == "Item")
 		{
-			auto item = Item::create();
-			item->setInfo(properties);
+			auto item = Item::create(properties);
 			this->addChild(item);
 		}
 		if (properties["type"].asString() == "DieZone")
@@ -125,8 +126,7 @@ bool PlayLayer::createMap(string tmxpath)
 		}
 		if (properties["type"].asString() == "EndGame")
 		{
-			auto node = GameObject::create();
-			node->setInfo(properties);
+			auto node = GameObject::create(properties);
 			this->addChild(node);
 		}
 	}
@@ -151,5 +151,10 @@ void PlayLayer::setViewPointCenter(Point position)
 HubLayer* PlayLayer::getHubLayer()
 {
 	return (HubLayer*)this->getParent()->getChildByTag(3);
+}
+
+void PlayLayer::update(float dt)
+{
+	this->setViewPointCenter(player->getPosition());
 }
 

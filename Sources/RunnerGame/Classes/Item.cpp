@@ -1,8 +1,13 @@
 #include "Item.h"
 
 
-Item::Item()
+Item::Item(ValueMap properties) : GameObject(properties)
 {
+	_score = properties["Score"].asInt();
+	_entityManager->addComponentObject("Animator", Animator::create());
+	Animator* animator = (Animator*)this->getEntityManager()->getComponentObjectByName("Animator");
+	animator->addAction("idle", properties["ImageCount"].asInt(), properties["ImagePath"].asString());
+	animator->playActionByName("idle",1.0f,true);
 }
 
 
@@ -10,17 +15,9 @@ Item::~Item()
 {
 }
 
-void Item::setInfo(ValueMap properties)
+Item* Item::create(ValueMap properties)
 {
-	GameObject::setInfo(properties);
-	_score = properties["Score"].asInt();
-	this->getAnimator()->addAction("idle", properties["ImageCount"].asInt(), properties["ImagePath"].asString());
-	this->getAnimator()->playActionByName("idle");
-}
-
-Item* Item::create()
-{
-	Item *sprite = new Item();
+	Item *sprite = new Item(properties);
 	if (sprite)
 	{
 		sprite->autorelease();

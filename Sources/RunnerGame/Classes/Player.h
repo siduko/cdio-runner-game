@@ -11,15 +11,17 @@ enum PlayerState
 };
 class Player:public GameObject
 {
+private:
+	PlayerState _playerState;
 public:
-	Player();
+	Player(ValueMap properties);
 	~Player();
 	CC_SYNTHESIZE(bool, _allowJump, AllowJump);
 	void setSpeed(float value);
-	void setInfo(ValueMap properties);
-	static Player* create();
+	static Player* create(ValueMap properties);
 	void move(Vec2 vec);
 	void jump(Vec2 vec);
+	void update(float dt);
 };
 #endif // Player_h__
 

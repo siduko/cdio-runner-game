@@ -36,44 +36,44 @@ bool HubLayer::init()
 	lbVelocity->setPosition(ccp(sceneSize.width*0.25f, sceneSize.height*0.85f));
 	this->addChild(lbVelocity);
 
-	auto joystick = JoyStick::create("joystick_bg.png", "joystick_ct.png");
+	/*auto joystick = JoyStick::create("joystick_bg.png", "joystick_ct.png");
 	this->addChild(joystick, 100);
 	joystick->setPosition(Vec2(100, 100));
 	joystick->setDieRadius(60);
 	joystick->onDirection = [this](JoyStickEnum dir, float vel){
-		if (player)
-		switch (dir)
-		{
-		case DEFAULT:
-			player->getAnimator()->playActionByName("idle");
-			break;
-		case D_UP:
-			break;
-		case D_DOWN:
-			break;
-		case D_LEFT:
-			player->move(ccp(-vel * 100, 0));
-			player->setFlipX(true);
-			player->getAnimator()->playActionByName("run");
-			break;
-		case D_RIGHT:
-			player->move(ccp(vel * 100, 0));
-			player->setFlipX(false);
-			player->getAnimator()->playActionByName("run");
-			break;
-		case D_LEFT_UP:
-			break;
-		case D_LEFT_DOWN:
-			break;
-		case D_RIGHT_UP:
-			break;
-		case D_RIGHT_DOWN:
-			break;
-		default:
-			break;
-		}
+	if (player)
+	switch (dir)
+	{
+	case DEFAULT:
+	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("idle");
+	break;
+	case D_UP:
+	break;
+	case D_DOWN:
+	break;
+	case D_LEFT:
+	player->move(ccp(-vel * 100, 0));
+	player->setFlipX(true);
+	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("run");
+	break;
+	case D_RIGHT:
+	player->move(ccp(vel * 100, 0));
+	player->setFlipX(false);
+	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("run");
+	break;
+	case D_LEFT_UP:
+	break;
+	case D_LEFT_DOWN:
+	break;
+	case D_RIGHT_UP:
+	break;
+	case D_RIGHT_DOWN:
+	break;
+	default:
+	break;
+	}
 	};
-	joystick->onRun();
+	joystick->onRun();*/
 
 	scheduleUpdate();
 
@@ -89,6 +89,6 @@ void HubLayer::update(float delta)
 {
 	if (player)
 	{
-		lbVelocity->setString(Utils::to_string((int)this->player->spriteBody->getVelocity().x) + " m/s");
+		lbVelocity->setString(Utils::to_string((int)this->player->getPhysicsBody()->getVelocity().x) + " m/s");
 	}
 }

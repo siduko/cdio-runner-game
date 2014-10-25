@@ -10,10 +10,9 @@ class Item:public GameObject
 {
 public:
 	CC_SYNTHESIZE(int, _score, Score);
-	void setInfo(ValueMap properties);
-	Item();
+	Item(ValueMap properties);
 	~Item();
-	static Item* create();
+	static Item* create(ValueMap properties);
 };
 #endif // Item_h__
 

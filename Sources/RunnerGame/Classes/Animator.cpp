@@ -3,12 +3,16 @@
 
 Animator::Animator()
 {
+	_playingAction = NULL;
+	_currentAnimate = NULL;
+	_playingActionName = "";
 }
 
 Animator::~Animator()
 {
 	for (pair<string, Action*> a : _listAnimation)
 		a.second->release();
+	_listAnimation.clear();
 }
 
 Animator* Animator::create()
@@ -23,38 +27,46 @@ Animator* Animator::create()
 	return nullptr;
 }
 
-void Animator::playActionByName(string name)
+void Animator::playActionByName(string name, float duration /*= 0.1f*/, bool isRepeat /*= false*/, bool returnIdle /*= false*/)
 {
 	Node* _parent = this->getParent();
 	if (_parent){
-		for (pair<string, Action*> a : _listAnimation)
+		Animate* act = _listAnimation[name];
+		if (act && _currentAnimate != act)
 		{
-			if (a.first == name)
+			act->setDuration(duration);
+			if (_playingAction)
+				_parent->stopAction(_playingAction);
+			if (isRepeat)
 			{
-				if (_playingAction != a){
-					_parent->stopAction(_playingAction.second);
-					_parent->runAction(a.second);
-					_playingAction = a;
-				}
-				return;
+				Action* temp = RepeatForever::create(act);
+				_parent->runAction(temp);
+				_playingAction = temp;
+				_playingActionName = name;
 			}
+			else
+			{
+				if (returnIdle)
+				{
+					Action* temp = Sequence::createWithTwoActions(act, CallFunc::create([this](){this->playActionByName("idle"); }));
+					_parent->runAction(temp);
+					_playingAction = temp;
+					_playingActionName = name;
+				}
+				else
+				{
+					_parent->runAction(act);
+					_playingAction = act;
+					_playingActionName = name;
+				}
+			}
+			_currentAnimate = act;
 		}
 	}
+
 }
 
-void Animator::playActionByIndex(int index)
-{
-	Node* _parent = this->getParent();
-	if (_parent  && index < _listAnimation.size()){
-		if (_playingAction != _listAnimation[index]){
-			_parent->stopAction(_playingAction.second);
-			_parent->runAction(_listAnimation[index].second);
-			_playingAction = _listAnimation[index];
-		}
-	}
-}
-
-void Animator::addAction(string name, int imageCount, string imagePath, float animationDelay /*= 0.2f*/, bool isRepeat /*= true*/, bool isFlipX /*= false*/, bool isFlipY /*= false*/)
+void Animator::addAction(string name, int imageCount, string imagePath, float animationDelay /*= 0.2f*/)
 {
 	Sprite* test;
 	Vector<SpriteFrame*> animFrames(imageCount);
@@ -63,27 +75,21 @@ void Animator::addAction(string name, int imageCount, string imagePath, float an
 	{
 		sprintf(str, imagePath.c_str(), i);
 		test = Sprite::create(str);
-		test->setFlipX(isFlipX);
-		test->setFlipY(isFlipY);
 		auto frame = test->getSpriteFrame();
 		animFrames.pushBack(frame);
 	}
 
 	auto animation = Animation::createWithSpriteFrames(animFrames, animationDelay);
-	Action* temp = Animate::create(animation);
-	if (isRepeat)
-		temp = RepeatForever::create(Animate::create(animation));
-	else
-		temp = Sequence::createWithTwoActions(Animate::create(animation), CallFunc::create([this](){this->playActionByName("idle"); }));
+	Animate* temp = Animate::create(animation);
 	temp->retain();
-	_listAnimation.push_back(make_pair(name, temp));
+	_listAnimation[name] = temp;
 }
 
 void Animator::stopCurrentAction()
 {
 	Node* _parent = this->getParent();
-	if (_parent  ){
-		_parent->stopAction(_playingAction.second);
+	if (_parent){
+		_parent->stopAction(_playingAction);
 	}
 }
 
@@ -92,32 +98,12 @@ void Animator::stopActionByName(string name)
 	Node* _parent = this->getParent();
 	if (_parent){
 		Action* a = getActionByName(name);
-		if (a!=NULL)
-		_parent->stopAction(a);
-	}
-}
-
-void Animator::stopActionByIndex(int index)
-{
-	Node* _parent = this->getParent();
-	if (_parent){
-		Action* a = getActionByIndex(index);
 		if (a != NULL)
-		_parent->stopAction(a);
+			_parent->stopAction(a);
 	}
 }
 
 Action* Animator::getActionByName(string name)
 {
-	for (AnimationPair a:_listAnimation)
-	if (a.first == name)
-		return a.second;
-	return NULL;
-}
-
-Action* Animator::getActionByIndex(int index)
-{
-	if (index < _listAnimation.size())
-		return _listAnimation[index].second;
-	return NULL;
+	return _listAnimation[name];
 }

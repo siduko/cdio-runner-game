@@ -2,20 +2,21 @@
 #define GameObject_h__
 #include "cocos2d.h"
 #include "Animator.h"
+#include "EntityManager.h"
 USING_NS_CC;
 
 
 class GameObject:public Sprite
 {
 protected:
-	Animator* _animator;
+	EntityManager* _entityManager;
 public:
-	PhysicsBody* spriteBody;
 	GameObject();
+	GameObject(ValueMap properties);
 	~GameObject();
-	inline Animator* getAnimator(){ return _animator; }
-	void setInfo(ValueMap properties);
+	inline EntityManager* getEntityManager(){ return _entityManager; }
 	static GameObject* create();
+	static GameObject* create(ValueMap properties);
 };
 #endif // GameObject_h__
 

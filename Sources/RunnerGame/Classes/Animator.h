@@ -1,30 +1,27 @@
 #ifndef Animator_h__
 #define Animator_h__
 #include "cocos2d.h"
+#include "ComponentObject.h"
 USING_NS_CC;
 using namespace std;
 
-typedef pair<string, Action*> AnimationPair;
 
-class Animator:public Node
+class Animator:public ComponentObject
 {
 private:
-	vector<AnimationPair> _listAnimation;
-	AnimationPair _playingAction;
+	map<string,Animate*> _listAnimation;
+	Animate* _currentAnimate;
 public:
 	Animator();
 	~Animator();
+	CC_SYNTHESIZE_READONLY(Action*, _playingAction, PlayingAction);
+	CC_SYNTHESIZE_READONLY(string, _playingActionName, PlayingActionName);
 	static Animator* create();
-	inline void addAction(string name, Action* action){ _listAnimation.push_back(make_pair(name, action)); }
-	void addAction(string name, int imageCount, string imagePath, float animationDelay = 0.2f, bool isRepeat = true,bool isFlipX = false,bool isFlipY = false);
-	inline string getPlayingActionName(){ return _playingAction.first; }
-	inline Action* getPlayingSelectedAction(){ return _playingAction.second; }
+	inline void addAction(string name, Animate* action){ _listAnimation[name] = action; }
+	void addAction(string name, int imageCount, string imagePath, float animationDelay = 0.2f);
 	Action* getActionByName(string name);
-	Action* getActionByIndex(int index);
-	void playActionByName(string name);
-	void playActionByIndex(int index);
+	void playActionByName(string name, float duration = 0.1f, bool isRepeat = false, bool returnIdle = false);
 	void stopCurrentAction();
 	void stopActionByName(string name);
-	void stopActionByIndex(int index);
 };
 #endif // Animator_h__

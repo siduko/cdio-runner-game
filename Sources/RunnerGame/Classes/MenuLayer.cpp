@@ -6,13 +6,13 @@ bool MenuLayer::init()
 	if (!Layer::init())
 		return false;
 
-	auto btnPlay = MenuItemImage::create("CloseNormal.png","CloseSelected.png",menu_selector(MenuLayer::btnPlay_Click));
+	/*auto btnPlay = MenuItemImage::create("CloseNormal.png","CloseSelected.png",menu_selector(MenuLayer::btnPlay_Click));
 	auto btnOption = MenuItemImage::create("CloseNormal.png","CloseSelected.png",menu_selector(MenuLayer::btnOption_Click));
-	auto btnQuit = MenuItemImage::create("CloseNormal.png","CloseSelected.png",menu_selector(MenuLayer::btnQuit_Click));
+	auto btnQuit = MenuItemImage::create("CloseNormal.png","CloseSelected.png",menu_selector(MenuLayer::btnQuit_Click));*/
 
-	Menu* menu = Menu::create(btnPlay,btnOption,btnQuit);
+	/*Menu* menu = Menu::create(btnPlay,btnOption,btnQuit);
 	menu->alignItemsVerticallyWithPadding(20);
-	this->addChild(menu);
+	this->addChild(menu);*/
 	return true;
 }
 

@@ -31,5 +31,6 @@ private:
 	void setViewPointCenter(Point position);
 	virtual bool onTouchBegan(Touch *touch, Event *unused_event);
 	HubLayer* getHubLayer();
+	void update(float dt);
 };
 #endif // PlayLayer_h__
