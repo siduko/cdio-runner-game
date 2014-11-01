@@ -50,9 +50,9 @@ void Player::setSpeed(float value)
 
 void Player::update(float dt)
 {
-	if (this->getPhysicsBody()->getVelocity().x < 0)
+	if (this->getVelocity() < 0)
 		_playerState = PlayerState::Hurt;
-	else if (this->getPhysicsBody()->getVelocity().x >= 0 && this->getPhysicsBody()->getVelocity().x < 1)
+	else if (this->getVelocity() >= 0 && this->getVelocity() < 1)
 	{
 		if (_playerState == PlayerState::Running)
 		{
@@ -82,6 +82,7 @@ void Player::update(float dt)
 	default:
 		break;
 	}
-	if (this->getPhysicsBody()->getVelocity().x < 100)
-		this->getPhysicsBody()->setVelocity(ccpAdd(this->getPhysicsBody()->getVelocity(), ccp(10*dt, 0)));
+	if (this->getVelocity() < 100)
+		this->setVelocity(this->getVelocity()+ _acceleration * dt);
+	
 }

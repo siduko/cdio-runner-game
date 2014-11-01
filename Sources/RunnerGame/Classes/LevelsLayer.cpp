@@ -16,6 +16,7 @@ LevelsLayer::LevelsLayer()
 	sliding->setPosition(ccp(0,0));
 	sliding->setAnchorPoint(ccp(0, 0));
 	this->addChild(sliding);
+	
 }
 
 

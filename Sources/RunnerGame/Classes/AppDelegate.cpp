@@ -1,6 +1,6 @@
 #include "AppDelegate.h"
 #include "PlayLayer.h"
-#include "LevelsLayer.h"
+#include "ChapterLayer.h"
 #include "SimpleAudioEngine.h"
 
 USING_NS_CC;
@@ -35,8 +35,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    auto scene = PlayLayer::createScene("Levels/level1.tmx");
-	//auto scene = LevelsLayer::createScene();
+    //auto scene = PlayLayer::createScene("Levels/level1.tmx");
+	auto scene = ChapterLayer::createScene();
     // run
     director->runWithScene(scene);
 

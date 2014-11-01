@@ -6,15 +6,12 @@ GameObject::GameObject()
 	auto t = new Texture2D();
 	t->autorelease();
 	initWithTexture(t);
-}
-
-GameObject::GameObject(ValueMap properties)
-{
-	auto t = new Texture2D();
-	t->autorelease();
-	initWithTexture(t);
 	_entityManager = new EntityManager();
 	this->addChild(_entityManager);
+}
+
+GameObject::GameObject(ValueMap properties) :GameObject()
+{
 	PhysicsBody* spriteBody = PhysicsBody::createBox(Size(properties["width"].asFloat(), properties["height"].asFloat()), PhysicsMaterial(1.0f, 0.0f, 0.0f));
 	spriteBody->setDynamic(properties["DynamicBody"].asBool());
 	spriteBody->setCollisionBitmask(properties["CollisionBitmask"].asInt());

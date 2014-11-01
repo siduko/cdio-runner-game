@@ -10,6 +10,18 @@
     <Filter Include="resource">
       <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Actors">
+      <UniqueIdentifier>{12759215-4058-45c7-9c30-cddf7c1d815f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Components">
+      <UniqueIdentifier>{11137a24-af56-4ed6-934b-ec31fcc30c8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Layers">
+      <UniqueIdentifier>{8f9a06b2-ce7f-429e-a106-827af2426603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameSettings">
+      <UniqueIdentifier>{f47f1cd8-3804-42d6-8a0f-e94d2b0a368d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -18,8 +30,56 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>Classes</Filter>
+    <ClCompile Include="..\Classes\Enemy.cpp">
+      <Filter>Classes\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Item.cpp">
+      <Filter>Classes\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Player.cpp">
+      <Filter>Classes\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameoverLayer.cpp">
+      <Filter>Classes\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HubLayer.cpp">
+      <Filter>Classes\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LevelsLayer.cpp">
+      <Filter>Classes\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MenuLayer.cpp">
+      <Filter>Classes\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PlayLayer.cpp">
+      <Filter>Classes\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Animator.cpp">
+      <Filter>Classes\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameObject.cpp">
+      <Filter>Classes\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\JoyStick.cpp">
+      <Filter>Classes\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SlidingMenuGrid.cpp">
+      <Filter>Classes\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Utils.cpp">
+      <Filter>Classes\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EntityManager.cpp">
+      <Filter>Classes\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ComponentObject.cpp">
+      <Filter>Classes\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EffectComponent.cpp">
+      <Filter>Classes\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ChapterLayer.cpp">
+      <Filter>Classes\Layers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -29,8 +89,59 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
-      <Filter>Classes</Filter>
+    <ClInclude Include="..\Classes\Enemy.h">
+      <Filter>Classes\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Item.h">
+      <Filter>Classes\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Player.h">
+      <Filter>Classes\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameoverLayer.h">
+      <Filter>Classes\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HubLayer.h">
+      <Filter>Classes\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LevelsLayer.h">
+      <Filter>Classes\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MenuLayer.h">
+      <Filter>Classes\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlayLayer.h">
+      <Filter>Classes\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Animator.h">
+      <Filter>Classes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameObject.h">
+      <Filter>Classes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\JoyStick.h">
+      <Filter>Classes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SlidingMenuGrid.h">
+      <Filter>Classes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Definitions.h">
+      <Filter>Classes\GameSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Utils.h">
+      <Filter>Classes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EntityManager.h">
+      <Filter>Classes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ComponentObject.h">
+      <Filter>Classes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EffectComponent.h">
+      <Filter>Classes\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ChapterLayer.h">
+      <Filter>Classes\Layers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
