@@ -9,14 +9,8 @@
                 <string>1. Prehistoric</string>
                 <key>ChapterImage</key>
                 <string>Chapters_chapterImage.png</string>
-                <key>Score</key>
-                <integer>0</integer>
-                <key>Star</key>
-                <integer>0</integer>
-                <key>StarMax</key>
-                <integer>100</integer>
                 <key>Locked</key>
-                <boolean>true</boolean>
+                <integer>0</integer>
                 <key>Levels</key>
                 <array>
                     <dict>
@@ -26,26 +20,36 @@
                         <string>Levels/level1.tmx</string>
                         <key>Star</key>
                         <integer>3</integer>
+                        <key>StarMax</key>
+                        <integer>3</integer>
                         <key>Score</key>
-                        <integer>2000</integer>
-                        <key>Started</key>
-                        <boolean>true</boolean>
+                        <integer>5000</integer>
+                        <key>Locked</key>
+                        <integer>0</integer>
                     </dict>
                     <dict>
                         <key>Name</key>
-                        <string>1</string>
+                        <string>2</string>
                         <key>TmxPath</key>
                         <string>Levels/level1.tmx</string>
                         <key>Star</key>
                         <integer>0</integer>
+                        <key>StarMax</key>
+                        <integer>3</integer>
                         <key>Score</key>
                         <integer>0</integer>
-                        <key>Started</key>
-                        <boolean>false</boolean>
+                        <key>Locked</key>
+                        <integer>1</integer>
                     </dict>
                 </array>
             </dict>
             <dict>
+                <key>Name</key>
+                <string>2. Nowaday</string>
+                <key>ChapterImage</key>
+                <string>Chapters_chapterImage.png</string>
+                <key>Locked</key>
+                <integer>1</integer>
                 <key>Levels</key>
                 <array>
                     <dict>
@@ -54,78 +58,29 @@
                         <key>TmxPath</key>
                         <string>Levels/level1.tmx</string>
                         <key>Star</key>
+                        <integer>0</integer>
+                        <key>StarMax</key>
                         <integer>3</integer>
                         <key>Score</key>
-                        <integer>2000</integer>
-                        <key>Started</key>
-                        <boolean>true</boolean>
+                        <integer>0</integer>
+                        <key>Locked</key>
+                        <integer>1</integer>
                     </dict>
                     <dict>
                         <key>Name</key>
-                        <string>1</string>
+                        <string>2</string>
                         <key>TmxPath</key>
                         <string>Levels/level1.tmx</string>
                         <key>Star</key>
                         <integer>0</integer>
-                        <key>Score</key>
-                        <integer>0</integer>
-                        <key>Started</key>
-                        <boolean>false</boolean>
-                    </dict>
-                </array>
-                <key>Name</key>
-                <string>2. Medival</string>
-                <key>ChapterImage</key>
-                <string>Chapters_chapterImage.png</string>
-                <key>Score</key>
-                <integer>10000</integer>
-                <key>Star</key>
-                <integer>50</integer>
-                <key>StarMax</key>
-                <integer>100</integer>
-                <key>Locked</key>
-                <boolean>false</boolean>
-            </dict>
-            <dict>
-                <key>Levels</key>
-                <array>
-                    <dict>
-                        <key>Name</key>
-                        <string>1</string>
-                        <key>TmxPath</key>
-                        <string>Levels/level1.tmx</string>
-                        <key>Star</key>
+                        <key>StarMax</key>
                         <integer>3</integer>
                         <key>Score</key>
-                        <integer>2000</integer>
-                        <key>Started</key>
-                        <boolean>true</boolean>
-                    </dict>
-                    <dict>
-                        <key>Name</key>
-                        <string>1</string>
-                        <key>TmxPath</key>
-                        <string>Levels/level1.tmx</string>
-                        <key>Star</key>
                         <integer>0</integer>
-                        <key>Score</key>
-                        <integer>0</integer>
-                        <key>Started</key>
-                        <boolean>false</boolean>
+                        <key>Locked</key>
+                        <integer>1</integer>
                     </dict>
                 </array>
-                <key>Name</key>
-                <string>3. Pro</string>
-                <key>ChapterImage</key>
-                <string>Chapters_chapterImage.png</string>
-                <key>Score</key>
-                <integer>0</integer>
-                <key>Star</key>
-                <integer>0</integer>
-                <key>StarMax</key>
-                <integer>100</integer>
-                <key>Locked</key>
-                <boolean>false</boolean>
             </dict>
         </array>
     </dict>

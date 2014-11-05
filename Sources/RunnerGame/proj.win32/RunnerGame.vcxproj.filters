@@ -81,6 +81,9 @@
     <ClCompile Include="..\Classes\ChapterLayer.cpp">
       <Filter>Classes\Layers</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\DataController.cpp">
+      <Filter>Classes\GameSettings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\ChapterLayer.h">
       <Filter>Classes\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DataController.h">
+      <Filter>Classes\GameSettings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

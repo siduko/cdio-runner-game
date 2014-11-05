@@ -1,8 +1,10 @@
 #ifndef ChapterLayer_h__
 #define ChapterLayer_h__
 #include "cocos2d.h"
-#include "SlidingMenuGrid.h"
+#include "DataController.h"
+#include "ui/CocosGUI.h"
 USING_NS_CC;
+using namespace ui;
 
 class ChapterLayer:public Layer
 {

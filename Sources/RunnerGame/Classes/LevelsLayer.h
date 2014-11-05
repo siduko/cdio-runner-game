@@ -4,21 +4,19 @@
 #include "SlidingMenuGrid.h"
 #include "PlayLayer.h"
 #include "Utils.h"
+#include "ui/CocosGUI.h"
 USING_NS_CC;
-using namespace std;
+using namespace ui;
 
 
 class LevelsLayer:public Layer
 {
-private:
-	SlidingMenuGrid* sliding;
 public:
 	LevelsLayer();
 	~LevelsLayer();
 	static Scene* createScene();
 	virtual bool init();
 	CREATE_FUNC(LevelsLayer);
-	void btnLevel_Clicked(Object* pSender);
 };
 #endif // LevelsLayer_h__
 

@@ -15,44 +15,86 @@ bool ChapterLayer::init()
 	if (!Layer::init())
 		return false;
 
+	stringstream ss;
+	string temp;
+
 	auto wSize = Director::getInstance()->getWinSize();
 
-	auto bg = Sprite::create("Chapters_Select-Episode.png");
-	bg->setPosition(ccp(wSize.width / 2, wSize.height/2));
-	this->addChild(bg,0);
-	std::string path = FileUtils::getInstance()->fullPathForFilename("Levels/GameData.plist");
-	ValueMap gameData = FileUtils::getInstance()->getValueMapFromFile(path);
-	ValueVector chapters = gameData["Chapters"].asValueVector();
-	CCLOG("%d", chapters.size());
-	Vector<MenuItemSprite*> michapters;
-	for (auto c : chapters)
-	{
-		Sprite* chapterBackground = Sprite::create("Chapters_chapterBackground.png");
-		auto mi = MenuItemSprite::create(chapterBackground, chapterBackground, CC_CALLBACK_1(ChapterLayer::btnLevel_Clicked, this));
-		mi->setContentSize(chapterBackground->getContentSize());
-		ValueMap chapter = c.asValueMap();
-		LabelTTF* lbName = LabelTTF::create(chapter["Name"].asString(), "arial", 32);
-		lbName->setPosition(chapterBackground->getContentSize().width / 2, chapterBackground->getContentSize().height*0.9);
-		mi->addChild(lbName);
-		Sprite* chapterImage = Sprite::create(chapter["ChapterImage"].asString());
-		chapterImage->setPosition(chapterBackground->getContentSize().width / 2, chapterBackground->getContentSize().height*0.6);
-		mi->addChild(chapterImage);
-		LabelTTF* lbScore = LabelTTF::create(chapter["Score"].asString(), "arial", 18);
-		lbScore->setPosition(chapterBackground->getContentSize().width*0.2, chapterBackground->getContentSize().height*0.2);
-		mi->addChild(lbScore);
-		if (chapter["Locked"].asBool())
-		{
-			Sprite* lockSprite = Sprite::create("Chapters_lock.png");
-			lockSprite->setPosition(chapterBackground->getContentSize().width / 2, chapterBackground->getContentSize().height / 2);
-			mi->addChild(lockSprite);
-		}
-		michapters.pushBack(mi);
-	}
-	SlidingMenuGrid* menu = SlidingMenuGrid::menuWithArray(michapters, 1, 1, ccp(0, 0), ccp(10, 10), false);
-	menu->setPosition(ccp(0, 0));
-	menu->setAnchorPoint(ccp(0, 0));
-	this->addChild(menu);
+	ScrollView* scrollView = ScrollView::create();
+	scrollView->setDirection(ScrollView::Direction::HORIZONTAL);
+	scrollView->setContentSize(wSize);
+	scrollView->setBackGroundImage("Chapters_Select-Episode.png");
+	scrollView->setPosition(ccp(wSize.width / 2, wSize.height / 2));
+	scrollView->setAnchorPoint(ccp(0.5, 0.5));
+	this->addChild(scrollView);
 
+	ValueVector chapters = DataController::getInstance()->getChapters();
+	float lastPos = wSize.width / 2;
+	float padding = 0.0f;
+	for (int i = 0; i < chapters.size();i++)
+	{
+		ValueMap chapter = chapters[i].asValueMap();
+		Layout* layout = Layout::create();
+		layout->setBackGroundImage("Chapters_chapterBackground.png");
+		layout->setPosition(ccp(lastPos + padding, wSize.height / 2));
+		layout->setContentSize(Size(288,261));
+		layout->setAnchorPoint(ccp(0.5, 0.5));
+
+		Text* chapterName = Text::create(chapter["Name"].asString(), "arial", 32);
+		chapterName->setPosition(ccp(layout->getContentSize().width / 2, layout->getContentSize().height*0.9));
+		layout->addChild(chapterName);
+
+		ImageView* chapterImage = ImageView::create(chapter["ChapterImage"].asString());
+		chapterImage->setPosition(ccp(layout->getContentSize().width / 2, layout->getContentSize().height / 2));
+		layout->addChild(chapterImage);
+
+		ss << DataController::getInstance()->getChapterScoreByIndex(i);
+		ss >> temp;
+		ss.clear();
+		Text* chapterScore = Text::create(temp, "arial", 20);
+		chapterScore->setPosition(ccp(layout->getContentSize().width * 0.25, layout->getContentSize().height*0.17));
+		layout->addChild(chapterScore);
+
+		ss << DataController::getInstance()->getChapterStarByIndex(i) << "/" << DataController::getInstance()->getChapterStarMaxByIndex(i);
+		ss >> temp;
+		ss.clear();
+		Text* chapterStar = Text::create(temp, "arial", 20);
+		chapterStar->setPosition(ccp(layout->getContentSize().width * 0.7, layout->getContentSize().height*0.17));
+		layout->addChild(chapterStar);
+
+		if (chapter["Locked"].asInt())
+		{
+			ImageView* chapterLock = ImageView::create("Chapters_lock.png");
+			chapterLock->setPosition(ccp(layout->getContentSize().width / 2, layout->getContentSize().height / 2));
+			layout->addChild(chapterLock);
+		}
+
+		padding = 100;
+		lastPos = layout->getPosition().x + layout->getContentSize().width;
+
+		layout->setTouchEnabled(true);
+		layout->addTouchEventListener([i](Ref *pSender, ui::Layout::TouchEventType type)
+		{
+			switch (type)
+			{
+			case cocos2d::ui::Widget::TouchEventType::BEGAN:
+				CCLOG("%d", i);
+				break;
+			case cocos2d::ui::Widget::TouchEventType::MOVED:
+				break;
+			case cocos2d::ui::Widget::TouchEventType::ENDED:
+				break;
+			case cocos2d::ui::Widget::TouchEventType::CANCELED:
+				break;
+			default:
+				break;
+			}
+		});
+
+		scrollView->addChild(layout);
+	}
+
+	scrollView->setInnerContainerSize(Size(lastPos, wSize.height));
 	return true;
 }
 
