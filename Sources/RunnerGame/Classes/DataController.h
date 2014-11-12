@@ -10,6 +10,7 @@ class DataController
 private:
 	static DataController* _instance;
 	ValueMap _gameData;
+	ValueMap _gameSettings;
 	ValueVector _chapters;
 public:
 	DataController();
@@ -24,6 +25,7 @@ public:
 	int getChapterStarByIndex(int index);
 	int getChapterStarMaxByIndex(int index);
 	ValueMap getLevelByChapterIndex(int chapterIndex, int levelIndex);
+	ValueMap getGameSettings();
 	void saveGameData();
 };
 #endif // DataController_h__

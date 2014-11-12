@@ -78,7 +78,8 @@ bool ChapterLayer::init()
 			switch (type)
 			{
 			case cocos2d::ui::Widget::TouchEventType::BEGAN:
-				CCLOG("%d", i);
+				UserDefault::getInstance()->setIntegerForKey("ChapterSelected", i);
+				Director::getInstance()->replaceScene(LevelsLayer::createScene());
 				break;
 			case cocos2d::ui::Widget::TouchEventType::MOVED:
 				break;
@@ -103,9 +104,4 @@ Scene* ChapterLayer::createScene()
 	auto scene = Scene::create();
 	scene->addChild(ChapterLayer::create());
 	return scene;
-}
-
-void ChapterLayer::btnLevel_Clicked(Object* pSender)
-{
-
 }

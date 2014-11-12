@@ -22,58 +22,18 @@ bool HubLayer::init()
 	avatar->setPosition(ccp(sceneSize.width*0.1f, sceneSize.height*0.9f));
 	this->addChild(avatar);
 
-	lbScore = LabelTTF::create("Score: 0", "fonts/Marker Felt.ttf", 30, Size::ZERO, TextHAlignment::LEFT);
-	lbScore->setColor(Color3B(255, 0, 0));
-	lbScore->setFontFillColor(Color3B(255, 0, 0));
-	lbScore->setFontSize(25);
+	lbScore = Text::create("Score: 0", "fonts/Marker Felt.ttf", 30);
 	lbScore->setPosition(ccp(sceneSize.width*0.25f, sceneSize.height*0.95f));
 	this->addChild(lbScore);
 
-	lbVelocity = LabelTTF::create("0 m/s", "fonts/Marker Felt.ttf", 30,Size::ZERO,TextHAlignment::LEFT);
+	lbVelocity = Text::create("0 m/s", "fonts/Marker Felt.ttf", 30);
 	lbVelocity->setColor(Color3B(255, 0, 0));
-	lbVelocity->setFontFillColor(Color3B(255, 0, 0));
-	lbVelocity->setFontSize(25);
 	lbVelocity->setPosition(ccp(sceneSize.width*0.25f, sceneSize.height*0.85f));
 	this->addChild(lbVelocity);
 
-	/*auto joystick = JoyStick::create("joystick_bg.png", "joystick_ct.png");
-	this->addChild(joystick, 100);
-	joystick->setPosition(Vec2(100, 100));
-	joystick->setDieRadius(60);
-	joystick->onDirection = [this](JoyStickEnum dir, float vel){
-	if (player)
-	switch (dir)
-	{
-	case DEFAULT:
-	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("idle");
-	break;
-	case D_UP:
-	break;
-	case D_DOWN:
-	break;
-	case D_LEFT:
-	player->move(ccp(-vel * 100, 0));
-	player->setFlipX(true);
-	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("run");
-	break;
-	case D_RIGHT:
-	player->move(ccp(vel * 100, 0));
-	player->setFlipX(false);
-	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("run");
-	break;
-	case D_LEFT_UP:
-	break;
-	case D_LEFT_DOWN:
-	break;
-	case D_RIGHT_UP:
-	break;
-	case D_RIGHT_DOWN:
-	break;
-	default:
-	break;
-	}
-	};
-	joystick->onRun();*/
+	effectImage = ImageView::create("effectIcon1.png");
+	effectImage->setPosition(ccp(sceneSize.width*0.5f, sceneSize.height*0.85f));
+	this->addChild(effectImage);
 
 	scheduleUpdate();
 
@@ -90,5 +50,8 @@ void HubLayer::update(float delta)
 	if (player)
 	{
 		lbVelocity->setString(Utils::to_string((int)this->player->getPhysicsBody()->getVelocity().x) + " m/s");
+		lbScore->setString("Score: " + Utils::to_string(this->player->getScore()));
+		EffectComponent* effectPlayer = (EffectComponent*)player->getEntityManager()->getComponentObjectByName("EffectComponent");
+		effectImage->loadTexture(effectPlayer->getEffectIcon());
 	}
 }

@@ -7,7 +7,6 @@ bool PlayLayer::init()
 		return false;
 	player = NULL;
 	sceneSize = Director::getInstance()->getWinSize();
-	score = 0;
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(PlayLayer::onContactBegin, this);
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
@@ -25,7 +24,7 @@ Scene* PlayLayer::createScene(string tmxpath)
 {
 	auto scene = Scene::createWithPhysics();
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
-	scene->getPhysicsWorld()->setGravity(ccp(0, -WorldGravity));
+	scene->getPhysicsWorld()->setGravity(ccp(0, DataController::getInstance()->getGameSettings()["WorldGravity"].asInt()));
 	auto bglayer = Layer::create();
 	auto bg = Sprite::create("bg.png");
 	bg->setAnchorPoint(ccp(0, 0));
@@ -44,35 +43,44 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 {
 	auto a = contact.getShapeA()->getBody();
 	auto b = contact.getShapeB()->getBody();
-	if (a->getCollisionBitmask() == CONTACT_PLAYER && b->getCollisionBitmask() == CONTACT_ITEM){
-		score += ((Item*)b->getNode())->getScore();
-		this->getHubLayer()->setScore("Score: " + Utils::to_string(score));
+
+	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ITEM"].asInt()){
+		player->setScore(player->getScore() + ((Item*)b->getNode())->getScore());
 		b->getNode()->removeFromParentAndCleanup(true);
 		return false;
 	}
-	if (b->getCollisionBitmask() == CONTACT_PLAYER && a->getCollisionBitmask() == CONTACT_ITEM){
-		score += ((Item*)a->getNode())->getScore();
-		this->getHubLayer()->setScore("Score: " + Utils::to_string(score));
+	if (b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ITEM"].asInt()){
+		player->setScore(player->getScore() + ((Item*)a->getNode())->getScore());
 		a->getNode()->removeFromParentAndCleanup(true);
 		return false;
 	}
-	if (a->getCollisionBitmask() == CONTACT_PLAYER && b->getCollisionBitmask() == CONTACT_FLOOR || b->getCollisionBitmask() == CONTACT_PLAYER && a->getCollisionBitmask() == CONTACT_FLOOR){
+
+	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_FLOOR"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_FLOOR"].asInt()){
 		player->setAllowJump(true);
 	}
-	if (a->getCollisionBitmask() == CONTACT_PLAYER && b->getCollisionBitmask() == CONTACT_DieZone || b->getCollisionBitmask() == CONTACT_PLAYER && a->getCollisionBitmask() == CONTACT_DieZone){
+
+	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt()){
 		
 		Director::getInstance()->replaceScene(GameoverLayer::createScene());
 		return false;
 	}
-	if (a->getCollisionBitmask() == CONTACT_PLAYER && b->getCollisionBitmask() == CONTACT_EndGame || b->getCollisionBitmask() == CONTACT_PLAYER && a->getCollisionBitmask() == CONTACT_EndGame){
+
+	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EndGame"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EndGame"].asInt()){
 		Director::getInstance()->replaceScene(GameoverLayer::createScene());
+		return false;
 	}
+
+	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EffectItem"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EffectItem"].asInt()){
+		EffectComponent* effectPlayer = (EffectComponent*)player->getEntityManager()->getComponentObjectByName("EffectComponent");
+		effectPlayer->runRandomEffect();
+	}
+
 	return true;
 }
 
 bool PlayLayer::onTouchBegan(Touch *touch, Event *unused_event)
 {
-	player->jump(ccp(0, PlayerJump));
+	player->jump();
 	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("jump",2.0f,false,true);
 	return true;
 }
@@ -92,9 +100,8 @@ bool PlayLayer::createMap(string tmxpath)
 		if (properties["type"].asString() == "Player")
 		{
 			player = Player::create(properties);
-			this->addChild(player);
+			this->addChild(player, 10, DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt());
 			((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("idle");
-			player->move(ccp(5000, 0));
 			this->getHubLayer()->setPlayer(player);
 		}
 		if (properties["type"].asString() == "Floor")
@@ -111,6 +118,11 @@ bool PlayLayer::createMap(string tmxpath)
 		if (properties["type"].asString() == "Item")
 		{
 			auto item = Item::create(properties);
+			this->addChild(item);
+		}
+		if (properties["type"].asString() == "EffectItem")
+		{
+			auto item = EffectItem::create(properties);
 			this->addChild(item);
 		}
 		if (properties["type"].asString() == "DieZone")

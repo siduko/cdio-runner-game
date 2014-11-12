@@ -83,5 +83,26 @@
                 </array>
             </dict>
         </array>
+        <key>GameSettings</key>
+        <dict>
+            <key>CONTACT_DieZone</key>
+            <integer>1</integer>
+            <key>CONTACT_PLAYER</key>
+            <integer>2</integer>
+            <key>CONTACT_FLOOR</key>
+            <integer>3</integer>
+            <key>CONTACT_ITEM</key>
+            <integer>4</integer>
+            <key>CONTACT_EndGame</key>
+            <integer>5</integer>
+            <key>CONTACT_EffectItem</key>
+            <integer>6</integer>
+            <key>PlayerSpeed</key>
+            <integer>700000</integer>
+            <key>PlayerJump</key>
+            <integer>1000000</integer>
+            <key>WorldGravity</key>
+            <integer>-500</integer>
+        </dict>
     </dict>
 </plist>

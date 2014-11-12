@@ -4,23 +4,29 @@
 #include "ComponentObject.h"
 #include "Player.h"
 USING_NS_CC;
+using namespace std;
 enum EffectType
 {
+	None,
 	SlowEffect,
+	FastEffect,
 	UnlimitHealth
 };
 class EffectComponent:public ComponentObject
 {
 private:
 	void update(float dt);
-	Action* _effectAnimation;
-	EffectType _runningEffect;
+	GameObject* _effectObject;
 public:
-	CC_SYNTHESIZE(Sprite*, _effectIcon, EffectIcon);
+	CC_SYNTHESIZE(string, _effectIcon, EffectIcon);
 	CC_SYNTHESIZE(float, _lifeTime, LifeTime);
 	CC_SYNTHESIZE(bool, _isAlive, Alive);
+	CC_SYNTHESIZE(EffectType, _runningEffect, RunningEffect);
+	static EffectComponent* create();
 	void runEffect(EffectType type);
+	void runRandomEffect();
 	EffectComponent();
 	~EffectComponent();
+	virtual void onEnter();
 };
 #endif // EffectComponent_h__

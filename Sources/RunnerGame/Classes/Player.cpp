@@ -9,8 +9,11 @@ Player::Player(ValueMap properties) : GameObject(properties)
 	animator->addAction("run", properties["RunCount"].asInt(), properties["RunPath"].asString());
 	animator->addAction("hurt", properties["HurtCount"].asInt(), properties["HurtPath"].asString());
 	animator->addAction("jump", properties["JumpCount"].asInt(), properties["JumpPath"].asString());
+	_entityManager->addComponentObject("EffectComponent", EffectComponent::create());
 	_playerState = PlayerState::Idle;
-	scheduleUpdate();
+	_acceleration = 20;
+	_limitVelocity = 500;
+	_score = 0;
 }
 
 
@@ -30,33 +33,24 @@ Player* Player::create(ValueMap properties)
 	return nullptr;
 }
 
-void Player::move(Vec2 vec)
-{
-
-}
-
-void Player::jump(Vec2 vec)
+void Player::jump()
 {
 	if (_allowJump){
-		this->getPhysicsBody()->applyImpulse(vec);
+		this->getPhysicsBody()->applyImpulse(ccp(0, 700000));
 		_allowJump = false;
 	}
 }
 
-void Player::setSpeed(float value)
-{
-	//playerRun->setSpeed(value);
-}
-
 void Player::update(float dt)
 {
+	GameObject::update(dt);
 	if (this->getVelocity() < 0)
 		_playerState = PlayerState::Hurt;
 	else if (this->getVelocity() >= 0 && this->getVelocity() < 1)
 	{
 		if (_playerState == PlayerState::Running)
 		{
-			this->getPhysicsBody()->applyImpulse(ccp(-100000, 1000000));
+			this->getPhysicsBody()->applyImpulse(ccp(-100000, 10000));
 		}
 		else
 			_playerState = PlayerState::Idle;
@@ -82,7 +76,19 @@ void Player::update(float dt)
 	default:
 		break;
 	}
-	if (this->getVelocity() < 100)
-		this->setVelocity(this->getVelocity()+ _acceleration * dt);
-	
+	EffectComponent* effectPlayer = ((EffectComponent*)this->getEntityManager()->getComponentObjectByName("EffectComponent"));
+	if (effectPlayer->getAlive())
+	{
+		if (!(effectPlayer->getRunningEffect() == EffectType::FastEffect || effectPlayer->getRunningEffect() == EffectType::SlowEffect))
+		{
+			if (this->getVelocity() < _limitVelocity)
+				this->setVelocity(this->getVelocity() + _acceleration * dt);
+		}
+	}
+	else
+	{
+		if (this->getVelocity() < _limitVelocity)
+			this->setVelocity(this->getVelocity() + _acceleration * dt);
+	}
+
 }

@@ -8,6 +8,7 @@ USING_NS_CC;
 #define CONTACT_FLOOR 3
 #define CONTACT_ITEM 4
 #define CONTACT_EndGame 5
+#define CONTACT_Game 5
 
 #define PlayerSpeed 700000
 #define PlayerJump 1000000

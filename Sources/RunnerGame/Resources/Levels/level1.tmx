@@ -40,7 +40,7 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="Player" type="Player" x="28" y="765" width="43" height="47">
+  <object name="Player" type="Player" x="192" y="825" width="43" height="47">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
     <property name="CollisionBitmask" value="2"/>
@@ -102,14 +102,13 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="Item" type="Item" x="111" y="606">
+  <object name="EffectItem" type="EffectItem" x="804" y="729" width="93" height="93">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
-    <property name="CollisionBitmask" value="4"/>
+    <property name="CollisionBitmask" value="6"/>
     <property name="DynamicBody" value="false"/>
-    <property name="ImageCount" value="10"/>
-    <property name="ImagePath" value="coin%d.png"/>
-    <property name="Score" value="100"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="effectIcon%d.png"/>
    </properties>
   </object>
   <object name="EndGame" type="EndGame" x="13923.8" y="839.667" width="75" height="70">

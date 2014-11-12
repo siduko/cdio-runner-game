@@ -84,4 +84,9 @@ void DataController::saveGameData()
 	FileUtils::getInstance()->writeToFile(_gameData, path);
 }
 
+cocos2d::ValueMap DataController::getGameSettings()
+{
+	return _gameData["GameSettings"].asValueMap();
+}
+
 DataController* DataController::_instance;

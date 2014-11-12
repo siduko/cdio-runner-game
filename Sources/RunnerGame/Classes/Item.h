@@ -3,6 +3,7 @@
 #include "cocos2d.h"
 #include "Definitions.h"
 #include "GameObject.h"
+#include "Animator.h"
 USING_NS_CC;
 using namespace std;
 

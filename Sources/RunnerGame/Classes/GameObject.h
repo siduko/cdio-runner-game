@@ -1,7 +1,6 @@
 #ifndef GameObject_h__
 #define GameObject_h__
 #include "cocos2d.h"
-#include "Animator.h"
 #include "EntityManager.h"
 USING_NS_CC;
 
@@ -17,6 +16,7 @@ public:
 	inline EntityManager* getEntityManager(){ return _entityManager; }
 	static GameObject* create();
 	static GameObject* create(ValueMap properties);
+	void update(float dt);
 };
 #endif // GameObject_h__
 

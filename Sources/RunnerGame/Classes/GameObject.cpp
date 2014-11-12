@@ -8,6 +8,7 @@ GameObject::GameObject()
 	initWithTexture(t);
 	_entityManager = new EntityManager();
 	this->addChild(_entityManager);
+	scheduleUpdate();
 }
 
 GameObject::GameObject(ValueMap properties) :GameObject()
@@ -48,4 +49,9 @@ GameObject* GameObject::create(ValueMap properties)
 	}
 	CC_SAFE_DELETE(sprite);
 	return nullptr;
+}
+
+void GameObject::update(float dt)
+{
+	_entityManager->update(dt);
 }

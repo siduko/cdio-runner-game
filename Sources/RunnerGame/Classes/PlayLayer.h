@@ -2,9 +2,10 @@
 #define PlayLayer_h__
 #include "cocos2d.h"
 #include "Player.h"
-#include "Definitions.h"
+#include "DataController.h"
 #include "Utils.h"
 #include "Item.h"
+#include "EffectItem.h"
 #include "HubLayer.h"
 #include "GameoverLayer.h"
 #include "GameObject.h"
@@ -19,8 +20,6 @@ public:
 	bool createMap(string tmxpath);
 	CREATE_FUNC(PlayLayer);
 private:
-	int score;
-
 	PhysicsWorld* sceneWorld;
 	TMXTiledMap* map;
 	Size sceneSize;

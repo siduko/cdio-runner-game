@@ -13,7 +13,7 @@ ComponentObject::~ComponentObject()
 
 void ComponentObject::update(float dt)
 {
-
+	
 }
 
 ComponentObject* ComponentObject::create()

@@ -12,6 +12,45 @@ JoyStick* JoyStick::create(std::string chassisPath, std::string dotPath)
 	}
 	CC_SAFE_DELETE(node);
 	return nullptr;
+	/*	USING JOYSTICK
+	auto joystick = JoyStick::create("joystick_bg.png", "joystick_ct.png");
+	this->addChild(joystick, 100);
+	joystick->setPosition(Vec2(100, 100));
+	joystick->setDieRadius(60);
+	joystick->onDirection = [this](JoyStickEnum dir, float vel){
+	if (player)
+	switch (dir)
+	{
+	case DEFAULT:
+	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("idle");
+	break;
+	case D_UP:
+	break;
+	case D_DOWN:
+	break;
+	case D_LEFT:
+	player->move(ccp(-vel * 100, 0));
+	player->setFlipX(true);
+	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("run");
+	break;
+	case D_RIGHT:
+	player->move(ccp(vel * 100, 0));
+	player->setFlipX(false);
+	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("run");
+	break;
+	case D_LEFT_UP:
+	break;
+	case D_LEFT_DOWN:
+	break;
+	case D_RIGHT_UP:
+	break;
+	case D_RIGHT_DOWN:
+	break;
+	default:
+	break;
+	}
+	};
+	joystick->onRun();*/
 }
 
 void JoyStick::initWithJoystick(std::string chassisPath, std::string dotPath)

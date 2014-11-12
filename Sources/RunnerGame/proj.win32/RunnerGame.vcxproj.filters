@@ -84,6 +84,9 @@
     <ClCompile Include="..\Classes\DataController.cpp">
       <Filter>Classes\GameSettings</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\EffectItem.cpp">
+      <Filter>Classes\Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\DataController.h">
       <Filter>Classes\GameSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EffectItem.h">
+      <Filter>Classes\Actors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

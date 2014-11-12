@@ -3,14 +3,17 @@
 #include "cocos2d.h"
 #include "Utils.h"
 #include "Player.h"
-#include "JoyStick.h"
+#include "ui/CocosGUI.h"
 USING_NS_CC;
 using namespace std;
+using namespace ui;
+
 class HubLayer:public Layer
 {
 private:
 	Size sceneSize;
-	LabelTTF* lbScore,*lbVelocity;
+	Text* lbScore,*lbVelocity;
+	ImageView* effectImage;
 	Player* player;
 public:
 	virtual bool init();
