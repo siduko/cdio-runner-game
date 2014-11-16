@@ -36,10 +36,10 @@ Player* Player::create(ValueMap properties)
 	return nullptr;
 }
 
-void Player::jump()
+void Player::jump(Vec2 vec)
 {
 	if (_allowJump){
-		this->getPhysicsBody()->applyImpulse(ccp(0, DataController::getInstance()->getGameSettings()["PlayerJump"].asFloat()));
+		this->getPhysicsBody()->applyImpulse(vec);
 		_allowJump = false;
 	}
 }

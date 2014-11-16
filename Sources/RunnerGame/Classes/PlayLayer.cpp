@@ -13,6 +13,8 @@ bool PlayLayer::init()
 
 	auto touchListener = EventListenerTouchOneByOne::create();
 	touchListener->onTouchBegan = CC_CALLBACK_2(PlayLayer::onTouchBegan, this);
+	touchListener->onTouchMoved = CC_CALLBACK_2(PlayLayer::onTouchMoved, this);
+	touchListener->onTouchEnded = CC_CALLBACK_2(PlayLayer::onTouchEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
 	scheduleUpdate();
@@ -104,12 +106,23 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 
 bool PlayLayer::onTouchBegan(Touch *touch, Event *unused_event)
 {
-	player->jump();
+	vecJump = ccp(player->getVelocity(), DataController::getInstance()->getGameSettings()["PlayerJump"].asFloat());
+	return true;
+}
+void PlayLayer::onTouchMoved(Touch *touch, Event *unused_event)
+{
+	if (vecJump.y < DataController::getInstance()->getGameSettings()["JumpLimit"].asFloat())
+		vecJump = ccpAdd(vecJump, ccp(0, 50000));
+}
+
+void PlayLayer::onTouchEnded(Touch *touch, Event *unused_event)
+{
+	player->jump(vecJump);
 	player->setPlayerState(PlayerState::Jumping);
-	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("jump",2.0f,false,true);
+	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("jump", 2.0f, false, true);
 	if (player->getVelocity() <= 0)
 		player->setVelocity(30);
-	return true;
+	CCLOG("%f", vecJump.y);
 }
 
 bool PlayLayer::createMap(string tmxpath)

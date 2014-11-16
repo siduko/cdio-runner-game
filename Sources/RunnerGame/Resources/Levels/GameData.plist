@@ -103,6 +103,8 @@
             <integer>700000</integer>
             <key>PlayerJump</key>
             <integer>1500000</integer>
+	    <key>JumpLimit</key>
+            <integer>5000000</integer>
             <key>WorldGravity</key>
             <integer>-500</integer>
             <key>PlayerHurt</key>

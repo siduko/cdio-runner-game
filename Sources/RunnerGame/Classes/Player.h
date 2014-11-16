@@ -32,7 +32,7 @@ public:
 	inline void setVelocity(float value){
 		this->getPhysicsBody()->setVelocity(ccp(value, this->getPhysicsBody()->getVelocity().y));
 	};
-	void jump();
+	void jump(Vec2 vec);
 	void update(float dt);
 };
 #endif // Player_h__

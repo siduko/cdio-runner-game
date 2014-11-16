@@ -24,11 +24,13 @@ private:
 	TMXTiledMap* map;
 	Size sceneSize;
 	Player* player;
-
+	Vec2 vecJump;
 	inline void setPhysicsWorld(PhysicsWorld* word){ sceneWorld = word; }
 	bool onContactBegin(PhysicsContact &contact);
 	void setViewPointCenter(Point position);
 	virtual bool onTouchBegan(Touch *touch, Event *unused_event);
+	virtual void onTouchMoved(Touch *touch, Event *unused_event);
+	virtual void onTouchEnded(Touch *touch, Event *unused_event);
 	HubLayer* getHubLayer();
 	void update(float dt);
 };
