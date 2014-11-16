@@ -7,10 +7,10 @@ USING_NS_CC;
 using namespace std;
 enum EffectType
 {
-	None,
 	SlowEffect,
 	FastEffect,
-	UnlimitHealth
+	UnlimitHealth,
+	None
 };
 class EffectComponent:public ComponentObject
 {

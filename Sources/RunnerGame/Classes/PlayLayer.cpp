@@ -57,6 +57,22 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_FLOOR"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_FLOOR"].asInt()){
 		player->setAllowJump(true);
+		if (player->getPlayerState() == PlayerState::Jumping)
+			player->setPlayerState(PlayerState::Running);
+	}
+
+	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_BLOCK"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_BLOCK"].asInt()){
+		player->setAllowJump(true);
+		if (player->getPlayerState() == PlayerState::Running)
+		{
+			ValueMap force = DataController::getInstance()->getGameSettings()["PlayerHurt"].asValueMap();
+			player->getPhysicsBody()->applyImpulse(ccp(force["x"].asInt(), force["y"].asInt()));
+			player->setPlayerState(PlayerState::Hurt);
+			player->setActionTimeOut(2.0f);
+		}
+		if (player->getPlayerState() == PlayerState::Jumping)
+			player->setPlayerState(PlayerState::Running);
+		CCLOG("Collision detected");
 	}
 
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt()){
@@ -65,6 +81,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 		return false;
 	}
 
+
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EndGame"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EndGame"].asInt()){
 		Director::getInstance()->replaceScene(GameoverLayer::createScene());
 		return false;
@@ -72,8 +89,15 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EffectItem"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EffectItem"].asInt()){
 		EffectComponent* effectPlayer = (EffectComponent*)player->getEntityManager()->getComponentObjectByName("EffectComponent");
+		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EffectItem"].asInt())
+			a->getNode()->removeFromParentAndCleanup(true);
+		else
+			b->getNode()->removeFromParentAndCleanup(true);
 		effectPlayer->runRandomEffect();
+		return false;
 	}
+
+
 
 	return true;
 }
@@ -81,7 +105,10 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 bool PlayLayer::onTouchBegan(Touch *touch, Event *unused_event)
 {
 	player->jump();
+	player->setPlayerState(PlayerState::Jumping);
 	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("jump",2.0f,false,true);
+	if (player->getVelocity() <= 0)
+		player->setVelocity(30);
 	return true;
 }
 
@@ -113,6 +140,19 @@ bool PlayLayer::createMap(string tmxpath)
 			spriteBody->setCollisionBitmask(properties["CollisionBitmask"].asInt());
 			spriteBody->setContactTestBitmask(true);
 			node->setPhysicsBody(spriteBody);
+			node->setRotation(properties["Rotation"].asFloat());
+			this->addChild(node);
+		}
+		if (properties["type"].asString() == "Block")
+		{
+			auto node = Node::create();
+			node->setPosition(ccp(properties["x"].asFloat() + properties["width"].asFloat() / 2, properties["y"].asFloat() + properties["height"].asFloat() / 2));
+			auto spriteBody = PhysicsBody::createBox(Size(properties["width"].asFloat(), properties["height"].asFloat()), PhysicsMaterial(1.0f, 0.5f, 0.5f));
+			spriteBody->setDynamic(properties["DynamicBody"].asBool());
+			spriteBody->setCollisionBitmask(properties["CollisionBitmask"].asInt());
+			spriteBody->setContactTestBitmask(true);
+			node->setPhysicsBody(spriteBody);
+			node->setRotation(properties["Rotation"].asFloat());
 			this->addChild(node);
 		}
 		if (properties["type"].asString() == "Item")

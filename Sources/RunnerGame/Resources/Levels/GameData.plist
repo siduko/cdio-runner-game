@@ -91,6 +91,8 @@
             <integer>2</integer>
             <key>CONTACT_FLOOR</key>
             <integer>3</integer>
+            <key>CONTACT_BLOCK</key>
+            <integer>7</integer>
             <key>CONTACT_ITEM</key>
             <integer>4</integer>
             <key>CONTACT_EndGame</key>
@@ -100,9 +102,16 @@
             <key>PlayerSpeed</key>
             <integer>700000</integer>
             <key>PlayerJump</key>
-            <integer>1000000</integer>
+            <integer>1500000</integer>
             <key>WorldGravity</key>
             <integer>-500</integer>
+            <key>PlayerHurt</key>
+            <dict>
+                <key>x</key>
+                <integer>-300000</integer>
+                <key>y</key>
+                <integer>300000</integer>
+            </dict>
         </dict>
     </dict>
 </plist>

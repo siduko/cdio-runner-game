@@ -19,7 +19,6 @@ EffectComponent::~EffectComponent()
 
 void EffectComponent::update(float dt)
 {
-	CCLOG("EffectComponent running");
 	Player* _parent = (Player*)this->getParent();
 	if (_parent)
 	{
@@ -30,7 +29,7 @@ void EffectComponent::update(float dt)
 			_lifeTime -= dt;
 			if (_lifeTime < 0){
 				_isAlive = false;
-				_runningEffect = None;
+				//_runningEffect = None;
 			}
 			else
 			{
@@ -38,9 +37,11 @@ void EffectComponent::update(float dt)
 				{
 				case SlowEffect:
 					_parent->setVelocity(30);
+					_parent->setAutoControlVelocity(false);
 					break;
 				case FastEffect:
 					_parent->setVelocity(500);
+					_parent->setAutoControlVelocity(false);
 					break;
 				case UnlimitHealth:
 					_parent->setHealth(_parent->getMaxHealth());
@@ -56,9 +57,13 @@ void EffectComponent::update(float dt)
 				break;
 			case SlowEffect:
 				_parent->setVelocity(100);
+				_parent->setAutoControlVelocity(true);
+				_runningEffect = None;
 				break;
 			case FastEffect:
 				_parent->setVelocity(100);
+				_parent->setAutoControlVelocity(true);
+				_runningEffect = None;
 				break;
 			case UnlimitHealth:
 				break;
@@ -94,7 +99,7 @@ void EffectComponent::runEffect(EffectType type)
 
 void EffectComponent::runRandomEffect()
 {
-	runEffect(static_cast<EffectType>(rand() % EffectType::UnlimitHealth));
+	runEffect(static_cast<EffectType>(rand() % EffectType::None));
 }
 
 EffectComponent* EffectComponent::create()
