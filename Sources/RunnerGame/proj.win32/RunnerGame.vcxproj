@@ -145,7 +145,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\Enemy.cpp" />
     <ClCompile Include="..\Classes\EntityManager.cpp" />
     <ClCompile Include="..\Classes\GameObject.cpp" />
-    <ClCompile Include="..\Classes\GameoverLayer.cpp" />
+    <ClCompile Include="..\Classes\ResultLayer.cpp" />
     <ClCompile Include="..\Classes\HubLayer.cpp" />
     <ClCompile Include="..\Classes\Item.cpp" />
     <ClCompile Include="..\Classes\JoyStick.cpp" />
@@ -169,7 +169,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Enemy.h" />
     <ClInclude Include="..\Classes\EntityManager.h" />
     <ClInclude Include="..\Classes\GameObject.h" />
-    <ClInclude Include="..\Classes\GameoverLayer.h" />
+    <ClInclude Include="..\Classes\ResultLayer.h" />
     <ClInclude Include="..\Classes\HubLayer.h" />
     <ClInclude Include="..\Classes\Item.h" />
     <ClInclude Include="..\Classes\JoyStick.h" />

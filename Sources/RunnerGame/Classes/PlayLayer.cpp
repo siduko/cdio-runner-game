@@ -79,13 +79,13 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt()){
 		
-		Director::getInstance()->replaceScene(GameoverLayer::createScene());
+		Director::getInstance()->replaceScene(ResultLayer::createScene());
 		return false;
 	}
 
 
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EndGame"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EndGame"].asInt()){
-		Director::getInstance()->replaceScene(GameoverLayer::createScene());
+		Director::getInstance()->replaceScene(ResultLayer::createScene());
 		return false;
 	}
 

@@ -14,7 +14,7 @@ private:
 public:
 	Animator();
 	~Animator();
-	CC_SYNTHESIZE_READONLY(Action*, _playingAction, PlayingAction);
+	CC_SYNTHESIZE_READONLY(Speed*, _playingAction, PlayingAction);
 	CC_SYNTHESIZE_READONLY(string, _playingActionName, PlayingActionName);
 	static Animator* create();
 	inline void addAction(string name, Animate* action){ _listAnimation[name] = action; }

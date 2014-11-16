@@ -7,7 +7,7 @@
 #include "Item.h"
 #include "EffectItem.h"
 #include "HubLayer.h"
-#include "GameoverLayer.h"
+#include "ResultLayer.h"
 #include "GameObject.h"
 #include "JoyStick.h"
 USING_NS_CC;

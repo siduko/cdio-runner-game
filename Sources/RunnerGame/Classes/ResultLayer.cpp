@@ -1,16 +1,16 @@
-#include "GameoverLayer.h"
+#include "ResultLayer.h"
 
 
-GameoverLayer::GameoverLayer()
+ResultLayer::ResultLayer()
 {
 }
 
 
-GameoverLayer::~GameoverLayer()
+ResultLayer::~ResultLayer()
 {
 }
 
-bool GameoverLayer::init()
+bool ResultLayer::init()
 {
 	if (!Layer::init())
 		return false;
@@ -19,7 +19,7 @@ bool GameoverLayer::init()
 	lb->setPosition(100, 200);
 	this->addChild(lb);
 
-	auto btnBack = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(GameoverLayer::btnBack_Click,this));
+	auto btnBack = MenuItemImage::create("CloseNormal.png", "CloseSelected.png", CC_CALLBACK_1(ResultLayer::btnBack_Click,this));
 	btnBack->setPosition(ccp(200, 200));
 	auto menu = Menu::create(btnBack, NULL);
 	this->addChild(menu);
@@ -27,14 +27,14 @@ bool GameoverLayer::init()
 	return true;
 }
 
-Scene* GameoverLayer::createScene()
+Scene* ResultLayer::createScene()
 {
 	auto scene = Scene::create();
-	scene->addChild(GameoverLayer::create());
+	scene->addChild(ResultLayer::create());
 	return scene;
 }
 
-void GameoverLayer::btnBack_Click(Ref* psender)
+void ResultLayer::btnBack_Click(Ref* psender)
 {
 	Director::getInstance()->replaceScene(PlayLayer::createScene("Levels/level1.tmx"));
 }

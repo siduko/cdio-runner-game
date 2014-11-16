@@ -40,7 +40,7 @@ bool ChapterLayer::init()
 		layout->setContentSize(Size(288,261));
 		layout->setAnchorPoint(ccp(0.5, 0.5));
 
-		Text* chapterName = Text::create(chapter["Name"].asString(), "arial", 32);
+		Text* chapterName = Text::create(chapter["Name"].asString(), "fonts/Marker Felt.ttf", 32);
 		chapterName->setPosition(ccp(layout->getContentSize().width / 2, layout->getContentSize().height*0.9));
 		layout->addChild(chapterName);
 
@@ -51,14 +51,14 @@ bool ChapterLayer::init()
 		ss << DataController::getInstance()->getChapterScoreByIndex(i);
 		ss >> temp;
 		ss.clear();
-		Text* chapterScore = Text::create(temp, "arial", 20);
+		Text* chapterScore = Text::create(temp, "fonts/Marker Felt.ttf", 20);
 		chapterScore->setPosition(ccp(layout->getContentSize().width * 0.25, layout->getContentSize().height*0.17));
 		layout->addChild(chapterScore);
 
 		ss << DataController::getInstance()->getChapterStarByIndex(i) << "/" << DataController::getInstance()->getChapterStarMaxByIndex(i);
 		ss >> temp;
 		ss.clear();
-		Text* chapterStar = Text::create(temp, "arial", 20);
+		Text* chapterStar = Text::create(temp, "fonts/Marker Felt.ttf", 20);
 		chapterStar->setPosition(ccp(layout->getContentSize().width * 0.7, layout->getContentSize().height*0.17));
 		layout->addChild(chapterStar);
 

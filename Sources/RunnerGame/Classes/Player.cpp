@@ -60,23 +60,25 @@ void Player::update(float dt)
 	{
 		_playerState = PlayerState::Running;
 	}*/
+	Animator* ani = (Animator*)this->getEntityManager()->getComponentObjectByName("Animator");
 	switch (_playerState)
 	{
 	case Idle:
-		((Animator*)this->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("idle", 0.2f, true);
+		ani->playActionByName("idle", 0.2f, true);
 		break;
 	case Running:
-		((Animator*)this->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("run", 1.0f, true);
+		ani->playActionByName("run", 1.0f, true);
 		if (_autoControlVelocity){
 			if (this->getVelocity() < _limitVelocity)
 				this->setVelocity(this->getVelocity() + _acceleration * dt);
+			ani->getPlayingAction()->setSpeed(this->getVelocity() / 100);
 		}
 		break;
 	case Jumping:
-		((Animator*)this->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("jump", 1.2f);
+		ani->playActionByName("jump", 1.2f);
 		break;
 	case Hurt:
-		((Animator*)this->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("hurt", 2.0f);
+		ani->playActionByName("hurt", 2.0f);
 		_actionTimeOut -= dt;
 		if (_actionTimeOut < 0)
 			_playerState = PlayerState::Running;

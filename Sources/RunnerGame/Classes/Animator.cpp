@@ -39,7 +39,7 @@ void Animator::playActionByName(string name, float duration /*= 0.1f*/, bool isR
 				_parent->stopAction(_playingAction);
 			if (isRepeat)
 			{
-				Action* temp = RepeatForever::create(act);
+				Speed* temp =Speed::create(RepeatForever::create(act),1);
 				_parent->runAction(temp);
 				_playingAction = temp;
 				_playingActionName = name;
@@ -48,7 +48,7 @@ void Animator::playActionByName(string name, float duration /*= 0.1f*/, bool isR
 			{
 				if (returnIdle)
 				{
-					Action* temp = Sequence::createWithTwoActions(act, CallFunc::create([this](){this->playActionByName("idle"); }));
+					Speed* temp =Speed::create( Sequence::createWithTwoActions(act, CallFunc::create([this](){this->playActionByName("idle"); })),1);
 					_parent->runAction(temp);
 					_playingAction = temp;
 					_playingActionName = name;
@@ -56,7 +56,7 @@ void Animator::playActionByName(string name, float duration /*= 0.1f*/, bool isR
 				else
 				{
 					_parent->runAction(act);
-					_playingAction = act;
+					_playingAction = Speed::create( act,1);
 					_playingActionName = name;
 				}
 			}

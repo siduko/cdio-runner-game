@@ -39,9 +39,6 @@
     <ClCompile Include="..\Classes\Player.cpp">
       <Filter>Classes\Actors</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameoverLayer.cpp">
-      <Filter>Classes\Layers</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\HubLayer.cpp">
       <Filter>Classes\Layers</Filter>
     </ClCompile>
@@ -87,6 +84,9 @@
     <ClCompile Include="..\Classes\EffectItem.cpp">
       <Filter>Classes\Actors</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\ResultLayer.cpp">
+      <Filter>Classes\Layers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -103,9 +103,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Player.h">
       <Filter>Classes\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameoverLayer.h">
-      <Filter>Classes\Layers</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HubLayer.h">
       <Filter>Classes\Layers</Filter>
@@ -154,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\EffectItem.h">
       <Filter>Classes\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ResultLayer.h">
+      <Filter>Classes\Layers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
