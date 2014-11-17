@@ -94,18 +94,22 @@
             <integer>2</integer>
             <key>CONTACT_FLOOR</key>
             <integer>3</integer>
-            <key>CONTACT_BLOCK</key>
-            <integer>7</integer>
-            <key>CONTACT_EndGame</key>
-            <integer>5</integer>
             <key>CONTACT_ITEM</key>
             <integer>4</integer>
-            <key>PlayerSpeed</key>
-            <integer>700000</integer>
+            <key>CONTACT_EndGame</key>
+            <integer>5</integer>
             <key>CONTACT_EffectItem</key>
             <integer>6</integer>
+            <key>CONTACT_BLOCK</key>
+            <integer>7</integer>
+			<key>CONTACT_ENEMY</key>
+            <integer>8</integer>
+            <key>PlayerSpeed</key>
+            <integer>700000</integer>
             <key>PlayerVelocityLimit</key>
             <integer>500</integer>
+			<key>TargetDetectedDistance</key>
+            <integer>100</integer>
             <key>JumpLimit</key>
             <integer>5000000</integer>
             <key>JumpStep</key>

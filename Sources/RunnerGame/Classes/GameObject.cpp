@@ -15,6 +15,7 @@ GameObject::GameObject(ValueMap properties) :GameObject()
 {
 	PhysicsBody* spriteBody = PhysicsBody::createBox(Size(properties["width"].asFloat(), properties["height"].asFloat()), PhysicsMaterial(1.0f, 0.0f, 0.0f));
 	spriteBody->setDynamic(properties["DynamicBody"].asBool());
+	spriteBody->setGravityEnable(properties["GravityEnable"].asBool());
 	spriteBody->setCollisionBitmask(properties["CollisionBitmask"].asInt());
 	spriteBody->setContactTestBitmask(true);
 	spriteBody->setRotationEnable(false);

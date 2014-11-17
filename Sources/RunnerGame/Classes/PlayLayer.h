@@ -6,6 +6,7 @@
 #include "Utils.h"
 #include "Item.h"
 #include "EffectItem.h"
+#include "Enemy.h"
 #include "HubLayer.h"
 #include "ResultLayer.h"
 #include "GameObject.h"

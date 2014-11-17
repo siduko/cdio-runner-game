@@ -82,6 +82,21 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 		return false;
 	}
 
+	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ENEMY"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ENEMY"].asInt()){
+		Enemy* enemy;
+		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ENEMY"].asInt())
+			enemy = (Enemy*)a->getNode();
+		else
+			enemy = (Enemy*)b->getNode();
+		enemy->setResetActionTimeout(true);
+		enemy->setEnemyState(Enemy::EnemyState::BeHit);
+		ValueMap force = DataController::getInstance()->getGameSettings()["PlayerHurt"].asValueMap();
+		player->getPhysicsBody()->applyImpulse(ccp(force["x"].asInt(), force["y"].asInt()));
+		player->setPlayerState(PlayerState::Hurt);
+		player->setActionTimeOut(2.0f);
+		return true;
+	}
+
 
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EndGame"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EndGame"].asInt()){
 		UserDefault::getInstance()->setIntegerForKey("Score", player->getScore());
@@ -210,6 +225,12 @@ bool PlayLayer::createMap(string tmxpath)
 			node->setPhysicsBody(spriteBody);
 			node->setRotation(properties["Rotation"].asFloat());
 			this->addChild(node);
+		}
+		if (properties["type"].asString() == "Enemy")
+		{
+			auto node = Enemy::create(properties);
+			this->addChild(node);
+			node->setTarget(player);
 		}
 		if (properties["type"].asString() == "Item")
 		{

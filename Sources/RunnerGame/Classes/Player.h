@@ -3,7 +3,6 @@
 #include "cocos2d.h"
 #include "DataController.h"
 #include "GameObject.h"
-#include "Animator.h"
 #include "EffectComponent.h"
 USING_NS_CC;
 using namespace std;

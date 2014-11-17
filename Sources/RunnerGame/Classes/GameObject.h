@@ -2,6 +2,7 @@
 #define GameObject_h__
 #include "cocos2d.h"
 #include "EntityManager.h"
+#include "Animator.h"
 USING_NS_CC;
 
 
