@@ -30,13 +30,13 @@ Scene* PlayLayer::createScene(string tmxpath)
 	auto bglayer = Layer::create();
 	auto bg = Sprite::create("bg.png");
 	bg->setAnchorPoint(ccp(0, 0));
-	bglayer->addChild(bg,1,1);
+	bglayer->addChild(bg, 1, 1);
 	scene->addChild(bglayer);
 	auto hub = HubLayer::create();
 	scene->addChild(hub, 3, 3);
 	auto layer = PlayLayer::create();
 	layer->setPhysicsWorld(scene->getPhysicsWorld());
-	scene->addChild(layer,2,2);
+	scene->addChild(layer, 2, 2);
 	layer->createMap(tmxpath);
 	return scene;
 }
@@ -74,17 +74,40 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 		}
 		if (player->getPlayerState() == PlayerState::Jumping)
 			player->setPlayerState(PlayerState::Running);
-		CCLOG("Collision detected");
 	}
 
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt()){
-		
+
 		Director::getInstance()->replaceScene(ResultLayer::createScene());
 		return false;
 	}
 
 
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EndGame"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EndGame"].asInt()){
+		UserDefault::getInstance()->setIntegerForKey("Score", player->getScore());
+		UserDefault::getInstance()->setIntegerForKey("Star", player->getScore());
+		ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
+		if (level["Score"].asInt() < player->getScore()){
+			level["Score"] = player->getScore();
+			CCLOG("Score %d", level["Score"].asInt());
+		}
+		
+		if (UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1 <= DataController::getInstance()->getLevelsInChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected")).size()){
+			ValueMap nextLevel = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
+			nextLevel["Locked"] = 0;
+			UserDefault::getInstance()->setIntegerForKey("LevelSelected", UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
+		}else
+		{
+			if (UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1 <= DataController::getInstance()->getChapters().size()){
+				ValueMap nextChapter = DataController::getInstance()->getChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1);
+				nextChapter["Locked"] = 0;
+				ValueMap nextLevel = nextChapter["Levels"].asValueVector()[0].asValueMap();
+				nextLevel["Locked"] = 0;
+				UserDefault::getInstance()->setIntegerForKey("ChapterSelected", UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1);
+				UserDefault::getInstance()->setIntegerForKey("LevelSelected", UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
+			}
+		}
+		DataController::getInstance()->saveGameData();
 		Director::getInstance()->replaceScene(ResultLayer::createScene());
 		return false;
 	}
@@ -106,23 +129,43 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 
 bool PlayLayer::onTouchBegan(Touch *touch, Event *unused_event)
 {
-	vecJump = ccp(player->getVelocity(), DataController::getInstance()->getGameSettings()["PlayerJump"].asFloat());
+	//vecJump = ccp(player->getVelocity(), DataController::getInstance()->getGameSettings()["PlayerJump"].asFloat());
+	this->getHubLayer()->powerJump->setPosition(touch->getStartLocation());
+	vecJump = ccp(0, 0);
+	this->getHubLayer()->powerJump->setVisible(true);
 	return true;
 }
 void PlayLayer::onTouchMoved(Touch *touch, Event *unused_event)
 {
-	if (vecJump.y < DataController::getInstance()->getGameSettings()["JumpLimit"].asFloat())
-		vecJump = ccpAdd(vecJump, ccp(0, 50000));
+	Vec2 vecOut = ccpSub(touch->getLocation(), touch->getStartLocation());
+	vecJump = ccpMult(vecOut, DataController::getInstance()->getGameSettings()["JumpStep"].asInt());
+	float angleJump = ccpAngle(vecOut, ccp(1,0))*180/3.14f;
+	if (vecJump.x > DataController::getInstance()->getGameSettings()["JumpLimit"].asFloat() || vecJump.y > DataController::getInstance()->getGameSettings()["JumpLimit"].asFloat()){
+		vecJump.x = DataController::getInstance()->getGameSettings()["JumpLimit"].asFloat();
+		vecJump.y = DataController::getInstance()->getGameSettings()["JumpLimit"].asFloat();
+	}
+	this->getHubLayer()->powerJump->setPercent(vecJump.y*100.0f / DataController::getInstance()->getGameSettings()["JumpLimit"].asFloat());
+	this->getHubLayer()->powerJump->setRotation(angleJump);
 }
 
 void PlayLayer::onTouchEnded(Touch *touch, Event *unused_event)
 {
-	player->jump(vecJump);
-	player->setPlayerState(PlayerState::Jumping);
-	((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("jump", 2.0f, false, true);
-	if (player->getVelocity() <= 0)
-		player->setVelocity(30);
-	CCLOG("%f", vecJump.y);
+	Vec2 vecOut = ccpSub(touch->getLocation(), touch->getStartLocation());
+	if (vecJump.y > DataController::getInstance()->getGameSettings()["PlayerJump"].asInt() && vecJump.x>=0){
+		player->jump(vecJump);
+		player->setPlayerState(PlayerState::Jumping);
+		((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("jump", 2.0f, false, true);
+		if (player->getVelocity() <= 0)
+			player->setVelocity(30);
+	}
+	if (vecOut.x<0){
+		float velocityPlayer = player->getVelocity();
+		if (velocityPlayer + vecOut.x >= 20)
+			player->setVelocity(velocityPlayer + vecOut.x);
+		else
+			player->setVelocity(20);
+	}
+	this->getHubLayer()->powerJump->setVisible(false);
 }
 
 bool PlayLayer::createMap(string tmxpath)

@@ -1,7 +1,6 @@
 #ifndef Item_h__
 #define Item_h__
 #include "cocos2d.h"
-#include "Definitions.h"
 #include "GameObject.h"
 #include "Animator.h"
 USING_NS_CC;

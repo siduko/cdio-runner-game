@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"/>
+
 <plist version="1.0">
     <dict>
         <key>Chapters</key>
@@ -18,12 +19,12 @@
                         <string>1</string>
                         <key>TmxPath</key>
                         <string>Levels/level1.tmx</string>
-                        <key>Star</key>
-                        <integer>3</integer>
                         <key>StarMax</key>
                         <integer>3</integer>
                         <key>Score</key>
-                        <integer>5000</integer>
+                        <integer>0</integer>
+                        <key>Star</key>
+                        <integer>0</integer>
                         <key>Locked</key>
                         <integer>0</integer>
                     </dict>
@@ -32,11 +33,11 @@
                         <string>2</string>
                         <key>TmxPath</key>
                         <string>Levels/level1.tmx</string>
-                        <key>Star</key>
-                        <integer>0</integer>
                         <key>StarMax</key>
                         <integer>3</integer>
                         <key>Score</key>
+                        <integer>0</integer>
+                        <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
                         <integer>1</integer>
@@ -57,11 +58,11 @@
                         <string>1</string>
                         <key>TmxPath</key>
                         <string>Levels/level1.tmx</string>
-                        <key>Star</key>
-                        <integer>0</integer>
                         <key>StarMax</key>
                         <integer>3</integer>
                         <key>Score</key>
+                        <integer>0</integer>
+                        <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
                         <integer>1</integer>
@@ -71,11 +72,11 @@
                         <string>2</string>
                         <key>TmxPath</key>
                         <string>Levels/level1.tmx</string>
-                        <key>Star</key>
-                        <integer>0</integer>
                         <key>StarMax</key>
                         <integer>3</integer>
                         <key>Score</key>
+                        <integer>0</integer>
+                        <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
                         <integer>1</integer>
@@ -87,24 +88,28 @@
         <dict>
             <key>CONTACT_DieZone</key>
             <integer>1</integer>
+            <key>PlayerJump</key>
+            <integer>1500000</integer>
             <key>CONTACT_PLAYER</key>
             <integer>2</integer>
             <key>CONTACT_FLOOR</key>
             <integer>3</integer>
             <key>CONTACT_BLOCK</key>
             <integer>7</integer>
-            <key>CONTACT_ITEM</key>
-            <integer>4</integer>
             <key>CONTACT_EndGame</key>
             <integer>5</integer>
-            <key>CONTACT_EffectItem</key>
-            <integer>6</integer>
+            <key>CONTACT_ITEM</key>
+            <integer>4</integer>
             <key>PlayerSpeed</key>
             <integer>700000</integer>
-            <key>PlayerJump</key>
-            <integer>1500000</integer>
-	    <key>JumpLimit</key>
+            <key>CONTACT_EffectItem</key>
+            <integer>6</integer>
+            <key>PlayerVelocityLimit</key>
+            <integer>500</integer>
+            <key>JumpLimit</key>
             <integer>5000000</integer>
+            <key>JumpStep</key>
+            <integer>5000</integer>
             <key>WorldGravity</key>
             <integer>-500</integer>
             <key>PlayerHurt</key>

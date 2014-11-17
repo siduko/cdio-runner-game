@@ -15,7 +15,7 @@ Player::Player(ValueMap properties) : GameObject(properties)
 	_entityManager->addComponentObject("EffectComponent", EffectComponent::create());
 	_playerState = PlayerState::Running;
 	_acceleration = 20;
-	_limitVelocity = 500;
+	_limitVelocity = DataController::getInstance()->getGameSettings()["PlayerVelocityLimit"].asInt();
 	_score = 0;
 }
 
@@ -71,6 +71,8 @@ void Player::update(float dt)
 		if (_autoControlVelocity){
 			if (this->getVelocity() < _limitVelocity)
 				this->setVelocity(this->getVelocity() + _acceleration * dt);
+			else
+				this->setVelocity(_limitVelocity);
 			ani->getPlayingAction()->setSpeed(this->getVelocity() / 100);
 		}
 		break;

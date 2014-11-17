@@ -15,7 +15,6 @@ bool HubLayer::init()
 {
 	if (!Layer::init())
 		return false;
-
 	sceneSize = Director::getInstance()->getWinSize();
 
 	auto avatar = Sprite::create("avatar.png");
@@ -34,6 +33,12 @@ bool HubLayer::init()
 	effectImage = ImageView::create("effectIcon1.png");
 	effectImage->setPosition(ccp(sceneSize.width*0.5f, sceneSize.height*0.85f));
 	this->addChild(effectImage);
+
+	powerJump = LoadingBar::create("progress_texture.png");
+	powerJump->setPosition(ccp(sceneSize.width*0.0f, sceneSize.height*0.0f));
+	powerJump->setAnchorPoint(ccp(0, 0.5f));
+	this->addChild(powerJump);
+	powerJump->setVisible(false);
 
 	scheduleUpdate();
 

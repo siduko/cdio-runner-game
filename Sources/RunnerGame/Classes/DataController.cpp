@@ -4,7 +4,7 @@
 DataController::DataController()
 {
 	string path = FileUtils::getInstance()->fullPathForFilename("Levels/GameData.plist");
-	_gameData = FileUtils::getInstance()->getValueMapFromFile(path);
+	_gameData = FileUtils::getInstance()->getValueMapFromFile("Levels/GameData.plist");
 	_chapters = _gameData["Chapters"].asValueVector();
 }
 
@@ -81,7 +81,6 @@ cocos2d::ValueMap DataController::getLevelByChapterIndex(int chapterIndex, int l
 void DataController::saveGameData()
 {
 	string path = FileUtils::getInstance()->fullPathForFilename("Levels/GameData.plist");
-	FileUtils::getInstance()->writeToFile(_gameData, path);
 }
 
 cocos2d::ValueMap DataController::getGameSettings()

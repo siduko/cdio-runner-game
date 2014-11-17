@@ -128,9 +128,6 @@
     <ClInclude Include="..\Classes\SlidingMenuGrid.h">
       <Filter>Classes\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Definitions.h">
-      <Filter>Classes\GameSettings</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Utils.h">
       <Filter>Classes\Components</Filter>
     </ClInclude>

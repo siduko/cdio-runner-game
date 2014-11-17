@@ -163,7 +163,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\ChapterLayer.h" />
     <ClInclude Include="..\Classes\ComponentObject.h" />
     <ClInclude Include="..\Classes\DataController.h" />
-    <ClInclude Include="..\Classes\Definitions.h" />
     <ClInclude Include="..\Classes\EffectComponent.h" />
     <ClInclude Include="..\Classes\EffectItem.h" />
     <ClInclude Include="..\Classes\Enemy.h" />

@@ -16,6 +16,7 @@ private:
 	ImageView* effectImage;
 	Player* player;
 public:
+	LoadingBar* powerJump;
 	virtual bool init();
 	void setScore(string value);
 	inline void setPlayer(Player* player){ this->player = player; }
