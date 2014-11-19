@@ -1,7 +1,9 @@
 #ifndef MenuLayer_h__
 #define MenuLayer_h__
 #include "cocos2d.h"
+#include "ui/CocosGUI.h"
 USING_NS_CC;
+using namespace ui;
 
 class MenuLayer:public Layer
 {

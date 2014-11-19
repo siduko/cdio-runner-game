@@ -17,6 +17,9 @@ bool PlayLayer::init()
 	touchListener->onTouchEnded = CC_CALLBACK_2(PlayLayer::onTouchEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
+	UserDefault::getInstance()->setIntegerForKey("ChapterPred", UserDefault::getInstance()->getIntegerForKey("ChapterSelected"));
+	UserDefault::getInstance()->setIntegerForKey("LevelPred", UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
+
 	scheduleUpdate();
 
 	return true;

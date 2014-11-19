@@ -23,7 +23,7 @@ bool ChapterLayer::init()
 	ScrollView* scrollView = ScrollView::create();
 	scrollView->setDirection(ScrollView::Direction::HORIZONTAL);
 	scrollView->setContentSize(wSize);
-	scrollView->setBackGroundImage("Chapters_Select-Episode.png");
+	scrollView->setBackGroundImage("Icons/background.png");
 	scrollView->setPosition(ccp(wSize.width / 2, wSize.height / 2));
 	scrollView->setAnchorPoint(ccp(0.5, 0.5));
 	this->addChild(scrollView);
@@ -96,6 +96,28 @@ bool ChapterLayer::init()
 	}
 
 	scrollView->setInnerContainerSize(Size(lastPos, wSize.height));
+
+	auto btnBack = Button::create("Icons/Arrow_icon.png", "Icons/Arrow_icon.png", "Icons/Arrow_icon.png");
+	btnBack->setPosition(ccp(wSize.width*0.1f, wSize.height*0.1f));
+	btnBack->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
+	{
+		switch (type)
+		{
+		case cocos2d::ui::Widget::TouchEventType::BEGAN:
+			Director::getInstance()->replaceScene(LevelsLayer::createScene());
+			break;
+		case cocos2d::ui::Widget::TouchEventType::MOVED:
+			break;
+		case cocos2d::ui::Widget::TouchEventType::ENDED:
+			break;
+		case cocos2d::ui::Widget::TouchEventType::CANCELED:
+			break;
+		default:
+			break;
+		}
+	});
+	this->addChild(btnBack);
+
 	return true;
 }
 

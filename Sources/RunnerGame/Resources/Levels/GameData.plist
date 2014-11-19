@@ -83,6 +83,31 @@
                     </dict>
                 </array>
             </dict>
+<dict>
+                <key>Name</key>
+                <string>3. Natural</string>
+                <key>ChapterImage</key>
+                <string>Chapters_chapterImage.png</string>
+                <key>Locked</key>
+                <integer>0</integer>
+                <key>Levels</key>
+                <array>
+                    <dict>
+                        <key>Name</key>
+                        <string>1</string>
+                        <key>TmxPath</key>
+                        <string>Levels/Natural.tmx</string>
+                        <key>StarMax</key>
+                        <integer>3</integer>
+                        <key>Score</key>
+                        <integer>0</integer>
+                        <key>Star</key>
+                        <integer>0</integer>
+                        <key>Locked</key>
+                        <integer>0</integer>
+                    </dict>
+                </array>
+            </dict>
         </array>
         <key>GameSettings</key>
         <dict>

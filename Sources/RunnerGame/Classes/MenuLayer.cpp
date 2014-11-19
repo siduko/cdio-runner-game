@@ -13,6 +13,8 @@ bool MenuLayer::init()
 	/*Menu* menu = Menu::create(btnPlay,btnOption,btnQuit);
 	menu->alignItemsVerticallyWithPadding(20);
 	this->addChild(menu);*/
+
+
 	return true;
 }
 

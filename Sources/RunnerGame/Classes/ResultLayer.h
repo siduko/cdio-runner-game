@@ -2,6 +2,9 @@
 #define ResultLayer_h__
 #include "cocos2d.h"
 #include "PlayLayer.h"
+#include "LevelsLayer.h"
+#include "MenuLayer.h"
+#include "MenuLayer.h"
 #include "ui/CocosGUI.h"
 USING_NS_CC;
 using namespace ui;
@@ -14,7 +17,6 @@ public:
 	virtual bool init();
 	ResultLayer();
 	~ResultLayer();
-	void btnBack_Click(Ref* psender);
 	CREATE_FUNC(ResultLayer);
 };
 #endif // GameoverLayer_h__
