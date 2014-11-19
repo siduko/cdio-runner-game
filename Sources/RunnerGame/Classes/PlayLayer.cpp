@@ -200,6 +200,13 @@ void PlayLayer::onTouchEnded(Touch *touch, Event *unused_event)
 		((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("jump", 2.0f, false, true);
 		if (player->getVelocity() <= 0)
 			player->setVelocity(30);
+	}else if (vecJump.y < DataController::getInstance()->getGameSettings()["PlayerJump"].asInt())
+	{
+		player->jump(ccp(DataController::getInstance()->getGameSettings()["PlayerJump"].asInt()*0.2f, DataController::getInstance()->getGameSettings()["PlayerJump"].asInt()));
+		player->setPlayerState(PlayerState::Jumping);
+		((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("jump", 2.0f, false, true);
+		if (player->getVelocity() <= 0)
+			player->setVelocity(30);
 	}
 	if (vecOut.x < 0){
 		float velocityPlayer = player->getVelocity();

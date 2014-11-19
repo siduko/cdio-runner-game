@@ -73,7 +73,7 @@ void Player::update(float dt)
 				this->setVelocity(this->getVelocity() + _acceleration * dt);
 			else
 				this->setVelocity(_limitVelocity);
-			ani->getPlayingAction()->setSpeed(this->getVelocity() / 100);
+			ani->getPlayingAction()->setSpeed(this->getVelocity() / 30);
 		}
 		break;
 	case Jumping:
