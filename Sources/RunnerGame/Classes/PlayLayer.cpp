@@ -67,10 +67,19 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 		player->setAllowJump(true);
 		if (player->getPlayerState() == PlayerState::Running)
 		{
-			ValueMap force = DataController::getInstance()->getGameSettings()["PlayerHurt"].asValueMap();
-			player->getPhysicsBody()->applyImpulse(ccp(force["x"].asInt(), force["y"].asInt()));
-			player->setPlayerState(PlayerState::Hurt);
-			player->setActionTimeOut(2.0f);
+			Vec2 coldir;
+			if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt())
+				coldir = Utils::collisedDirection(a->getNode()->getBoundingBox(), b->getNode()->getBoundingBox());
+			else
+				coldir = Utils::collisedDirection(b->getNode()->getBoundingBox(), a->getNode()->getBoundingBox());
+			CCLOG("Collition at: %f %f", coldir.x, coldir.y);
+			if (coldir == ccp(-1, 0) && coldir == ccp(1, 0))
+			{
+				ValueMap force = DataController::getInstance()->getGameSettings()["PlayerHurt"].asValueMap();
+				player->getPhysicsBody()->applyImpulse(ccp(force["x"].asInt(), force["y"].asInt()));
+				player->setPlayerState(PlayerState::Hurt);
+				player->setActionTimeOut(2.0f);
+			}
 		}
 		if (player->getPlayerState() == PlayerState::Jumping)
 			player->setPlayerState(PlayerState::Running);
@@ -84,16 +93,31 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ENEMY"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ENEMY"].asInt()){
 		Enemy* enemy;
-		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ENEMY"].asInt())
+		Vec2 coldir;
+		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ENEMY"].asInt()){
 			enemy = (Enemy*)a->getNode();
+			coldir = Utils::collisedDirection(b->getNode()->getBoundingBox(), a->getNode()->getBoundingBox());
+		}
 		else
+		{
 			enemy = (Enemy*)b->getNode();
-		enemy->setResetActionTimeout(true);
-		enemy->setEnemyState(Enemy::EnemyState::BeHit);
-		ValueMap force = DataController::getInstance()->getGameSettings()["PlayerHurt"].asValueMap();
-		player->getPhysicsBody()->applyImpulse(ccp(force["x"].asInt(), force["y"].asInt()));
-		player->setPlayerState(PlayerState::Hurt);
-		player->setActionTimeOut(2.0f);
+			coldir = Utils::collisedDirection(a->getNode()->getBoundingBox(), b->getNode()->getBoundingBox());
+		}
+		CCLOG("Collition with %d at: %f %f", enemy->getEnemyType(), coldir.x, coldir.y);
+		if (coldir == ccp(1, 0) || coldir == ccp(-1, 0) || coldir == ccp(0, -1))
+		{
+			enemy->setResetActionTimeout(true);
+			enemy->setEnemyState(Enemy::EnemyState::BeHit);
+			ValueMap force = DataController::getInstance()->getGameSettings()["PlayerHurt"].asValueMap();
+			player->getPhysicsBody()->applyImpulse(ccp(force["x"].asInt(), force["y"].asInt()));
+			player->setPlayerState(PlayerState::Hurt);
+			player->setActionTimeOut(2.0f);
+		}
+		if (coldir == ccp(0, 1))
+		{
+			enemy->setResetActionTimeout(true);
+			enemy->setEnemyState(Enemy::EnemyState::Dead);
+		}
 		return true;
 	}
 
@@ -106,12 +130,13 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			level["Score"] = player->getScore();
 			CCLOG("Score %d", level["Score"].asInt());
 		}
-		
+
 		if (UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1 <= DataController::getInstance()->getLevelsInChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected")).size()){
 			ValueMap nextLevel = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
 			nextLevel["Locked"] = 0;
 			UserDefault::getInstance()->setIntegerForKey("LevelSelected", UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
-		}else
+		}
+		else
 		{
 			if (UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1 <= DataController::getInstance()->getChapters().size()){
 				ValueMap nextChapter = DataController::getInstance()->getChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1);
@@ -154,7 +179,7 @@ void PlayLayer::onTouchMoved(Touch *touch, Event *unused_event)
 {
 	Vec2 vecOut = ccpSub(touch->getLocation(), touch->getStartLocation());
 	vecJump = ccpMult(vecOut, DataController::getInstance()->getGameSettings()["JumpStep"].asInt());
-	float angleJump = ccpAngle(vecOut, ccp(1,0))*180/3.14f;
+	float angleJump = ccpAngle(vecOut, ccp(1, 0)) * 180 / 3.14f;
 	if (vecJump.x > DataController::getInstance()->getGameSettings()["JumpLimit"].asFloat() || vecJump.y > DataController::getInstance()->getGameSettings()["JumpLimit"].asFloat()){
 		vecJump.x = DataController::getInstance()->getGameSettings()["JumpLimit"].asFloat();
 		vecJump.y = DataController::getInstance()->getGameSettings()["JumpLimit"].asFloat();
@@ -166,14 +191,14 @@ void PlayLayer::onTouchMoved(Touch *touch, Event *unused_event)
 void PlayLayer::onTouchEnded(Touch *touch, Event *unused_event)
 {
 	Vec2 vecOut = ccpSub(touch->getLocation(), touch->getStartLocation());
-	if (vecJump.y > DataController::getInstance()->getGameSettings()["PlayerJump"].asInt() && vecJump.x>=0){
+	if (vecJump.y > DataController::getInstance()->getGameSettings()["PlayerJump"].asInt() && vecJump.x >= 0){
 		player->jump(vecJump);
 		player->setPlayerState(PlayerState::Jumping);
 		((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("jump", 2.0f, false, true);
 		if (player->getVelocity() <= 0)
 			player->setVelocity(30);
 	}
-	if (vecOut.x<0){
+	if (vecOut.x < 0){
 		float velocityPlayer = player->getVelocity();
 		if (velocityPlayer + vecOut.x >= 20)
 			player->setVelocity(velocityPlayer + vecOut.x);

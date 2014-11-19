@@ -15,5 +15,6 @@ public:
 		os << t;
 		return os.str();
 	}
+	static Vec2 collisedDirection(Rect a, Rect b);
 };
 #endif // Utils_h__

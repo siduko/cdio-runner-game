@@ -37,10 +37,10 @@ Enemy* Enemy::create(ValueMap properties)
 
 void Enemy::update(float dt)
 {
-	if (_target && ccpDistance(_target->getPosition(), this->getPosition()) <= DataController::getInstance()->getGameSettings()["TargetDetectedDistance"].asInt())
+	/*if (_target && ccpDistance(_target->getPosition(), this->getPosition()) <= DataController::getInstance()->getGameSettings()["TargetDetectedDistance"].asInt())
 	{
 		_enemyState = EnemyState::TargetDetected;
-	}
+	}*/
 	_actionTimeout -= dt;
 	Animator* ani = (Animator*)this->getEntityManager()->getComponentObjectByName("Animator");
 	switch (_enemyState)
@@ -50,7 +50,6 @@ void Enemy::update(float dt)
 			ani->playActionByName("idle", 0.2f, true);
 			_actionTimeout = Utils::randomValueBetween(1.0f, 3.0f);
 			_resetActionTimeout = false;
-			CCLOG("Enemy Idle in %f",_actionTimeout);
 		}
 		if (_actionTimeout<0)
 		{
@@ -67,7 +66,6 @@ void Enemy::update(float dt)
 				this->setFlipX(true);
 			else
 				this->setFlipX(false);
-			CCLOG("Enemy Moving in %f",_actionTimeout);
 		}
 		if (_actionTimeout < 0){
 			if (Utils::randomValueBetween(0, 1))
@@ -95,7 +93,6 @@ void Enemy::update(float dt)
 			ani->playActionByName("behit", 0.2f, true);
 			_actionTimeout = 1.0f;
 			_resetActionTimeout = false;
-			CCLOG("Enemy Behit in %f", _actionTimeout);
 		}
 		if (_actionTimeout < 0)
 		{
@@ -106,14 +103,16 @@ void Enemy::update(float dt)
 	case Dead:
 		if (_resetActionTimeout){
 			ani->playActionByName("dead", 0.2f, true);
-			_actionTimeout = 2.0f;
+			_actionTimeout = 0.5f;
 			_resetActionTimeout = false;
-			CCLOG("Enemy Dead in %f", _actionTimeout);
+			CCLOG("Enemy dead in %f", _actionTimeout);
 		}
 		if (_actionTimeout < 0)
 		{
-			_resetActionTimeout = true;
-			_enemyState = EnemyState::Idle;
+			/*_resetActionTimeout = true;
+			_enemyState = EnemyState::Idle;*/
+			CCLOG("Enemy Dead");
+			this->removeFromParentAndCleanup(false);
 		}
 		break;
 	case TargetDetected:
@@ -124,7 +123,7 @@ void Enemy::update(float dt)
 			else
 				this->setFlipX(false);
 			this->getPhysicsBody()->setVelocity(ccpMult(Vec2::forAngle(ccpAngle(_target->getPosition(), this->getPosition())),abs(_moveVelocity)));
-			CCLOG("Enemy TargetDetected");
+			//CCLOG("Enemy TargetDetected");
 			if (ccpDistance(_target->getPosition(), this->getPosition()) > DataController::getInstance()->getGameSettings()["TargetDetectedDistance"].asInt())
 				_enemyState = EnemyState::Moving;
 		}
