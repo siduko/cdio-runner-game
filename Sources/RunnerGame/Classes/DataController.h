@@ -17,6 +17,7 @@ public:
 	~DataController();
 	static DataController* getInstance();
 	ValueMap getChapterByIndex(int index);
+	void setChapterByIndex(int index,ValueMap value);
 	inline ValueVector getChapters(){
 		return _chapters;
 	}
@@ -25,6 +26,7 @@ public:
 	int getChapterStarByIndex(int index);
 	int getChapterStarMaxByIndex(int index);
 	ValueMap getLevelByChapterIndex(int chapterIndex, int levelIndex);
+	void setLevelByChapterIndex(int chapterIndex, int levelIndex, ValueMap value);
 	ValueMap getGameSettings();
 	void saveGameData();
 };

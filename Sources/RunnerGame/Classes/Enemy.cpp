@@ -101,19 +101,21 @@ void Enemy::update(float dt)
 		}
 		break;
 	case Dead:
-		if (_resetActionTimeout){
+		/*if (_resetActionTimeout){
 			ani->playActionByName("dead", 0.2f, true);
 			_actionTimeout = 0.5f;
 			_resetActionTimeout = false;
 			CCLOG("Enemy dead in %f", _actionTimeout);
-		}
-		if (_actionTimeout < 0)
-		{
-			/*_resetActionTimeout = true;
-			_enemyState = EnemyState::Idle;*/
+		}*/
+		ani->playActionByName("dead", 0.2f, true);
+		this->runAction(Sequence::createWithTwoActions(EaseBackIn::create(ScaleTo::create(2, 0)), CallFuncN::create([](Node* pSender){
 			CCLOG("Enemy Dead");
-			this->removeFromParentAndCleanup(false);
-		}
+			pSender->removeFromParentAndCleanup(false); 
+		})));
+		/*if (_actionTimeout < 0)
+		{
+
+		}*/
 		break;
 	case TargetDetected:
 		if (_target)

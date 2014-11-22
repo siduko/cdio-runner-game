@@ -7,7 +7,8 @@
 USING_NS_CC;
 using namespace ui;
 
-class ChapterLayer:public Layer
+namespace Layers{
+class ChapterLayer :public Layer
 {
 public:
 	ChapterLayer();
@@ -16,4 +17,5 @@ public:
 	CREATE_FUNC(ChapterLayer);
 	static Scene* createScene();
 };
+}
 #endif // ChapterLayer_h__

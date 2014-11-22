@@ -22,7 +22,7 @@
                         <key>StarMax</key>
                         <integer>3</integer>
                         <key>Score</key>
-                        <integer>0</integer>
+                        <integer>5700</integer>
                         <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
@@ -40,7 +40,7 @@
                         <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                     </dict>
                 </array>
             </dict>
@@ -50,7 +50,7 @@
                 <key>ChapterImage</key>
                 <string>Chapters_chapterImage.png</string>
                 <key>Locked</key>
-                <integer>1</integer>
+                <integer>0</integer>
                 <key>Levels</key>
                 <array>
                     <dict>
@@ -83,7 +83,7 @@
                     </dict>
                 </array>
             </dict>
-<dict>
+            <dict>
                 <key>Name</key>
                 <string>3. Natural</string>
                 <key>ChapterImage</key>
@@ -111,29 +111,29 @@
         </array>
         <key>GameSettings</key>
         <dict>
-            <key>CONTACT_DieZone</key>
-            <integer>1</integer>
             <key>PlayerJump</key>
             <integer>1500000</integer>
+            <key>CONTACT_DieZone</key>
+            <integer>1</integer>
             <key>CONTACT_PLAYER</key>
             <integer>2</integer>
             <key>CONTACT_FLOOR</key>
             <integer>3</integer>
-            <key>CONTACT_ITEM</key>
-            <integer>4</integer>
             <key>CONTACT_EndGame</key>
             <integer>5</integer>
+            <key>CONTACT_ITEM</key>
+            <integer>4</integer>
+            <key>PlayerSpeed</key>
+            <integer>700000</integer>
             <key>CONTACT_EffectItem</key>
             <integer>6</integer>
             <key>CONTACT_BLOCK</key>
             <integer>7</integer>
-			<key>CONTACT_ENEMY</key>
+            <key>CONTACT_ENEMY</key>
             <integer>8</integer>
-            <key>PlayerSpeed</key>
-            <integer>700000</integer>
             <key>PlayerVelocityLimit</key>
             <integer>500</integer>
-			<key>TargetDetectedDistance</key>
+            <key>TargetDetectedDistance</key>
             <integer>100</integer>
             <key>JumpLimit</key>
             <integer>5000000</integer>

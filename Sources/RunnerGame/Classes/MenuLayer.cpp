@@ -1,41 +1,44 @@
 #include "MenuLayer.h"
 
+namespace Layers{
 
-bool MenuLayer::init()
-{
-	if (!Layer::init())
-		return false;
+	bool MenuLayer::init()
+	{
+		if (!Layer::init())
+			return false;
 
-	/*auto btnPlay = MenuItemImage::create("CloseNormal.png","CloseSelected.png",menu_selector(MenuLayer::btnPlay_Click));
-	auto btnOption = MenuItemImage::create("CloseNormal.png","CloseSelected.png",menu_selector(MenuLayer::btnOption_Click));
-	auto btnQuit = MenuItemImage::create("CloseNormal.png","CloseSelected.png",menu_selector(MenuLayer::btnQuit_Click));*/
+		auto wSize = Director::getInstance()->getWinSize();
 
-	/*Menu* menu = Menu::create(btnPlay,btnOption,btnQuit);
-	menu->alignItemsVerticallyWithPadding(20);
-	this->addChild(menu);*/
+		auto btnPlay = Button::create("Icons/Play_icon.png", "Icons/Play_icon.png", "Icons/Play_icon_disabled.png");
+		btnPlay->setPosition(ccp(wSize.width*0.5, wSize.height*0.3));
+		btnPlay->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
+		{
+			switch (type)
+			{
+			case cocos2d::ui::Widget::TouchEventType::BEGAN:
+				Director::getInstance()->replaceScene(ChapterLayer::createScene());
+				break;
+			case cocos2d::ui::Widget::TouchEventType::MOVED:
+				break;
+			case cocos2d::ui::Widget::TouchEventType::ENDED:
+				break;
+			case cocos2d::ui::Widget::TouchEventType::CANCELED:
+				break;
+			default:
+				break;
+			}
+		});
+		this->addChild(btnPlay);
 
+		return true;
+	}
 
-	return true;
-}
+	Scene* MenuLayer::createScene()
+	{
+		auto scene = Scene::create();
+		auto layer = MenuLayer::create();
+		scene->addChild(layer);
+		return scene;
+	}
 
-void MenuLayer::btnPlay_Click(Ref* pSender) {
-}
-
-void MenuLayer::btnOption_Click(Ref* pSender) {
-}
-
-void MenuLayer::btnQuit_Click(Ref* pSender) {
-}
-
-bool MenuLayer::onTouchBegan(Touch *touch, Event *unused_event)
-{
-	return true;
-}
-
-Scene* MenuLayer::createScene()
-{
-	auto scene = Scene::create();
-	auto layer = MenuLayer::create();
-	scene->addChild(layer);
-	return scene;
 }

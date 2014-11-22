@@ -1,5 +1,6 @@
 ﻿#include "PlayLayer.h"
 
+namespace Layers{
 
 bool PlayLayer::init()
 {
@@ -129,25 +130,32 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 		UserDefault::getInstance()->setIntegerForKey("Score", player->getScore());
 		UserDefault::getInstance()->setIntegerForKey("Star", player->getScore());
 		ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
+
+		int selectedLevel = UserDefault::getInstance()->getIntegerForKey("LevelSelected");
+		int selectedChapter = UserDefault::getInstance()->getIntegerForKey("ChapterSelected");
+
 		if (level["Score"].asInt() < player->getScore()){
 			level["Score"] = player->getScore();
-			CCLOG("Score %d", level["Score"].asInt());
+			//CCLOG("Score %d", level)["Score"].asInt());
+			DataController::getInstance()->setLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"), level);
 		}
 
-		if (UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1 <= DataController::getInstance()->getLevelsInChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected")).size()){
+		if (selectedLevel + 1 < DataController::getInstance()->getLevelsInChapterByIndex(selectedChapter).size()){
 			ValueMap nextLevel = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
 			nextLevel["Locked"] = 0;
 			UserDefault::getInstance()->setIntegerForKey("LevelSelected", UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
+			DataController::getInstance()->setLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"), nextLevel);
 		}
 		else
 		{
-			if (UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1 <= DataController::getInstance()->getChapters().size()){
+			if (UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1 < DataController::getInstance()->getChapters().size()){
 				ValueMap nextChapter = DataController::getInstance()->getChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1);
 				nextChapter["Locked"] = 0;
 				ValueMap nextLevel = nextChapter["Levels"].asValueVector()[0].asValueMap();
 				nextLevel["Locked"] = 0;
 				UserDefault::getInstance()->setIntegerForKey("ChapterSelected", UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1);
 				UserDefault::getInstance()->setIntegerForKey("LevelSelected", UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
+				DataController::getInstance()->setChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"),nextChapter);
 			}
 		}
 		DataController::getInstance()->saveGameData();
@@ -322,3 +330,4 @@ void PlayLayer::update(float dt)
 	this->setViewPointCenter(player->getPosition());
 }
 
+}

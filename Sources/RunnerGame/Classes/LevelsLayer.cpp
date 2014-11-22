@@ -1,9 +1,10 @@
 #include "LevelsLayer.h"
 
+namespace Layers{
 
 LevelsLayer::LevelsLayer()
 {
-	
+
 }
 
 
@@ -85,11 +86,14 @@ bool LevelsLayer::init()
 		layout->addTouchEventListener([i](Ref *pSender, ui::Layout::TouchEventType type)
 		{
 			ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
+			ValueMap selectedLevel;
 			switch (type)
 			{
 			case cocos2d::ui::Widget::TouchEventType::BEGAN:
-				UserDefault::getInstance()->setIntegerForKey("LevelSelected", i);
-				Director::getInstance()->replaceScene(PlayLayer::createScene(level["TmxPath"].asString()));
+				UserDefault::getInstance()->setIntegerForKey("LevelSelected", i); 
+				selectedLevel = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
+				if (selectedLevel["Locked"].asInt() == 0)
+					Director::getInstance()->replaceScene(PlayLayer::createScene(level["TmxPath"].asString()));
 				break;
 			case cocos2d::ui::Widget::TouchEventType::MOVED:
 				break;
@@ -107,7 +111,7 @@ bool LevelsLayer::init()
 
 	scrollView->setInnerContainerSize(Size(lastPos, wSize.height));
 
-	auto btnBack = Button::create("Icons/Arrow_icon.png", "Icons/Arrow_icon.png", "Icons/Arrow_icon.png");
+	auto btnBack = Button::create("Icons/Arrow_icon.png", "Icons/Arrow_icon.png", "Icons/Arrow_icon_disabled.png");
 	btnBack->setPosition(ccp(wSize.width*0.1f, wSize.height*0.1f));
 	btnBack->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
@@ -129,4 +133,5 @@ bool LevelsLayer::init()
 	this->addChild(btnBack);
 
 	return true;
+}
 }

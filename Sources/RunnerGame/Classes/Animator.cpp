@@ -48,15 +48,14 @@ void Animator::playActionByName(string name, float duration /*= 0.1f*/, bool isR
 			{
 				if (returnIdle)
 				{
-					Speed* temp =Speed::create( Sequence::createWithTwoActions(act, CallFunc::create([this](){this->playActionByName("idle"); })),1);
-					_parent->runAction(temp);
-					_playingAction = temp;
+					_playingAction = Speed::create(Sequence::createWithTwoActions(act, CallFunc::create([this](){this->playActionByName("idle"); })), 1);
+					_parent->runAction(_playingAction);
 					_playingActionName = name;
 				}
 				else
 				{
-					_parent->runAction(act);
-					_playingAction = Speed::create( act,1);
+					_playingAction = Speed::create(act, 1);
+					_parent->runAction(_playingAction);
 					_playingActionName = name;
 				}
 			}

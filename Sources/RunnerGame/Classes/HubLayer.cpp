@@ -1,5 +1,6 @@
 #include "HubLayer.h"
 
+namespace Layers{
 
 HubLayer::HubLayer()
 {
@@ -16,6 +17,8 @@ bool HubLayer::init()
 	if (!Layer::init())
 		return false;
 	sceneSize = Director::getInstance()->getWinSize();
+
+	
 
 	auto avatar = Sprite::create("avatar.png");
 	avatar->setPosition(ccp(sceneSize.width*0.1f, sceneSize.height*0.9f));
@@ -40,6 +43,168 @@ bool HubLayer::init()
 	this->addChild(powerJump);
 	powerJump->setVisible(false);
 
+	auto btnMenu = Button::create("Icons/Pause_icon.png", "Icons/Pause_icon.png", "Icons/Pause_icon_disabled.png");
+	btnMenu->setName("btnMenu");
+	btnMenu->setPosition(ccp(sceneSize.width*0.8f, sceneSize.height*0.85f));
+	btnMenu->addTouchEventListener([this](Ref *pSender, ui::Button::TouchEventType type)
+	{
+		switch (type)
+		{
+		case cocos2d::ui::Widget::TouchEventType::BEGAN:
+			this->getPlayer()->unscheduleUpdate();
+			((Button*)this->getChildByName("btnMenu"))->setEnabled(false);
+			((Layout*) this->getChildByName("PausePanel"))->runAction(Spawn::createWithTwoActions(FadeIn::create(0.5), EaseBounceIn::create(MoveBy::create(0.5, ccp(0, 500)))));
+			((Layer*)this->getParent())->pause();
+			break;
+		case cocos2d::ui::Widget::TouchEventType::MOVED:
+			break;
+		case cocos2d::ui::Widget::TouchEventType::ENDED:
+			break;
+		case cocos2d::ui::Widget::TouchEventType::CANCELED:
+			break;
+		default:
+			break;
+		}
+	});
+	this->addChild(btnMenu);
+
+	auto pausePanel = Layout::create();
+	pausePanel->setBackGroundImage("Icons/Shape_4_copy_2.png");
+	pausePanel->setContentSize(Size(359, 179));
+	pausePanel->setPosition(ccp(sceneSize.width / 2, sceneSize.height / 2 - 500));
+	pausePanel->setAnchorPoint(ccp(0.5, 0.5));
+	pausePanel->setName("PausePanel");
+	this->addChild(pausePanel);
+
+	auto pausePanelSize = pausePanel->getContentSize();
+
+	auto pauseLabel = ImageView::create("Icons/Paused.png");
+	pauseLabel->setPosition(ccp(pausePanelSize.width / 2, pausePanelSize.height));
+	pausePanel->addChild(pauseLabel);
+
+	auto btnClosePause = Button::create("Icons/Shape_1.png", "Icons/Shape_1.png", "Icons/Shape_1_disabled.png");
+	btnClosePause->setPosition(ccp(pausePanelSize.width, pausePanelSize.height));
+	btnClosePause->addTouchEventListener([this](Ref *pSender, ui::Button::TouchEventType type)
+	{
+		Layout* pausePanel = (Layout*) this->getChildByName("PausePanel");
+		switch (type)
+		{
+		case cocos2d::ui::Widget::TouchEventType::BEGAN:
+			this->getPlayer()->unscheduleUpdate();
+			((Button*)this->getChildByName("btnMenu"))->setEnabled(true);
+			pausePanel->runAction(Spawn::createWithTwoActions(FadeOut::create(0.5), EaseBounceOut::create(MoveBy::create(0.5, ccp(0, -500)))));
+			((Layer*)this->getParent())->resume();
+			break;
+		case cocos2d::ui::Widget::TouchEventType::MOVED:
+			break;
+		case cocos2d::ui::Widget::TouchEventType::ENDED:
+			break;
+		case cocos2d::ui::Widget::TouchEventType::CANCELED:
+			break;
+		default:
+			break;
+		}
+	});
+	pausePanel->addChild(btnClosePause);
+
+	auto btnMusic = Button::create("Icons/Speaker_icon.png", "Icons/Speaker_icon.png", "Icons/Speaker_icon_disabled.png");
+	btnMusic->setPosition(ccp(pausePanelSize.width*0.6f, pausePanelSize.height*0.5f));
+	btnMusic->addTouchEventListener([this](Ref *pSender, ui::Button::TouchEventType type)
+	{
+		switch (type)
+		{
+		case cocos2d::ui::Widget::TouchEventType::BEGAN:
+			UserDefault::getInstance()->setBoolForKey("MusicEnabled", !UserDefault::getInstance()->getBoolForKey("MusicEnabled", true));
+			SimpleAudioEngine::getInstance()->setBackgroundMusicVolume((float)UserDefault::getInstance()->getBoolForKey("MusicEnabled", true));
+			if (UserDefault::getInstance()->getBoolForKey("MusicEnabled", true))
+				((Button*)pSender)->loadTextureNormal("Icons/Speaker_icon.png");
+			else
+				((Button*)pSender)->loadTextureNormal("Icons/Speaker_icon_disabled.png");
+			CCLOG("%d %f", UserDefault::getInstance()->getBoolForKey("MusicEnabled", true), SimpleAudioEngine::getInstance()->getBackgroundMusicVolume());
+			break;
+		case cocos2d::ui::Widget::TouchEventType::MOVED:
+			break;
+		case cocos2d::ui::Widget::TouchEventType::ENDED:
+			break;
+		case cocos2d::ui::Widget::TouchEventType::CANCELED:
+			break;
+		default:
+			break;
+		}
+	});
+	pausePanel->addChild(btnMusic);
+
+	auto btnEffect = Button::create("Icons/Music_tone_icon.png", "Icons/Music_tone_icon.png", "Icons/Music_tone_icon_disabled.png");
+	btnEffect->setPosition(ccp(pausePanelSize.width*0.8f, pausePanelSize.height*0.5f));
+	btnEffect->addTouchEventListener([this](Ref *pSender, ui::Button::TouchEventType type)
+	{
+		switch (type)
+		{
+		case cocos2d::ui::Widget::TouchEventType::BEGAN:
+			UserDefault::getInstance()->setBoolForKey("EffectEnabled", !UserDefault::getInstance()->getBoolForKey("EffectEnabled", true));
+			SimpleAudioEngine::getInstance()->setEffectsVolume((float)UserDefault::getInstance()->getBoolForKey("EffectEnabled", true));
+			if (UserDefault::getInstance()->getBoolForKey("EffectEnabled", true))
+				((Button*)pSender)->loadTextureNormal("Icons/Music_tone_icon.png");
+			else
+				((Button*)pSender)->loadTextureNormal("Icons/Music_tone_icon_disabled.png");
+			CCLOG("%d %f", UserDefault::getInstance()->getBoolForKey("EffectEnabled", true), SimpleAudioEngine::getInstance()->getEffectsVolume());
+			break;
+		case cocos2d::ui::Widget::TouchEventType::MOVED:
+			break;
+		case cocos2d::ui::Widget::TouchEventType::ENDED:
+			break;
+		case cocos2d::ui::Widget::TouchEventType::CANCELED:
+			break;
+		default:
+			break;
+		}
+	});
+	pausePanel->addChild(btnEffect);
+
+	auto btnReturnLevels = Button::create("Icons/Menu_icon.png", "Icons/Menu_icon.png", "Icons/Menu_icon.png");
+
+	btnReturnLevels->setPosition(ccp(pausePanelSize.width*0.4f, pausePanelSize.height*0.5f));
+	btnReturnLevels->addTouchEventListener([this](Ref *pSender, ui::Button::TouchEventType type)
+	{
+		switch (type)
+		{
+		case cocos2d::ui::Widget::TouchEventType::BEGAN:
+			//Director::getInstance()->replaceScene(LevelsLayer::createScene());
+			break;
+		case cocos2d::ui::Widget::TouchEventType::MOVED:
+			break;
+		case cocos2d::ui::Widget::TouchEventType::ENDED:
+			break;
+		case cocos2d::ui::Widget::TouchEventType::CANCELED:
+			break;
+		default:
+			break;
+		}
+	});
+	pausePanel->addChild(btnReturnLevels);
+
+	auto btnReplay = Button::create("Icons/Reload_icon.png", "Icons/Reload_icon.png", "Icons/Reload_icon.png");
+	btnReplay->setPosition(ccp(pausePanelSize.width*0.2f, pausePanelSize.height*0.5f));
+	btnReplay->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
+	{
+		ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterPred"), UserDefault::getInstance()->getIntegerForKey("LevelPred"));
+		switch (type)
+		{
+		case cocos2d::ui::Widget::TouchEventType::BEGAN:
+			//Director::getInstance()->replaceScene(PlayLayer::createScene(level["TmxPath"].asString()));
+			break;
+		case cocos2d::ui::Widget::TouchEventType::MOVED:
+			break;
+		case cocos2d::ui::Widget::TouchEventType::ENDED:
+			break;
+		case cocos2d::ui::Widget::TouchEventType::CANCELED:
+			break;
+		default:
+			break;
+		}
+	});
+	pausePanel->addChild(btnReplay);
+
 	scheduleUpdate();
 
 	return true;
@@ -59,4 +224,5 @@ void HubLayer::update(float delta)
 		EffectComponent* effectPlayer = (EffectComponent*)player->getEntityManager()->getComponentObjectByName("EffectComponent");
 		effectImage->loadTexture(effectPlayer->getEffectIcon());
 	}
+}
 }

@@ -47,19 +47,6 @@ void Player::jump(Vec2 vec)
 void Player::update(float dt)
 {
 	GameObject::update(dt);
-	/*if (this->getVelocity() < 0)
-		_playerState = PlayerState::Hurt;
-	else if (this->getVelocity() >= 0 && this->getVelocity() < 1)
-	{
-		if (_playerState == PlayerState::Running)
-		{
-			this->getPhysicsBody()->applyImpulse(ccp(-100000, 10000));
-		}
-	}
-	else
-	{
-		_playerState = PlayerState::Running;
-	}*/
 	Animator* ani = (Animator*)this->getEntityManager()->getComponentObjectByName("Animator");
 	switch (_playerState)
 	{

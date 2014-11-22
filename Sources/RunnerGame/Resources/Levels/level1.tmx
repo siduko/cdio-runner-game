@@ -22,6 +22,7 @@
   <object name="Floor" type="Floor" x="-1" y="912" width="14054" height="156">
    <properties>
     <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
    </properties>
   </object>
   <object name="Water" type="DieZone" x="-65" y="1074" width="2169" height="44">
@@ -62,7 +63,7 @@
     <property name="SwimPath" value="alienBlue_swim%d.png"/>
    </properties>
   </object>
-  <object name="MoveEnemy" type="Enemy" x="552" y="765" width="72" height="51">
+  <object name="MoveEnemy" type="Enemy" x="1123" y="840" width="72" height="51">
    <properties>
     <property name="BeHitCount" value="2"/>
     <property name="BeHitPath" value="spider_hit%d.png"/>
@@ -138,7 +139,7 @@
     <property name="ImagePath" value="flagBlue%d.png"/>
    </properties>
   </object>
-  <object name="Item" type="Item" x="953" y="850">
+  <object name="Item" type="Item" x="949" y="849">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
     <property name="CollisionBitmask" value="4"/>
@@ -1530,6 +1531,12 @@
     <property name="MoveVelocity" value="30"/>
     <property name="MovingCount" value="2"/>
     <property name="MovingPath" value="barnacle_bite%d.png"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="617.337" y="850.642" width="38.4781" height="152.21" rotation="66.2927">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="66.29"/>
    </properties>
   </object>
  </objectgroup>

@@ -9,7 +9,7 @@
 USING_NS_CC;
 using namespace ui;
 
-
+namespace Layers{
 class LevelsLayer:public Layer
 {
 public:
@@ -19,5 +19,6 @@ public:
 	virtual bool init();
 	CREATE_FUNC(LevelsLayer);
 };
+}
 #endif // LevelsLayer_h__
 

@@ -1,5 +1,6 @@
 #include "ResultLayer.h"
 
+namespace Layers{
 
 ResultLayer::ResultLayer()
 {
@@ -21,7 +22,9 @@ bool ResultLayer::init()
 	bg->setPosition(ccp(winSize.width*0.5f, winSize.height*0.5f));
 	this->addChild(bg);
 
-	auto resultPanel = ui::ImageView::create("Icons/Base-006.png");
+	auto resultPanel = ui::Layout::create();
+	resultPanel->setBackGroundImage("Icons/Base-006.png");
+	resultPanel->setClippingEnabled(false);
 	resultPanel->setContentSize(Size(479,347));
 	resultPanel->setPosition(ccp(winSize.width*0.5f, winSize.height*0.5f));
 	this->addChild(resultPanel);
@@ -124,4 +127,6 @@ Scene* ResultLayer::createScene()
 	auto scene = Scene::create();
 	scene->addChild(ResultLayer::create());
 	return scene;
+}
+
 }

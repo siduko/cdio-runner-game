@@ -1,16 +1,16 @@
 #include "ChapterLayer.h"
 
 
-ChapterLayer::ChapterLayer()
+Layers::ChapterLayer::ChapterLayer()
 {
 }
 
 
-ChapterLayer::~ChapterLayer()
+Layers::ChapterLayer::~ChapterLayer()
 {
 }
 
-bool ChapterLayer::init()
+bool Layers::ChapterLayer::init()
 {
 	if (!Layer::init())
 		return false;
@@ -75,11 +75,14 @@ bool ChapterLayer::init()
 		layout->setTouchEnabled(true);
 		layout->addTouchEventListener([i](Ref *pSender, ui::Layout::TouchEventType type)
 		{
+			ValueMap chapter;
 			switch (type)
 			{
 			case cocos2d::ui::Widget::TouchEventType::BEGAN:
 				UserDefault::getInstance()->setIntegerForKey("ChapterSelected", i);
-				Director::getInstance()->replaceScene(LevelsLayer::createScene());
+				chapter = DataController::getInstance()->getChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"));
+				if (chapter["Locked"].asInt()==0)
+					Director::getInstance()->replaceScene(LevelsLayer::createScene());
 				break;
 			case cocos2d::ui::Widget::TouchEventType::MOVED:
 				break;
@@ -97,7 +100,7 @@ bool ChapterLayer::init()
 
 	scrollView->setInnerContainerSize(Size(lastPos, wSize.height));
 
-	auto btnBack = Button::create("Icons/Arrow_icon.png", "Icons/Arrow_icon.png", "Icons/Arrow_icon.png");
+	auto btnBack = Button::create("Icons/Arrow_icon.png", "Icons/Arrow_icon.png", "Icons/Arrow_icon_disabled.png");
 	btnBack->setPosition(ccp(wSize.width*0.1f, wSize.height*0.1f));
 	btnBack->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
@@ -121,7 +124,7 @@ bool ChapterLayer::init()
 	return true;
 }
 
-Scene* ChapterLayer::createScene()
+Scene* Layers::ChapterLayer::createScene()
 {
 	auto scene = Scene::create();
 	scene->addChild(ChapterLayer::create());
