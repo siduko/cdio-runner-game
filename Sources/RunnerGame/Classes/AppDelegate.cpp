@@ -4,7 +4,6 @@
 
 USING_NS_CC;
 using namespace CocosDenshion;
-using namespace Layers;
 
 
 AppDelegate::AppDelegate() {

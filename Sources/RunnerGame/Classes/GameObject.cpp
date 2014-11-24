@@ -11,8 +11,15 @@ GameObject::GameObject()
 	scheduleUpdate();
 }
 
-GameObject::GameObject(ValueMap properties) :GameObject()
+GameObject::GameObject(ValueMap properties)
 {
+	auto t = new Texture2D();
+	t->autorelease();
+	initWithTexture(t);
+	_entityManager = new EntityManager();
+	this->addChild(_entityManager);
+	scheduleUpdate();
+
 	PhysicsBody* spriteBody = PhysicsBody::createBox(Size(properties["width"].asFloat(), properties["height"].asFloat()), PhysicsMaterial(1.0f, 0.0f, 0.0f));
 	spriteBody->setDynamic(properties["DynamicBody"].asBool());
 	spriteBody->setGravityEnable(properties["GravityEnable"].asBool());

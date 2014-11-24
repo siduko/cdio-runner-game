@@ -1,6 +1,5 @@
 #include "LevelsLayer.h"
 
-namespace Layers{
 
 LevelsLayer::LevelsLayer()
 {
@@ -92,8 +91,9 @@ bool LevelsLayer::init()
 			case cocos2d::ui::Widget::TouchEventType::BEGAN:
 				UserDefault::getInstance()->setIntegerForKey("LevelSelected", i); 
 				selectedLevel = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
-				if (selectedLevel["Locked"].asInt() == 0)
-					Director::getInstance()->replaceScene(PlayLayer::createScene(level["TmxPath"].asString()));
+				if (selectedLevel["Locked"].asInt() == 0){
+					Director::getInstance()->replaceScene(LoadingLayer::createScene());
+				}
 				break;
 			case cocos2d::ui::Widget::TouchEventType::MOVED:
 				break;
@@ -115,10 +115,11 @@ bool LevelsLayer::init()
 	btnBack->setPosition(ccp(wSize.width*0.1f, wSize.height*0.1f));
 	btnBack->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
+		auto chapterLayer = TransitionSlideInL::create(1, ChapterLayer::createScene());
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
-			Director::getInstance()->replaceScene(ChapterLayer::createScene());
+			Director::getInstance()->replaceScene(chapterLayer);
 			break;
 		case cocos2d::ui::Widget::TouchEventType::MOVED:
 			break;
@@ -133,5 +134,4 @@ bool LevelsLayer::init()
 	this->addChild(btnBack);
 
 	return true;
-}
 }

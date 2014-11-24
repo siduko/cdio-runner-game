@@ -3,11 +3,11 @@
 #include "cocos2d.h"
 #include "DataController.h"
 #include "LevelsLayer.h"
+#include "MenuLayer.h"
 #include "ui/CocosGUI.h"
 USING_NS_CC;
 using namespace ui;
 
-namespace Layers{
 class ChapterLayer :public Layer
 {
 public:
@@ -17,5 +17,5 @@ public:
 	CREATE_FUNC(ChapterLayer);
 	static Scene* createScene();
 };
-}
+
 #endif // ChapterLayer_h__

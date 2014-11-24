@@ -10,16 +10,16 @@
 USING_NS_CC;
 using namespace ui;
 
-namespace Layers{
-	class ResultLayer :public Layer
-	{
-	public:
-		Label *lbLevelInfo, *lbScore, *lbStar;
-		static Scene* createScene();
-		virtual bool init();
-		ResultLayer();
-		~ResultLayer();
-		CREATE_FUNC(ResultLayer);
-	};
-}
+
+class ResultLayer :public Layer
+{
+public:
+	Label *lbLevelInfo, *lbScore, *lbStar;
+	static Scene* createScene();
+	virtual bool init();
+	ResultLayer();
+	~ResultLayer();
+	CREATE_FUNC(ResultLayer);
+};
+
 #endif // GameoverLayer_h__

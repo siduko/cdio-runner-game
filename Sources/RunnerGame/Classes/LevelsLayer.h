@@ -3,13 +3,13 @@
 #include "cocos2d.h"
 #include "PlayLayer.h"
 #include "ChapterLayer.h"
+#include "LoadingLayer.h"
 #include "Utils.h"
 #include "ui/CocosGUI.h"
 #include "DataController.h"
 USING_NS_CC;
 using namespace ui;
 
-namespace Layers{
 class LevelsLayer:public Layer
 {
 public:
@@ -19,6 +19,6 @@ public:
 	virtual bool init();
 	CREATE_FUNC(LevelsLayer);
 };
-}
+
 #endif // LevelsLayer_h__
 

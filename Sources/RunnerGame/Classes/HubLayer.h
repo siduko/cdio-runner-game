@@ -3,6 +3,7 @@
 #include "cocos2d.h"
 #include "Utils.h"
 #include "Player.h"
+#include "LevelsLayer.h"
 #include "ui/CocosGUI.h"
 #include "SimpleAudioEngine.h"
 USING_NS_CC;
@@ -10,7 +11,6 @@ using namespace std;
 using namespace ui;
 using namespace CocosDenshion;
 
-namespace Layers{
 class HubLayer:public Layer
 {
 private:
@@ -31,5 +31,5 @@ public:
 	~HubLayer();
 	CREATE_FUNC(HubLayer);
 };
-}
+
 #endif // HubLayer_h__

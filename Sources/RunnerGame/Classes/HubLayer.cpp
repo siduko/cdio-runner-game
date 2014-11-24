@@ -1,6 +1,5 @@
 #include "HubLayer.h"
-
-namespace Layers{
+#include "PlayLayer.h"
 
 HubLayer::HubLayer()
 {
@@ -166,10 +165,11 @@ bool HubLayer::init()
 	btnReturnLevels->setPosition(ccp(pausePanelSize.width*0.4f, pausePanelSize.height*0.5f));
 	btnReturnLevels->addTouchEventListener([this](Ref *pSender, ui::Button::TouchEventType type)
 	{
+		auto levelLayer = TransitionSlideInL::create(1, LevelsLayer::createScene());
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
-			//Director::getInstance()->replaceScene(LevelsLayer::createScene());
+			Director::getInstance()->replaceScene(levelLayer);
 			break;
 		case cocos2d::ui::Widget::TouchEventType::MOVED:
 			break;
@@ -187,11 +187,11 @@ bool HubLayer::init()
 	btnReplay->setPosition(ccp(pausePanelSize.width*0.2f, pausePanelSize.height*0.5f));
 	btnReplay->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
-		ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterPred"), UserDefault::getInstance()->getIntegerForKey("LevelPred"));
+		auto loadingLayer = TransitionSlideInR::create(1, LoadingLayer::createScene());
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
-			//Director::getInstance()->replaceScene(PlayLayer::createScene(level["TmxPath"].asString()));
+			Director::getInstance()->replaceScene(loadingLayer);
 			break;
 		case cocos2d::ui::Widget::TouchEventType::MOVED:
 			break;
@@ -224,5 +224,4 @@ void HubLayer::update(float delta)
 		EffectComponent* effectPlayer = (EffectComponent*)player->getEntityManager()->getComponentObjectByName("EffectComponent");
 		effectImage->loadTexture(effectPlayer->getEffectIcon());
 	}
-}
 }

@@ -145,15 +145,14 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\Enemy.cpp" />
     <ClCompile Include="..\Classes\EntityManager.cpp" />
     <ClCompile Include="..\Classes\GameObject.cpp" />
+    <ClCompile Include="..\Classes\LoadingLayer.cpp" />
     <ClCompile Include="..\Classes\ResultLayer.cpp" />
     <ClCompile Include="..\Classes\HubLayer.cpp" />
     <ClCompile Include="..\Classes\Item.cpp" />
-    <ClCompile Include="..\Classes\JoyStick.cpp" />
     <ClCompile Include="..\Classes\LevelsLayer.cpp" />
     <ClCompile Include="..\Classes\MenuLayer.cpp" />
     <ClCompile Include="..\Classes\Player.cpp" />
     <ClCompile Include="..\Classes\PlayLayer.cpp" />
-    <ClCompile Include="..\Classes\SlidingMenuGrid.cpp" />
     <ClCompile Include="..\Classes\Utils.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -168,15 +167,14 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Enemy.h" />
     <ClInclude Include="..\Classes\EntityManager.h" />
     <ClInclude Include="..\Classes\GameObject.h" />
+    <ClInclude Include="..\Classes\LoadingLayer.h" />
     <ClInclude Include="..\Classes\ResultLayer.h" />
     <ClInclude Include="..\Classes\HubLayer.h" />
     <ClInclude Include="..\Classes\Item.h" />
-    <ClInclude Include="..\Classes\JoyStick.h" />
     <ClInclude Include="..\Classes\LevelsLayer.h" />
     <ClInclude Include="..\Classes\MenuLayer.h" />
     <ClInclude Include="..\Classes\Player.h" />
     <ClInclude Include="..\Classes\PlayLayer.h" />
-    <ClInclude Include="..\Classes\SlidingMenuGrid.h" />
     <ClInclude Include="..\Classes\Utils.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

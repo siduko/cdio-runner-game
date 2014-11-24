@@ -1,16 +1,16 @@
 #include "ChapterLayer.h"
 
 
-Layers::ChapterLayer::ChapterLayer()
+ChapterLayer::ChapterLayer()
 {
 }
 
 
-Layers::ChapterLayer::~ChapterLayer()
+ChapterLayer::~ChapterLayer()
 {
 }
 
-bool Layers::ChapterLayer::init()
+bool ChapterLayer::init()
 {
 	if (!Layer::init())
 		return false;
@@ -75,14 +75,14 @@ bool Layers::ChapterLayer::init()
 		layout->setTouchEnabled(true);
 		layout->addTouchEventListener([i](Ref *pSender, ui::Layout::TouchEventType type)
 		{
-			ValueMap chapter;
+			ValueMap chapter = DataController::getInstance()->getChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"));
+			auto levelLayer = TransitionSlideInR::create(1, LevelsLayer::createScene());
 			switch (type)
 			{
 			case cocos2d::ui::Widget::TouchEventType::BEGAN:
 				UserDefault::getInstance()->setIntegerForKey("ChapterSelected", i);
-				chapter = DataController::getInstance()->getChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"));
 				if (chapter["Locked"].asInt()==0)
-					Director::getInstance()->replaceScene(LevelsLayer::createScene());
+					Director::getInstance()->replaceScene(levelLayer);
 				break;
 			case cocos2d::ui::Widget::TouchEventType::MOVED:
 				break;
@@ -104,10 +104,11 @@ bool Layers::ChapterLayer::init()
 	btnBack->setPosition(ccp(wSize.width*0.1f, wSize.height*0.1f));
 	btnBack->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
+		auto menuLayer = TransitionSlideInL::create(1, MenuLayer::createScene());
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
-			Director::getInstance()->replaceScene(LevelsLayer::createScene());
+			Director::getInstance()->replaceScene(menuLayer);
 			break;
 		case cocos2d::ui::Widget::TouchEventType::MOVED:
 			break;
@@ -124,7 +125,7 @@ bool Layers::ChapterLayer::init()
 	return true;
 }
 
-Scene* Layers::ChapterLayer::createScene()
+Scene* ChapterLayer::createScene()
 {
 	auto scene = Scene::create();
 	scene->addChild(ChapterLayer::create());

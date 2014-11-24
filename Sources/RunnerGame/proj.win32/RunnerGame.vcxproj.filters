@@ -57,12 +57,6 @@
     <ClCompile Include="..\Classes\GameObject.cpp">
       <Filter>Classes\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\JoyStick.cpp">
-      <Filter>Classes\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SlidingMenuGrid.cpp">
-      <Filter>Classes\Components</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Utils.cpp">
       <Filter>Classes\Components</Filter>
     </ClCompile>
@@ -85,6 +79,9 @@
       <Filter>Classes\Actors</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\ResultLayer.cpp">
+      <Filter>Classes\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LoadingLayer.cpp">
       <Filter>Classes\Layers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -122,12 +119,6 @@
     <ClInclude Include="..\Classes\GameObject.h">
       <Filter>Classes\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\JoyStick.h">
-      <Filter>Classes\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SlidingMenuGrid.h">
-      <Filter>Classes\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Utils.h">
       <Filter>Classes\Components</Filter>
     </ClInclude>
@@ -150,6 +141,9 @@
       <Filter>Classes\Actors</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ResultLayer.h">
+      <Filter>Classes\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LoadingLayer.h">
       <Filter>Classes\Layers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,5 @@
 ﻿#include "PlayLayer.h"
-
-namespace Layers{
+#include "HubLayer.h"
 
 bool PlayLayer::init()
 {
@@ -328,6 +327,4 @@ HubLayer* PlayLayer::getHubLayer()
 void PlayLayer::update(float dt)
 {
 	this->setViewPointCenter(player->getPosition());
-}
-
 }
