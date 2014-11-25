@@ -224,8 +224,20 @@ void PlayLayer::onTouchEnded(Touch *touch, Event *unused_event)
 
 bool PlayLayer::createMap(string tmxpath)
 {
+	auto parallaxLayer = ParallaxNode::create();
+	auto bg = Node::create();
+	auto bg1 = Sprite::create("blue_desert.png");
+
 	map = TMXTiledMap::create(tmxpath);
-	this->addChild(map);
+	float temp = 0;
+	for (int i = 0; i*bg1->getContentSize().width < map->getMapSize().width;i++)
+	{
+		auto bg2 = Sprite::create("blue_desert.png");
+		bg2->setPosition(ccp(i*bg1->getContentSize().width, bg1->getContentSize().height/2));
+		bg->addChild(bg2);
+		temp += bg1->getContentSize().width;
+	}
+	bg->setContentSize(Size(temp, bg1->getContentSize().height));
 	CCTMXObjectGroup *objectGroup = map->objectGroupNamed("Objects");
 	if (objectGroup == NULL){
 		this->getHubLayer()->setScore("Level Error");
@@ -298,6 +310,10 @@ bool PlayLayer::createMap(string tmxpath)
 			this->addChild(node);
 		}
 	}
+	parallaxLayer->addChild(bg, -1, Vec2(map->getMapSize().width*0.8 / bg->getContentSize().width, map->getMapSize().height*0.8 / bg->getContentSize().height), Vec2::ZERO);
+	parallaxLayer->addChild(map, 1, Vec2(1.0f, 1.0f), Vec2::ZERO);
+	this->addChild(parallaxLayer);
+
 	return true;
 }
 

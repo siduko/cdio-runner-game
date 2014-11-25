@@ -169,7 +169,7 @@ bool HubLayer::init()
 	btnReturnLevels->setPosition(ccp(pausePanelSize.width*0.4f, pausePanelSize.height*0.5f));
 	btnReturnLevels->addTouchEventListener([this](Ref *pSender, ui::Button::TouchEventType type)
 	{
-		auto levelLayer = TransitionSlideInL::create(1, LevelsLayer::createScene());
+		auto levelLayer = TransitionCrossFade::create(1, LevelsLayer::createScene());
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
@@ -191,7 +191,7 @@ bool HubLayer::init()
 	btnReplay->setPosition(ccp(pausePanelSize.width*0.2f, pausePanelSize.height*0.5f));
 	btnReplay->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
-		auto loadingLayer = TransitionSlideInR::create(1, LoadingLayer::createScene());
+		auto loadingLayer = TransitionCrossFade::create(1, LoadingLayer::createScene());
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:

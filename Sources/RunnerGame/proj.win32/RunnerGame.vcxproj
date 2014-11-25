@@ -155,6 +155,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\PlayLayer.cpp" />
     <ClCompile Include="..\Classes\SplashLayer.cpp" />
     <ClCompile Include="..\Classes\Utils.cpp" />
+    <ClCompile Include="C:\Users\LaiDuyHoang\AppData\Roaming\Skype\My Skype Received Files\IPSWS\Classes\InfiniteParallaxNode.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +179,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\PlayLayer.h" />
     <ClInclude Include="..\Classes\SplashLayer.h" />
     <ClInclude Include="..\Classes\Utils.h" />
+    <ClInclude Include="C:\Users\LaiDuyHoang\AppData\Roaming\Skype\My Skype Received Files\IPSWS\Classes\InfiniteParallaxNode.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

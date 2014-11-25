@@ -29,17 +29,28 @@ bool LevelsLayer::init()
 	string temp;
 	auto wSize = Director::getInstance()->getWinSize();
 
+	auto bg = Sprite::create("Icons/background.png");
+	bg->setPosition(ccp(wSize.width / 2, wSize.height / 2));
+	this->addChild(bg);
+
+
+	auto lbLevelSelect = ImageView::create("Icons/Level_Select.png");
+	lbLevelSelect->setPosition(ccp(wSize.width*0.5f, wSize.height*0.85f));
+
+	auto panelBorder = Sprite::create("Icons/BaseNewBorder.png");
+	panelBorder->setPosition(ccp(wSize.width / 2, wSize.height / 2));
+
 	ScrollView* scrollView = ScrollView::create();
 	scrollView->setDirection(ScrollView::Direction::HORIZONTAL);
-	scrollView->setContentSize(wSize);
-	scrollView->setBackGroundImage("Icons/background.png");
+	scrollView->setContentSize(Size(624,369));
+	scrollView->setClippingEnabled(true);
+	scrollView->setBackGroundImage("Icons/BaseNew.png");
 	scrollView->setPosition(ccp(wSize.width / 2, wSize.height / 2));
 	scrollView->setAnchorPoint(ccp(0.5, 0.5));
 	this->addChild(scrollView);
+	this->addChild(panelBorder);
+	this->addChild(lbLevelSelect);
 
-	auto lbLevelSelect = ImageView::create("Icons/Level_Select.png");
-	lbLevelSelect->setPosition(ccp(wSize.width*0.5f, wSize.height*0.9f));
-	scrollView->addChild(lbLevelSelect);
 	ValueVector levels = DataController::getInstance()->getLevelsInChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"));
 	float lastPos = wSize.width / 2;
 	float padding = 0.0f;
@@ -47,21 +58,21 @@ bool LevelsLayer::init()
 	{
 		ValueMap level = levels[i].asValueMap();
 		Layout* layout = Layout::create();
-		layout->setBackGroundImage("Chapters_chapterBackground.png");
-		layout->setPosition(ccp(lastPos + padding, wSize.height / 2));
-		layout->setContentSize(Size(288, 261));
+		layout->setBackGroundImage("Icons/Base_1.png");
+		layout->setPosition(ccp(lastPos + padding, wSize.height*0.6));
+		layout->setContentSize(Size(82, 93));
 		layout->setAnchorPoint(ccp(0.5, 0.5));
 
-		Text* chapterName = Text::create(level["Name"].asString(), "fonts/Marker Felt.ttf", 32);
-		chapterName->setPosition(ccp(layout->getContentSize().width / 2, layout->getContentSize().height*0.9));
-		layout->addChild(chapterName);
+		Text* levelName = Text::create(level["Name"].asString(), "fonts/Marker Felt.ttf", 32);
+		levelName->setPosition(ccp(layout->getContentSize().width / 2, layout->getContentSize().height*0.9));
+		layout->addChild(levelName);
 
 		ss << level["Score"].asString();
 		ss >> temp;
 		ss.clear();
-		Text* chapterScore = Text::create(temp, "fonts/Marker Felt.ttf", 20);
-		chapterScore->setPosition(ccp(layout->getContentSize().width * 0.25, layout->getContentSize().height*0.17));
-		layout->addChild(chapterScore);
+		Text* levelScore = Text::create(temp, "fonts/Marker Felt.ttf", 13);
+		levelScore->setPosition(ccp(layout->getContentSize().width * 0.25, layout->getContentSize().height*0.17));
+		layout->addChild(levelScore);
 
 		ss << level["Star"].asString() << "/" << level["StarMax"].asString();
 		ss >> temp;
@@ -72,9 +83,7 @@ bool LevelsLayer::init()
 
 		if (level["Locked"].asInt())
 		{
-			ImageView* chapterLock = ImageView::create("Chapters_lock.png");
-			chapterLock->setPosition(ccp(layout->getContentSize().width / 2, layout->getContentSize().height / 2));
-			layout->addChild(chapterLock);
+			layout->setBackGroundImage("Icons/Color_Fill_41.png");
 		}
 
 		padding = 100;
@@ -111,10 +120,10 @@ bool LevelsLayer::init()
 	scrollView->setInnerContainerSize(Size(lastPos, wSize.height));
 
 	auto btnBack = Button::create("Icons/Arrow_icon.png", "Icons/Arrow_icon.png", "Icons/Arrow_icon_disabled.png");
-	btnBack->setPosition(ccp(wSize.width*0.1f, wSize.height*0.1f));
+	btnBack->setPosition(ccp(wSize.width*0.5f, wSize.height*0.1f));
 	btnBack->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
-		auto chapterLayer = TransitionSlideInL::create(1, ChapterLayer::createScene());
+		auto chapterLayer = TransitionCrossFade::create(1, ChapterLayer::createScene());
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:

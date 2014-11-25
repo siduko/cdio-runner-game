@@ -84,7 +84,12 @@
     <ClCompile Include="..\Classes\LoadingLayer.cpp">
       <Filter>Classes\Layers</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\SplashLayer.cpp" />
+    <ClCompile Include="..\Classes\SplashLayer.cpp">
+      <Filter>Classes\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\LaiDuyHoang\AppData\Roaming\Skype\My Skype Received Files\IPSWS\Classes\InfiniteParallaxNode.cpp">
+      <Filter>Classes\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -147,7 +152,12 @@
     <ClInclude Include="..\Classes\LoadingLayer.h">
       <Filter>Classes\Layers</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\SplashLayer.h" />
+    <ClInclude Include="..\Classes\SplashLayer.h">
+      <Filter>Classes\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\LaiDuyHoang\AppData\Roaming\Skype\My Skype Received Files\IPSWS\Classes\InfiniteParallaxNode.h">
+      <Filter>Classes\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

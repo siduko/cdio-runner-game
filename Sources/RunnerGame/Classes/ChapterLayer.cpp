@@ -20,13 +20,27 @@ bool ChapterLayer::init()
 
 	auto wSize = Director::getInstance()->getWinSize();
 
+	auto bg = Sprite::create("Icons/background.png");
+	bg->setPosition(ccp(wSize.width / 2, wSize.height / 2));
+	this->addChild(bg);
+
+	auto panelBorder = Sprite::create("Icons/BaseNewBorder.png");
+	panelBorder->setPosition(ccp(wSize.width / 2, wSize.height / 2));
+
+	auto chapterSelected = Sprite::create("Icons/ChapterSelect.png");
+	chapterSelected->setPosition(ccp(wSize.width*0.5f, wSize.height*0.85f));
+
 	ScrollView* scrollView = ScrollView::create();
 	scrollView->setDirection(ScrollView::Direction::HORIZONTAL);
-	scrollView->setContentSize(wSize);
-	scrollView->setBackGroundImage("Icons/background.png");
+	scrollView->setContentSize(Size(624, 369));
+	scrollView->setBackGroundImage("Icons/BaseNew.png");
+	scrollView->setClippingEnabled(true);
 	scrollView->setPosition(ccp(wSize.width / 2, wSize.height / 2));
 	scrollView->setAnchorPoint(ccp(0.5, 0.5));
+
 	this->addChild(scrollView);
+	this->addChild(panelBorder);
+	this->addChild(chapterSelected);
 
 	ValueVector chapters = DataController::getInstance()->getChapters();
 	float lastPos = wSize.width / 2;
@@ -76,7 +90,7 @@ bool ChapterLayer::init()
 		layout->addTouchEventListener([i](Ref *pSender, ui::Layout::TouchEventType type)
 		{
 			ValueMap chapter = DataController::getInstance()->getChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"));
-			auto levelLayer = TransitionSlideInR::create(1, LevelsLayer::createScene());
+			auto levelLayer = TransitionCrossFade::create(1, LevelsLayer::createScene());
 			switch (type)
 			{
 			case cocos2d::ui::Widget::TouchEventType::BEGAN:
@@ -101,10 +115,10 @@ bool ChapterLayer::init()
 	scrollView->setInnerContainerSize(Size(lastPos, wSize.height));
 
 	auto btnBack = Button::create("Icons/Arrow_icon.png", "Icons/Arrow_icon.png", "Icons/Arrow_icon_disabled.png");
-	btnBack->setPosition(ccp(wSize.width*0.1f, wSize.height*0.1f));
+	btnBack->setPosition(ccp(wSize.width*0.5f, wSize.height*0.1f));
 	btnBack->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
-		auto menuLayer = TransitionSlideInL::create(1, MenuLayer::createScene());
+		auto menuLayer = TransitionCrossFade::create(1, MenuLayer::createScene());
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
