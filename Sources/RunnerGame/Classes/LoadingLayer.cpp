@@ -27,7 +27,9 @@ bool LoadingLayer::init()
 	loadingText->setPosition(ccp(wSize.width*0.8f, wSize.height*0.05f));
 	this->addChild(loadingText);
 	loadingText->runAction(RepeatForever::create( Sequence::createWithTwoActions(FadeOut::create(3),FadeIn::create(2))));
-
+	auto selectedLevel = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
+	auto playLayer = PlayLayer::createScene(selectedLevel["TmxPath"].asString());
+	Director::getInstance()->replaceScene(playLayer);
 	scheduleUpdate();
 
 	return true;

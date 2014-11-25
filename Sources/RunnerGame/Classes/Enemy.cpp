@@ -108,7 +108,7 @@ void Enemy::update(float dt)
 			CCLOG("Enemy dead in %f", _actionTimeout);
 		}*/
 		ani->playActionByName("dead", 0.2f, true);
-		this->runAction(Sequence::createWithTwoActions(EaseBackIn::create(ScaleTo::create(2, 0)), CallFuncN::create([](Node* pSender){
+		this->runAction(Sequence::createWithTwoActions(ScaleTo::create(0.5, 0), CallFuncN::create([](Node* pSender){
 			CCLOG("Enemy Dead");
 			pSender->removeFromParentAndCleanup(false); 
 		})));

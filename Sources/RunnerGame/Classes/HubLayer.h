@@ -14,12 +14,12 @@ using namespace CocosDenshion;
 class HubLayer:public Layer
 {
 private:
-	Size sceneSize;
 	Text* lbScore,*lbVelocity;
 	ImageView* effectImage;
 	Player* player;
 public:
 	LoadingBar* powerJump;
+	Sprite* angleJump;
 	virtual bool init();
 	void setScore(string value);
 	inline void setPlayer(Player* player){ this->player = player; }

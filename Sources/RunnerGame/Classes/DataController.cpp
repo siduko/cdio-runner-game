@@ -22,8 +22,11 @@ DataController* DataController::getInstance()
 
 ValueMap DataController::getChapterByIndex(int index)
 {
-	if (index >= 0 && index < _chapters.size())
+	/*if (index >= 0 && index < _chapters.size())
 		return _chapters.at(index).asValueMap();
+	return ValueMap();*/
+	if (index >= 0 && index < _chapters.size())
+		return _gameData["Chapters"].asValueVector()[index].asValueMap();
 	return ValueMap();
 }
 
@@ -71,10 +74,13 @@ int DataController::getChapterStarMaxByIndex(int index)
 
 cocos2d::ValueMap DataController::getLevelByChapterIndex(int chapterIndex, int levelIndex)
 {
-	ValueVector levels = getLevelsInChapterByIndex(chapterIndex);
+	/*ValueVector levels = getLevelsInChapterByIndex(chapterIndex);
 
 	if (levelIndex >= 0 && levelIndex < levels.size())
-		return levels.at(levelIndex).asValueMap();
+	return levels.at(levelIndex).asValueMap();
+	return ValueMap();*/
+	if (levelIndex >= 0 && levelIndex < _gameData["Chapters"].asValueVector()[chapterIndex].asValueMap()["Levels"].asValueVector().size())
+		return _gameData["Chapters"].asValueVector()[chapterIndex].asValueMap()["Levels"].asValueVector()[levelIndex].asValueMap();
 	return ValueMap();
 }
 

@@ -179,10 +179,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 
 bool PlayLayer::onTouchBegan(Touch *touch, Event *unused_event)
 {
-	//vecJump = ccp(player->getVelocity(), DataController::getInstance()->getGameSettings()["PlayerJump"].asFloat());
-	this->getHubLayer()->powerJump->setPosition(touch->getStartLocation());
 	vecJump = ccp(0, 0);
-	this->getHubLayer()->powerJump->setVisible(true);
 	return true;
 }
 void PlayLayer::onTouchMoved(Touch *touch, Event *unused_event)
@@ -195,7 +192,7 @@ void PlayLayer::onTouchMoved(Touch *touch, Event *unused_event)
 		vecJump.y = DataController::getInstance()->getGameSettings()["JumpLimit"].asFloat();
 	}
 	this->getHubLayer()->powerJump->setPercent(vecJump.y*100.0f / DataController::getInstance()->getGameSettings()["JumpLimit"].asFloat());
-	this->getHubLayer()->powerJump->setRotation(angleJump);
+	this->getHubLayer()->angleJump->setRotation(angleJump);
 }
 
 void PlayLayer::onTouchEnded(Touch *touch, Event *unused_event)
@@ -222,7 +219,7 @@ void PlayLayer::onTouchEnded(Touch *touch, Event *unused_event)
 		else
 			player->setVelocity(20);
 	}
-	this->getHubLayer()->powerJump->setVisible(false);
+	this->getHubLayer()->powerJump->setPercent(0);
 }
 
 bool PlayLayer::createMap(string tmxpath)

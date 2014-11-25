@@ -84,6 +84,7 @@
     <ClCompile Include="..\Classes\LoadingLayer.cpp">
       <Filter>Classes\Layers</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\SplashLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -146,6 +147,7 @@
     <ClInclude Include="..\Classes\LoadingLayer.h">
       <Filter>Classes\Layers</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\SplashLayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

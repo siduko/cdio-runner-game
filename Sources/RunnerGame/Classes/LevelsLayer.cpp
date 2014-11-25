@@ -14,7 +14,6 @@ LevelsLayer::~LevelsLayer()
 Scene* LevelsLayer::createScene()
 {
 	auto scene = Scene::create();
-	auto layer = LevelsLayer::create();
 	scene->addChild(LevelsLayer::create());
 	return scene;
 }

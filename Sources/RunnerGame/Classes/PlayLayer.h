@@ -10,7 +10,9 @@
 #include "Enemy.h"
 #include "GameObject.h"
 #include "ResultLayer.h"
+#include "SimpleAudioEngine.h"
 USING_NS_CC;
+using namespace CocosDenshion;
 
 class HubLayer;
 class PlayLayer :public Layer

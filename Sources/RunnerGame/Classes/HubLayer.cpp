@@ -15,36 +15,40 @@ bool HubLayer::init()
 {
 	if (!Layer::init())
 		return false;
-	sceneSize = Director::getInstance()->getWinSize();
-
-	
-
-	auto avatar = Sprite::create("avatar.png");
-	avatar->setPosition(ccp(sceneSize.width*0.1f, sceneSize.height*0.9f));
-	this->addChild(avatar);
+	auto wSize = Director::getInstance()->getWinSize();
 
 	lbScore = Text::create("Score: 0", "fonts/Marker Felt.ttf", 30);
-	lbScore->setPosition(ccp(sceneSize.width*0.25f, sceneSize.height*0.95f));
+	lbScore->setPosition(ccp(wSize.width*0.25f, wSize.height*0.95f));
 	this->addChild(lbScore);
 
 	lbVelocity = Text::create("0 m/s", "fonts/Marker Felt.ttf", 30);
 	lbVelocity->setColor(Color3B(255, 0, 0));
-	lbVelocity->setPosition(ccp(sceneSize.width*0.25f, sceneSize.height*0.85f));
+	lbVelocity->setPosition(ccp(wSize.width*0.25f, wSize.height*0.85f));
 	this->addChild(lbVelocity);
 
 	effectImage = ImageView::create("effectIcon1.png");
-	effectImage->setPosition(ccp(sceneSize.width*0.5f, sceneSize.height*0.85f));
+	effectImage->setPosition(ccp(wSize.width*0.5f, wSize.height*0.85f));
 	this->addChild(effectImage);
 
-	powerJump = LoadingBar::create("progress_texture.png");
-	powerJump->setPosition(ccp(sceneSize.width*0.0f, sceneSize.height*0.0f));
+	auto avatar = Sprite::create("Icons/playerlayer_0000s_0000s_0003_avatar.png");
+	auto meterBar = Sprite::create("Icons/playerlayer_0000s_0000s_0000_bar.png");
+	powerJump = LoadingBar::create("Icons/playerlayer_0000s_0000s_0002_process.png");
+	angleJump = Sprite::create("Icons/playerlayer_0000s_0000s_0001_needle.png");
+	meterBar->setAnchorPoint(ccp(0, 0));
+	meterBar->setPosition(ccp(wSize.width*0.01, wSize.height*0.01));
+	avatar->setPosition(ccp(meterBar->getContentSize().width*0.12f, meterBar->getContentSize().height*0.42f));
+	angleJump->setPosition(ccp(meterBar->getContentSize().width*0.12f, meterBar->getContentSize().height*0.42f));
+	powerJump->setPosition(ccp(meterBar->getContentSize().width*0.25f, meterBar->getContentSize().height*0.42f));
 	powerJump->setAnchorPoint(ccp(0, 0.5f));
+	angleJump->setAnchorPoint(ccp(0,0.5));
+	this->addChild(avatar);
 	this->addChild(powerJump);
-	powerJump->setVisible(false);
+	this->addChild(angleJump);
+	this->addChild(meterBar);
 
 	auto btnMenu = Button::create("Icons/Pause_icon.png", "Icons/Pause_icon.png", "Icons/Pause_icon_disabled.png");
 	btnMenu->setName("btnMenu");
-	btnMenu->setPosition(ccp(sceneSize.width*0.8f, sceneSize.height*0.85f));
+	btnMenu->setPosition(ccp(wSize.width*0.8f, wSize.height*0.85f));
 	btnMenu->addTouchEventListener([this](Ref *pSender, ui::Button::TouchEventType type)
 	{
 		switch (type)
@@ -70,7 +74,7 @@ bool HubLayer::init()
 	auto pausePanel = Layout::create();
 	pausePanel->setBackGroundImage("Icons/Shape_4_copy_2.png");
 	pausePanel->setContentSize(Size(359, 179));
-	pausePanel->setPosition(ccp(sceneSize.width / 2, sceneSize.height / 2 - 500));
+	pausePanel->setPosition(ccp(wSize.width / 2, wSize.height / 2 - 500));
 	pausePanel->setAnchorPoint(ccp(0.5, 0.5));
 	pausePanel->setName("PausePanel");
 	this->addChild(pausePanel);

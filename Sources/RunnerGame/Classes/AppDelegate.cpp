@@ -1,6 +1,5 @@
 #include "AppDelegate.h"
-#include "MenuLayer.h"
-#include "SimpleAudioEngine.h"
+#include "SplashLayer.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -34,12 +33,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Audios/background.mp3");
-	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audios/background.mp3", true);
-
     // create a scene. it's an autorelease object
     //auto scene = PlayLayer::createScene("Levels/level1.tmx");
-	auto scene = MenuLayer::createScene();
+	auto scene = SplashLayer::createScene();
     // run
     director->runWithScene(scene);
 

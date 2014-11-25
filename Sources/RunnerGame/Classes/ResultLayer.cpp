@@ -27,6 +27,7 @@ bool ResultLayer::init()
 	resultPanel->setClippingEnabled(false);
 	resultPanel->setContentSize(Size(479, 347));
 	resultPanel->setPosition(ccp(winSize.width*0.5f, winSize.height*0.5f));
+	resultPanel->setAnchorPoint(ccp(0.5, 0.5));
 	this->addChild(resultPanel);
 
 	auto resultLabel = ImageView::create("Icons/Level_Cleared.png");
