@@ -191,11 +191,10 @@ bool HubLayer::init()
 	btnReplay->setPosition(ccp(pausePanelSize.width*0.2f, pausePanelSize.height*0.5f));
 	btnReplay->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
-		auto loadingLayer = TransitionCrossFade::create(1, LoadingLayer::createScene());
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
-			Director::getInstance()->replaceScene(loadingLayer);
+			Director::getInstance()->replaceScene(LoadingLayer::createScene());
 			break;
 		case cocos2d::ui::Widget::TouchEventType::MOVED:
 			break;

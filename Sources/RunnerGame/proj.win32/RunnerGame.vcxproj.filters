@@ -87,9 +87,6 @@
     <ClCompile Include="..\Classes\SplashLayer.cpp">
       <Filter>Classes\Layers</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\InfiniteParallaxNode.cpp">
-      <Filter>Classes\Components</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -154,9 +151,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\SplashLayer.h">
       <Filter>Classes\Layers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\InfiniteParallaxNode.h">
-      <Filter>Classes\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -20,6 +20,8 @@ bool PlayLayer::init()
 	UserDefault::getInstance()->setIntegerForKey("ChapterPred", UserDefault::getInstance()->getIntegerForKey("ChapterSelected"));
 	UserDefault::getInstance()->setIntegerForKey("LevelPred", UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
 
+	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audios/playbg.wav", true);
+
 	scheduleUpdate();
 
 	return true;
@@ -28,11 +30,11 @@ bool PlayLayer::init()
 Scene* PlayLayer::createScene(string tmxpath, Color4B skyColor /*= Color4B(64, 62, 60, 254)*/)
 {
 	auto scene = Scene::createWithPhysics();
-	//scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	scene->getPhysicsWorld()->setGravity(ccp(0, DataController::getInstance()->getGameSettings()["WorldGravity"].asInt()));
-	auto bglayer = LayerColor::create(Color4B(204, 220,235,254));
-	bglayer->runAction(RepeatForever::create(Sequence::createWithTwoActions( TintTo::create(120, 64, 62, 60), TintTo::create(120, 204, 220, 235))));
-	scene->addChild(bglayer,1,1);
+	//auto bglayer = LayerColor::create(Color4B(204, 220,235,254));
+	//bglayer->runAction(RepeatForever::create(Sequence::createWithTwoActions( TintTo::create(10, 64, 62, 60), TintTo::create(120, 204, 220, 235))));
+	//scene->addChild(bglayer,1,1);
 	auto hub = HubLayer::create();
 	scene->addChild(hub, 3, 3);
 	auto layer = PlayLayer::create();
@@ -62,6 +64,23 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 		player->setAllowJump(true);
 		if (player->getPlayerState() == PlayerState::Jumping)
 			player->setPlayerState(PlayerState::Running);
+		player->setPlayerState(PlayerState::Running);
+		CCLOG("Collision with floor");
+		Vec2 coldir;
+		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt())
+			coldir = Utils::collisedDirection(a->getNode()->getBoundingBox(), b->getNode()->getBoundingBox());
+		else
+			coldir = Utils::collisedDirection(b->getNode()->getBoundingBox(), a->getNode()->getBoundingBox());
+		CCLOG("Collition at: %f %f", coldir.x, coldir.y);
+		if (coldir == ccp(-1, 0) || coldir == ccp(1, 0))
+		{
+			ValueMap force = DataController::getInstance()->getGameSettings()["PlayerHurt"].asValueMap();
+			player->getPhysicsBody()->applyImpulse(ccp(force["x"].asInt(), force["y"].asInt()));
+			player->setPlayerState(PlayerState::Hurt);
+			player->setActionTimeOut(2.0f);
+			CCLOG("Hurt with floor");
+		}
+		return true;
 	}
 
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_BLOCK"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_BLOCK"].asInt()){
@@ -74,7 +93,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			else
 				coldir = Utils::collisedDirection(b->getNode()->getBoundingBox(), a->getNode()->getBoundingBox());
 			CCLOG("Collition at: %f %f", coldir.x, coldir.y);
-			if (coldir == ccp(-1, 0) && coldir == ccp(1, 0))
+			if (coldir == ccp(-1, 0) || coldir == ccp(1, 0))
 			{
 				ValueMap force = DataController::getInstance()->getGameSettings()["PlayerHurt"].asValueMap();
 				player->getPhysicsBody()->applyImpulse(ccp(force["x"].asInt(), force["y"].asInt()));
@@ -84,6 +103,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 		}
 		if (player->getPlayerState() == PlayerState::Jumping)
 			player->setPlayerState(PlayerState::Running);
+		return true;
 	}
 
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt()){
@@ -108,6 +128,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 		if (coldir == ccp(1, 0) || coldir == ccp(-1, 0) || coldir == ccp(0, -1))
 		{
 			enemy->setResetActionTimeout(true);
+			
 			enemy->setEnemyState(Enemy::EnemyState::BeHit);
 			ValueMap force = DataController::getInstance()->getGameSettings()["PlayerHurt"].asValueMap();
 			player->getPhysicsBody()->applyImpulse(ccp(force["x"].asInt(), force["y"].asInt()));
@@ -119,7 +140,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			enemy->setResetActionTimeout(true);
 			enemy->setEnemyState(Enemy::EnemyState::Dead);
 		}
-		return true;
+		return false;
 	}
 
 
@@ -204,7 +225,7 @@ void PlayLayer::onTouchEnded(Touch *touch, Event *unused_event)
 			player->setVelocity(30);
 	}else if (vecJump.y < DataController::getInstance()->getGameSettings()["PlayerJump"].asInt())
 	{
-		player->jump(ccp(DataController::getInstance()->getGameSettings()["PlayerJump"].asInt()*0.2f, DataController::getInstance()->getGameSettings()["PlayerJump"].asInt()));
+		player->jump(ccp(DataController::getInstance()->getGameSettings()["PlayerJump"].asInt()*0.5f, DataController::getInstance()->getGameSettings()["PlayerJump"].asInt()));
 		player->setPlayerState(PlayerState::Jumping);
 		((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("jump", 2.0f, false, true);
 		if (player->getVelocity() <= 0)
@@ -222,9 +243,24 @@ void PlayLayer::onTouchEnded(Touch *touch, Event *unused_event)
 
 bool PlayLayer::createMap(string tmxpath)
 {
-	map = TMXTiledMap::create(tmxpath);
-	this->addChild(map);
+	auto parallaxLayer = ParallaxNode::create();
+	auto bg = Node::create();
+	auto bg1 = Sprite::create("blue_desert.png");
+	auto bg1width = bg1->getContentSize().width;
 
+	map = TMXTiledMap::create(tmxpath);
+	//this->addChild(map);
+	auto sizemap = map->getMapSize().width*map->getTileSize().width;
+	float temp = 0;
+	for (int i = 0; i*bg1width < sizemap; i++)
+	{
+		auto bg2 = Sprite::create("blue_desert.png");
+		bg2->setAnchorPoint(ccp(0, 0));
+		bg2->setPosition(ccp(i*bg1width, 0));
+		bg->addChild(bg2);
+		temp += bg1width;
+	}
+	bg->setContentSize(Size(temp, 0));
 	CCTMXObjectGroup *objectGroup = map->objectGroupNamed("Objects");
 	if (objectGroup == NULL){
 		this->getHubLayer()->setScore("Level Error");
@@ -297,7 +333,9 @@ bool PlayLayer::createMap(string tmxpath)
 			this->addChild(node);
 		}
 	}
-
+	parallaxLayer->addChild(bg, -100, Vec2(0.5f, 0.5f), Vec2::ZERO);
+	parallaxLayer->addChild(map, 1, Vec2(1.0f, 1.0f), Vec2::ZERO);
+	this->addChild(parallaxLayer, -10);
 	return true;
 }
 

@@ -102,11 +102,12 @@ bool ResultLayer::init()
 	btnReplay->setPosition(ccp(resultPanel->getContentSize().width*0.4f, resultPanel->getContentSize().height*0.2f));
 	btnReplay->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
-		ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterPred"), UserDefault::getInstance()->getIntegerForKey("LevelPred"));
+		//ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterPred"), UserDefault::getInstance()->getIntegerForKey("LevelPred"));
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
-			Director::getInstance()->replaceScene(PlayLayer::createScene(level["TmxPath"].asString()));
+			//Director::getInstance()->replaceScene(PlayLayer::createScene(level["TmxPath"].asString()));
+			Director::getInstance()->replaceScene(LoadingLayer::createScene());
 			break;
 		case cocos2d::ui::Widget::TouchEventType::MOVED:
 			break;
@@ -119,6 +120,17 @@ bool ResultLayer::init()
 		}
 	});
 	resultPanel->addChild(btnReplay);
+
+	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audios/gameoverbg.wav", true);
+
+	int score = UserDefault::getInstance()->getIntegerForKey("Score");
+	stringstream ss;
+	ss << score;
+	string s;
+	ss >> s;
+	auto lbScore = Text::create(s, "fonts/Marker Felt.ttf", 32);
+	lbScore->setPosition(ccp(resultPanel->getContentSize().width*0.5f, resultPanel->getContentSize().height*0.5f));
+	resultPanel->addChild(lbScore);
 
 	return true;
 }

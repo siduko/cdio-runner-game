@@ -6,10 +6,13 @@
 #include "MenuLayer.h"
 #include "ChapterLayer.h"
 #include "LevelsLayer.h"
+
+
+#include"LoadingLayer.h"
 #include "ui/CocosGUI.h"
 USING_NS_CC;
 using namespace ui;
-
+using namespace std;
 
 class ResultLayer :public Layer
 {

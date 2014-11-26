@@ -17,7 +17,8 @@ Vec2 Utils::collisedDirection(Rect a, Rect b)
 			return ccp(-1, 0);
 		if (a.getMidX() >= b.getMaxX())
 			return ccp(1, 0);
-	}else
+	}
+	if (a.getMinY()>=b.getMaxY() || a.getMinY()<=b.getMinY())
 	{
 		//top or bottom
 		if (a.getMidY() >= b.getMaxY())

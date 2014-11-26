@@ -1,7 +1,6 @@
 #ifndef LevelsLayer_h__
 #define LevelsLayer_h__
 #include "cocos2d.h"
-#include "PlayLayer.h"
 #include "ChapterLayer.h"
 #include "LoadingLayer.h"
 #include "Utils.h"
