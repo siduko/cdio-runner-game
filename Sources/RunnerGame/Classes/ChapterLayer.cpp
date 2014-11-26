@@ -32,7 +32,7 @@ bool ChapterLayer::init()
 
 	ScrollView* scrollView = ScrollView::create();
 	scrollView->setDirection(ScrollView::Direction::HORIZONTAL);
-	scrollView->setContentSize(Size(624, 369));
+	scrollView->setContentSize(Size(615, 369));
 	scrollView->setBackGroundImage("Icons/BaseNew.png");
 	scrollView->setClippingEnabled(true);
 	scrollView->setPosition(ccp(wSize.width / 2, wSize.height / 2));
@@ -50,8 +50,8 @@ bool ChapterLayer::init()
 		ValueMap chapter = chapters[i].asValueMap();
 		Layout* layout = Layout::create();
 		layout->setBackGroundImage("Chapters_chapterBackground.png");
-		layout->setPosition(ccp(lastPos + padding, wSize.height / 2));
-		layout->setContentSize(Size(288,261));
+		layout->setPosition(ccp(lastPos + padding, wSize.height*0.6));
+		layout->setContentSize(Size(250,212));
 		layout->setAnchorPoint(ccp(0.5, 0.5));
 
 		Text* chapterName = Text::create(chapter["Name"].asString(), "fonts/Marker Felt.ttf", 32);
@@ -78,9 +78,7 @@ bool ChapterLayer::init()
 
 		if (chapter["Locked"].asInt())
 		{
-			ImageView* chapterLock = ImageView::create("Chapters_lock.png");
-			chapterLock->setPosition(ccp(layout->getContentSize().width / 2, layout->getContentSize().height / 2));
-			layout->addChild(chapterLock);
+			layout->setBackGroundImage("Chapters_chapterBackground_locked.png");
 		}
 
 		padding = 100;

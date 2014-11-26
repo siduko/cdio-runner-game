@@ -145,6 +145,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\Enemy.cpp" />
     <ClCompile Include="..\Classes\EntityManager.cpp" />
     <ClCompile Include="..\Classes\GameObject.cpp" />
+    <ClCompile Include="..\Classes\InfiniteParallaxNode.cpp" />
     <ClCompile Include="..\Classes\LoadingLayer.cpp" />
     <ClCompile Include="..\Classes\ResultLayer.cpp" />
     <ClCompile Include="..\Classes\HubLayer.cpp" />
@@ -155,7 +156,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\PlayLayer.cpp" />
     <ClCompile Include="..\Classes\SplashLayer.cpp" />
     <ClCompile Include="..\Classes\Utils.cpp" />
-    <ClCompile Include="C:\Users\LaiDuyHoang\AppData\Roaming\Skype\My Skype Received Files\IPSWS\Classes\InfiniteParallaxNode.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +169,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Enemy.h" />
     <ClInclude Include="..\Classes\EntityManager.h" />
     <ClInclude Include="..\Classes\GameObject.h" />
+    <ClInclude Include="..\Classes\InfiniteParallaxNode.h" />
     <ClInclude Include="..\Classes\LoadingLayer.h" />
     <ClInclude Include="..\Classes\ResultLayer.h" />
     <ClInclude Include="..\Classes\HubLayer.h" />
@@ -179,7 +180,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\PlayLayer.h" />
     <ClInclude Include="..\Classes\SplashLayer.h" />
     <ClInclude Include="..\Classes\Utils.h" />
-    <ClInclude Include="C:\Users\LaiDuyHoang\AppData\Roaming\Skype\My Skype Received Files\IPSWS\Classes\InfiniteParallaxNode.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

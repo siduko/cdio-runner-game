@@ -87,7 +87,7 @@
     <ClCompile Include="..\Classes\SplashLayer.cpp">
       <Filter>Classes\Layers</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\LaiDuyHoang\AppData\Roaming\Skype\My Skype Received Files\IPSWS\Classes\InfiniteParallaxNode.cpp">
+    <ClCompile Include="..\Classes\InfiniteParallaxNode.cpp">
       <Filter>Classes\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,7 +155,7 @@
     <ClInclude Include="..\Classes\SplashLayer.h">
       <Filter>Classes\Layers</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\LaiDuyHoang\AppData\Roaming\Skype\My Skype Received Files\IPSWS\Classes\InfiniteParallaxNode.h">
+    <ClInclude Include="..\Classes\InfiniteParallaxNode.h">
       <Filter>Classes\Components</Filter>
     </ClInclude>
   </ItemGroup>

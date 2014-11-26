@@ -18,7 +18,7 @@ class HubLayer;
 class PlayLayer :public Layer
 {
 public:
-	static Scene* createScene(string tmxpath);
+	static Scene* createScene(string tmxpath, Color4B skyColor = Color4B(64, 62, 60, 254));
 	virtual bool init();
 	bool createMap(string tmxpath);
 	CREATE_FUNC(PlayLayer);

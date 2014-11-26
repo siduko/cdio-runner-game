@@ -64,7 +64,7 @@ bool LevelsLayer::init()
 		layout->setAnchorPoint(ccp(0.5, 0.5));
 
 		Text* levelName = Text::create(level["Name"].asString(), "fonts/Marker Felt.ttf", 32);
-		levelName->setPosition(ccp(layout->getContentSize().width / 2, layout->getContentSize().height*0.9));
+		levelName->setPosition(ccp(layout->getContentSize().width / 2, layout->getContentSize().height*0.7));
 		layout->addChild(levelName);
 
 		ss << level["Score"].asString();
