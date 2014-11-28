@@ -237,8 +237,8 @@ void HubLayer::update(float delta)
 				effectImage->setVisible(true);
 				lbEffectTimer->setVisible(true);
 				effectImage->loadTexture(effectPlayer->getEffectIcon());
+			}else
 				lbEffectTimer->setText(Utils::count2Timer((int)effectPlayer->getLifeTime()));
-			}
 		}else
 		{
 			if (effectImage->isVisible())

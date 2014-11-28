@@ -45,163 +45,6 @@ Scene* PlayLayer::createScene(string tmxpath, Color4B skyColor /*= Color4B(64, 6
 	return scene;
 }
 
-bool PlayLayer::onContactBegin(PhysicsContact &contact)
-{
-	auto a = contact.getShapeA()->getBody();
-	auto b = contact.getShapeB()->getBody();
-
-	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ITEM"].asInt()){
-		player->setScore(player->getScore() + ((Item*)b->getNode())->getScore());
-		b->getNode()->removeFromParentAndCleanup(true);
-		return false;
-	}
-	if (b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ITEM"].asInt()){
-		player->setScore(player->getScore() + ((Item*)a->getNode())->getScore());
-		a->getNode()->removeFromParentAndCleanup(true);
-		return false;
-	}
-
-	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_FLOOR"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_FLOOR"].asInt()){
-		player->setAllowJump(true);
-		if (player->getPlayerState() == PlayerState::Jumping)
-			player->setPlayerState(PlayerState::Running);
-		player->setPlayerState(PlayerState::Running);
-		CCLOG("Collision with floor");
-		Vec2 coldir;
-		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt())
-			coldir = Utils::collisedDirection(a->getNode()->getBoundingBox(), b->getNode()->getBoundingBox());
-		else
-			coldir = Utils::collisedDirection(b->getNode()->getBoundingBox(), a->getNode()->getBoundingBox());
-		CCLOG("Collition at: %f %f", coldir.x, coldir.y);
-		if (coldir == ccp(-1, 0) || coldir == ccp(1, 0))
-		{
-			ValueMap force = DataController::getInstance()->getGameSettings()["PlayerHurt"].asValueMap();
-			player->getPhysicsBody()->applyImpulse(ccp(force["x"].asInt(), force["y"].asInt()));
-			player->setPlayerState(PlayerState::Hurt);
-			player->setActionTimeOut(2.0f);
-			CCLOG("Hurt with floor");
-		}
-		return true;
-	}
-
-	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_BLOCK"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_BLOCK"].asInt()){
-		player->setAllowJump(true);
-		if (player->getPlayerState() == PlayerState::Running)
-		{
-			Vec2 coldir;
-			if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt())
-				coldir = Utils::collisedDirection(a->getNode()->getBoundingBox(), b->getNode()->getBoundingBox());
-			else
-				coldir = Utils::collisedDirection(b->getNode()->getBoundingBox(), a->getNode()->getBoundingBox());
-			CCLOG("Collition at: %f %f", coldir.x, coldir.y);
-			if (coldir == ccp(-1, 0) || coldir == ccp(1, 0))
-			{
-				ValueMap force = DataController::getInstance()->getGameSettings()["PlayerHurt"].asValueMap();
-				player->getPhysicsBody()->applyImpulse(ccp(force["x"].asInt(), force["y"].asInt()));
-				player->setPlayerState(PlayerState::Hurt);
-				player->setActionTimeOut(2.0f);
-			}
-		}
-		if (player->getPlayerState() == PlayerState::Jumping)
-			player->setPlayerState(PlayerState::Running);
-		return true;
-	}
-
-	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt()){
-
-		Director::getInstance()->replaceScene(ResultLayer::createScene());
-		return false;
-	}
-
-	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ENEMY"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ENEMY"].asInt()){
-		Enemy* enemy;
-		Vec2 coldir;
-		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ENEMY"].asInt()){
-			enemy = (Enemy*)a->getNode();
-			coldir = Utils::collisedDirection(b->getNode()->getBoundingBox(), a->getNode()->getBoundingBox());
-		}
-		else
-		{
-			enemy = (Enemy*)b->getNode();
-			coldir = Utils::collisedDirection(a->getNode()->getBoundingBox(), b->getNode()->getBoundingBox());
-		}
-		CCLOG("Collition with %d at: %f %f", enemy->getEnemyType(), coldir.x, coldir.y);
-		if (coldir == ccp(1, 0) || coldir == ccp(-1, 0) || coldir == ccp(0, -1))
-		{
-			enemy->setResetActionTimeout(true);
-			
-			enemy->setEnemyState(Enemy::EnemyState::BeHit);
-			ValueMap force = DataController::getInstance()->getGameSettings()["PlayerHurt"].asValueMap();
-			player->getPhysicsBody()->applyImpulse(ccp(force["x"].asInt(), force["y"].asInt()));
-			player->setPlayerState(PlayerState::Hurt);
-			player->setActionTimeOut(2.0f);
-			player->setHealth(player->getHealth() - 1);
-			if (player->getHealth()<=0)
-			{
-				Director::getInstance()->replaceScene(ResultLayer::createScene());
-			}
-		}
-		if (coldir == ccp(0, 1))
-		{
-			enemy->setResetActionTimeout(true);
-			enemy->setEnemyState(Enemy::EnemyState::Dead);
-		}
-		return false;
-	}
-
-
-	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EndGame"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EndGame"].asInt()){
-		UserDefault::getInstance()->setIntegerForKey("Score", player->getScore());
-		UserDefault::getInstance()->setIntegerForKey("Star", player->getScore());
-		ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
-
-		int selectedLevel = UserDefault::getInstance()->getIntegerForKey("LevelSelected");
-		int selectedChapter = UserDefault::getInstance()->getIntegerForKey("ChapterSelected");
-
-		if (level["Score"].asInt() < player->getScore()){
-			level["Score"] = player->getScore();
-			//CCLOG("Score %d", level)["Score"].asInt());
-			DataController::getInstance()->setLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"), level);
-		}
-
-		if (selectedLevel + 1 < DataController::getInstance()->getLevelsInChapterByIndex(selectedChapter).size()){
-			ValueMap nextLevel = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
-			nextLevel["Locked"] = 0;
-			UserDefault::getInstance()->setIntegerForKey("LevelSelected", UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
-			DataController::getInstance()->setLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"), nextLevel);
-		}
-		else
-		{
-			if (UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1 < DataController::getInstance()->getChapters().size()){
-				ValueMap nextChapter = DataController::getInstance()->getChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1);
-				nextChapter["Locked"] = 0;
-				ValueMap nextLevel = nextChapter["Levels"].asValueVector()[0].asValueMap();
-				nextLevel["Locked"] = 0;
-				UserDefault::getInstance()->setIntegerForKey("ChapterSelected", UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1);
-				UserDefault::getInstance()->setIntegerForKey("LevelSelected", UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
-				DataController::getInstance()->setChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"),nextChapter);
-			}
-		}
-		DataController::getInstance()->saveGameData();
-		Director::getInstance()->replaceScene(ResultLayer::createScene());
-		return false;
-	}
-
-	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EffectItem"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EffectItem"].asInt()){
-		EffectComponent* effectPlayer = (EffectComponent*)player->getEntityManager()->getComponentObjectByName("EffectComponent");
-		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EffectItem"].asInt())
-			a->getNode()->removeFromParentAndCleanup(true);
-		else
-			b->getNode()->removeFromParentAndCleanup(true);
-		effectPlayer->runRandomEffect();
-		return false;
-	}
-
-
-
-	return true;
-}
-
 bool PlayLayer::onTouchBegan(Touch *touch, Event *unused_event)
 {
 	vecJump = ccp(0, 0);
@@ -244,6 +87,8 @@ void PlayLayer::onTouchEnded(Touch *touch, Event *unused_event)
 		else
 			player->setVelocity(20);
 	}
+	this->addEffect("smoke", "Effects/wind%d.png", 11, player->getPosition() - ccp(0, player->getBoundingBox().size.height*0.3), 1);
+	player->setPlayerState(PlayerState::Running);
 	this->getHubLayer()->powerJump->setPercent(0);
 }
 
@@ -278,8 +123,7 @@ bool PlayLayer::createMap(string tmxpath)
 		if (properties["type"].asString() == "Player")
 		{
 			player = Player::create(properties);
-			player->setHealth(5);
-			player->setMaxHealth(5);
+			player->setAcceleration(DataController::getInstance()->getGameSettings()["PlayerAcceleration"].asInt());
 			this->addChild(player, 10, DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt());
 			((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("idle");
 			this->getHubLayer()->setPlayer(player);
@@ -347,6 +191,167 @@ bool PlayLayer::createMap(string tmxpath)
 	return true;
 }
 
+bool PlayLayer::onContactBegin(PhysicsContact &contact)
+{
+	auto a = contact.getShapeA()->getBody();
+	auto b = contact.getShapeB()->getBody();
+
+	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ITEM"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ITEM"].asInt()){
+		player->setScore(player->getScore() + ((Item*)b->getNode())->getScore());
+		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt()){
+			this->addEffect("blast", "Effects/blast%d.png", 9, b->getNode()->getPosition(), 1);
+			b->getNode()->removeFromParentAndCleanup(true);
+		}
+		else
+		{
+			this->addEffect("blast", "Effects/blast%d.png", 9, a->getNode()->getPosition(), 1);
+			a->getNode()->removeFromParentAndCleanup(true);
+		}
+		return false;
+	}
+
+	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_BLOCK"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_BLOCK"].asInt()){
+		player->setAllowJump(true);
+		if (player->getPlayerState() == PlayerState::Running)
+		{
+			Vec2 coldir;
+			if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt())
+				coldir = Utils::collisedDirection(a->getNode()->getBoundingBox(), b->getNode()->getBoundingBox());
+			else
+				coldir = Utils::collisedDirection(b->getNode()->getBoundingBox(), a->getNode()->getBoundingBox());
+			CCLOG("Collition at: %f %f", coldir.x, coldir.y);
+			if (coldir == ccp(-1, 0) || coldir == ccp(1, 0))
+			{
+				player->setPlayerState(PlayerState::Hurt);
+				player->setActionTimeOut(2.0f);
+			}
+		}
+		if (player->getPlayerState() == PlayerState::Jumping)
+			player->setPlayerState(PlayerState::Running);
+		return true;
+	}
+
+	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_FLOOR"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_FLOOR"].asInt()){
+		player->setAllowJump(true);
+		if (player->getPlayerState() == PlayerState::Jumping){
+			this->addEffect("smoke", "Effects/wind%d.png", 11, player->getPosition() - ccp(0, player->getBoundingBox().size.height*0.3),1);
+			player->setPlayerState(PlayerState::Running);
+			CCLOG("Jump to running");
+		}
+		player->setPlayerState(PlayerState::Running);
+		CCLOG("Collision with floor");
+		Vec2 coldir;
+		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt())
+			coldir = Utils::collisedDirection(a->getNode()->getBoundingBox(), b->getNode()->getBoundingBox());
+		else
+			coldir = Utils::collisedDirection(b->getNode()->getBoundingBox(), a->getNode()->getBoundingBox());
+		CCLOG("Collition at: %f %f", coldir.x, coldir.y);
+		if (coldir == ccp(-1, 0) || coldir == ccp(1, 0))
+		{
+			player->setPlayerState(PlayerState::Hurt);
+			player->setActionTimeOut(2.0f);
+			CCLOG("Hurt with floor");
+		}
+		return true;
+	}
+
+	
+
+	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt()){
+		UserDefault::getInstance()->setIntegerForKey("Score", player->getScore());
+		UserDefault::getInstance()->setIntegerForKey("Star", player->getScore());
+		Director::getInstance()->replaceScene(ResultLayer::createScene());
+		return false;
+	}
+
+	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ENEMY"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ENEMY"].asInt()){
+		Enemy* enemy;
+		Vec2 coldir;
+		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ENEMY"].asInt()){
+			enemy = (Enemy*)a->getNode();
+			coldir = Utils::collisedDirection(b->getNode()->getBoundingBox(), a->getNode()->getBoundingBox());
+		}
+		else
+		{
+			enemy = (Enemy*)b->getNode();
+			coldir = Utils::collisedDirection(a->getNode()->getBoundingBox(), b->getNode()->getBoundingBox());
+		}
+		CCLOG("Collition with %d at: %f %f", enemy->getEnemyType(), coldir.x, coldir.y);
+		if (coldir == ccp(1, 0) || coldir == ccp(-1, 0) || coldir == ccp(0, -1))
+		{
+			enemy->setResetActionTimeout(true);
+
+			enemy->setEnemyState(Enemy::EnemyState::BeHit);
+			player->setPlayerState(PlayerState::Hurt);
+			player->setActionTimeOut(2.0f);
+			player->setHealth(player->getHealth() - 1);
+			if (player->getHealth() <= 0)
+			{
+				Director::getInstance()->replaceScene(ResultLayer::createScene());
+			}
+		}
+		if (coldir == ccp(0, 1))
+		{
+			this->addEffect("lightningclaw", "Effects/lightningclaw%d.png", 16, enemy->getPosition(), 1);
+			enemy->setResetActionTimeout(true);
+			enemy->setEnemyState(Enemy::EnemyState::Dead);
+		}
+		return false;
+	}
+
+
+	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EndGame"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EndGame"].asInt()){
+		UserDefault::getInstance()->setIntegerForKey("Score", player->getScore());
+		UserDefault::getInstance()->setIntegerForKey("Star", player->getScore());
+		ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
+
+		int selectedLevel = UserDefault::getInstance()->getIntegerForKey("LevelSelected");
+		int selectedChapter = UserDefault::getInstance()->getIntegerForKey("ChapterSelected");
+
+		if (level["Score"].asInt() < player->getScore()){
+			level["Score"] = player->getScore();
+			//CCLOG("Score %d", level)["Score"].asInt());
+			DataController::getInstance()->setLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"), level);
+		}
+
+		if (selectedLevel + 1 < DataController::getInstance()->getLevelsInChapterByIndex(selectedChapter).size()){
+			ValueMap nextLevel = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
+			nextLevel["Locked"] = 0;
+			UserDefault::getInstance()->setIntegerForKey("LevelSelected", UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
+			DataController::getInstance()->setLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"), nextLevel);
+		}
+		else
+		{
+			if (UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1 < DataController::getInstance()->getChapters().size()){
+				ValueMap nextChapter = DataController::getInstance()->getChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1);
+				nextChapter["Locked"] = 0;
+				ValueMap nextLevel = nextChapter["Levels"].asValueVector()[0].asValueMap();
+				nextLevel["Locked"] = 0;
+				UserDefault::getInstance()->setIntegerForKey("ChapterSelected", UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1);
+				UserDefault::getInstance()->setIntegerForKey("LevelSelected", UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
+				DataController::getInstance()->setChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), nextChapter);
+			}
+		}
+		DataController::getInstance()->saveGameData();
+		Director::getInstance()->replaceScene(ResultLayer::createScene());
+		return false;
+	}
+
+	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EffectItem"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EffectItem"].asInt()){
+		EffectComponent* effectPlayer = (EffectComponent*)player->getEntityManager()->getComponentObjectByName("EffectComponent");
+		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_EffectItem"].asInt())
+			a->getNode()->removeFromParentAndCleanup(true);
+		else
+			b->getNode()->removeFromParentAndCleanup(true);
+		effectPlayer->runRandomEffect();
+		return false;
+	}
+
+
+
+	return true;
+}
+
 void PlayLayer::setViewPointCenter(Point position)
 {
 	CCSize winSize = CCDirector::sharedDirector()->getWinSize();
@@ -370,4 +375,20 @@ HubLayer* PlayLayer::getHubLayer()
 void PlayLayer::update(float dt)
 {
 	this->setViewPointCenter(player->getPosition());
+	if (player->getPlayerState() == PlayerState::Running && abs(player->getVelocity())>200)
+		this->addEffect("smoke", "Effects/smokeEffect%d.png", 11, player->getPosition() - ccp(0, player->getBoundingBox().size.height*0.5), dt*abs( player->getVelocity()) / 20);
+}
+
+void PlayLayer::addEffect(string name, string imagePath, int imageCount, Point pos, float timeRemove)
+{
+	GameObject* effect = GameObject::create();
+	effect->setPosition(pos);
+	Animator* ani = Animator::create();
+	ani->addAction(name, imageCount, imagePath);
+	effect->getEntityManager()->addComponentObject("Animator", ani);
+	ani->playActionByName(name, timeRemove, true);
+	effect->runAction(Sequence::createWithTwoActions(DelayTime::create(timeRemove), CallFunc::create([effect](){
+		effect->removeFromParentAndCleanup(true);
+	})));
+	this->addChild(effect);
 }

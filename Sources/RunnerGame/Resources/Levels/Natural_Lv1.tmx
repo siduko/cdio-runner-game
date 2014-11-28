@@ -3467,5 +3467,14 @@
     <property name="CollisionBitmask" value="3"/>
    </properties>
   </object>
+  <object name="EffectItem" type="EffectItem" x="498.5" y="780.5" width="93" height="93">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="6"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="effectIcon%d.png"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

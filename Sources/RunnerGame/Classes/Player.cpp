@@ -14,9 +14,11 @@ Player::Player(ValueMap properties) : GameObject(properties)
 	animator->addAction("swim", properties["SwimCount"].asInt(), properties["SwimPath"].asString());
 	_entityManager->addComponentObject("EffectComponent", EffectComponent::create());
 	_playerState = PlayerState::Running;
-	_acceleration = 20;
+	_acceleration = 100;
 	_limitVelocity = DataController::getInstance()->getGameSettings()["PlayerVelocityLimit"].asInt();
 	_score = 0;
+	this->setMaxHealth(DataController::getInstance()->getGameSettings()["PlayerHealthMax"].asInt());
+	this->setHealth(this->getMaxHealth());
 }
 
 
@@ -68,6 +70,7 @@ void Player::update(float dt)
 		break;
 	case Hurt:
 		ani->playActionByName("hurt", 2.0f);
+		this->setVelocity(DataController::getInstance()->getGameSettings()["PlayerHurt"].asInt());
 		_actionTimeOut -= dt;
 		if (_actionTimeOut < 0)
 			_playerState = PlayerState::Running;

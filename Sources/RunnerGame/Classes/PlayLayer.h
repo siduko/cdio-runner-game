@@ -34,6 +34,7 @@ private:
 	virtual bool onTouchBegan(Touch *touch, Event *unused_event);
 	virtual void onTouchMoved(Touch *touch, Event *unused_event);
 	virtual void onTouchEnded(Touch *touch, Event *unused_event);
+	void addEffect(string name, string imagePath, int imageCount, Point pos, float timeRemove);
 	void update(float dt);
 	HubLayer* getHubLayer();
 };

@@ -146,7 +146,11 @@
             <key>CONTACT_ENEMY</key>
             <integer>8</integer>
             <key>PlayerVelocityLimit</key>
-            <integer>200</integer>
+            <integer>300</integer>
+			<key>PlayerAcceleration</key>
+            <integer>150</integer>
+			<key>PlayerHealthMax</key>
+            <integer>5</integer>
             <key>TargetDetectedDistance</key>
             <integer>100</integer>
             <key>JumpLimit</key>
@@ -156,12 +160,7 @@
             <key>WorldGravity</key>
             <integer>-500</integer>
             <key>PlayerHurt</key>
-            <dict>
-                <key>x</key>
-                <integer>-300000</integer>
-                <key>y</key>
-                <integer>300000</integer>
-            </dict>
+			<integer>-80</integer>
         </dict>
     </dict>
 </plist>
