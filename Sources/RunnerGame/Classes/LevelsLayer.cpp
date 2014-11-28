@@ -123,11 +123,10 @@ bool LevelsLayer::init()
 	btnBack->setPosition(ccp(wSize.width*0.5f, wSize.height*0.1f));
 	btnBack->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
-		auto chapterLayer = TransitionCrossFade::create(1, ChapterLayer::createScene());
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
-			Director::getInstance()->replaceScene(chapterLayer);
+			Director::getInstance()->replaceScene(ChapterLayer::createScene());
 			break;
 		case cocos2d::ui::Widget::TouchEventType::MOVED:
 			break;

@@ -28,3 +28,11 @@ Vec2 Utils::collisedDirection(Rect a, Rect b)
 	}
 	return ccp(0, 0);
 }
+
+std::string Utils::count2Timer(int count)
+{
+	int mm = count / 60;
+	int ss = count % 60;
+	string s = (mm<10?'0'+to_string(mm):to_string(mm)) + ":" + (ss<10 ? '0' + to_string(ss) : to_string(ss));
+	return s;
+}

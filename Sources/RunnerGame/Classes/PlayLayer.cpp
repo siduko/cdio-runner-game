@@ -19,6 +19,7 @@ bool PlayLayer::init()
 
 	UserDefault::getInstance()->setIntegerForKey("ChapterPred", UserDefault::getInstance()->getIntegerForKey("ChapterSelected"));
 	UserDefault::getInstance()->setIntegerForKey("LevelPred", UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
+	UserDefault::getInstance()->setIntegerForKey("Score", 0);
 
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audios/playbg.wav", true);
 
@@ -134,6 +135,11 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			player->getPhysicsBody()->applyImpulse(ccp(force["x"].asInt(), force["y"].asInt()));
 			player->setPlayerState(PlayerState::Hurt);
 			player->setActionTimeOut(2.0f);
+			player->setHealth(player->getHealth() - 1);
+			if (player->getHealth()<=0)
+			{
+				Director::getInstance()->replaceScene(ResultLayer::createScene());
+			}
 		}
 		if (coldir == ccp(0, 1))
 		{
@@ -272,6 +278,8 @@ bool PlayLayer::createMap(string tmxpath)
 		if (properties["type"].asString() == "Player")
 		{
 			player = Player::create(properties);
+			player->setHealth(5);
+			player->setMaxHealth(5);
 			this->addChild(player, 10, DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt());
 			((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("idle");
 			this->getHubLayer()->setPlayer(player);

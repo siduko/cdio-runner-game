@@ -16,5 +16,6 @@ public:
 		return os.str();
 	}
 	static Vec2 collisedDirection(Rect a, Rect b);
+	static string count2Timer(int count);
 };
 #endif // Utils_h__

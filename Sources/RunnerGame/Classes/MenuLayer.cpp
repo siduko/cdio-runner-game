@@ -17,11 +17,10 @@ bool MenuLayer::init()
 	btnPlay->setPosition(ccp(wSize.width*0.25, wSize.height*0.2));
 	btnPlay->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
-		auto chapterLayer = TransitionCrossFade::create(1, ChapterLayer::createScene());
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
-			Director::getInstance()->replaceScene(chapterLayer);
+			Director::getInstance()->replaceScene(ChapterLayer::createScene());
 			break;
 		case cocos2d::ui::Widget::TouchEventType::MOVED:
 			break;

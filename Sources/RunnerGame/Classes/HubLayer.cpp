@@ -26,9 +26,17 @@ bool HubLayer::init()
 	lbVelocity->setPosition(ccp(wSize.width*0.25f, wSize.height*0.85f));
 	this->addChild(lbVelocity);
 
+	lbHealth = Text::create("0", "fonts/Marker Felt.ttf", 30);
+	lbHealth->setPosition(ccp(wSize.width*0.4f, wSize.height*0.95f));
+	this->addChild(lbHealth);
+
 	effectImage = ImageView::create("effectIcon1.png");
-	effectImage->setPosition(ccp(wSize.width*0.5f, wSize.height*0.85f));
+	effectImage->setPosition(ccp(wSize.width*0.5f, wSize.height*0.9f));
 	this->addChild(effectImage);
+
+	lbEffectTimer = Text::create("00:00", "fonts/Marker Felt.ttf", 24);
+	lbEffectTimer->setPosition(ccp(effectImage->getBoundingBox().size.width*0.5f, -30));
+	effectImage->addChild(lbEffectTimer);
 
 	auto avatar = Sprite::create("Icons/playerlayer_0000s_0000s_0003_avatar.png");
 	auto meterBar = Sprite::create("Icons/playerlayer_0000s_0000s_0000_bar.png");
@@ -123,7 +131,6 @@ bool HubLayer::init()
 				((Button*)pSender)->loadTextureNormal("Icons/Speaker_icon.png");
 			else
 				((Button*)pSender)->loadTextureNormal("Icons/Speaker_icon_disabled.png");
-			CCLOG("%d %f", UserDefault::getInstance()->getBoolForKey("MusicEnabled", true), SimpleAudioEngine::getInstance()->getBackgroundMusicVolume());
 			break;
 		case cocos2d::ui::Widget::TouchEventType::MOVED:
 			break;
@@ -169,11 +176,10 @@ bool HubLayer::init()
 	btnReturnLevels->setPosition(ccp(pausePanelSize.width*0.4f, pausePanelSize.height*0.5f));
 	btnReturnLevels->addTouchEventListener([this](Ref *pSender, ui::Button::TouchEventType type)
 	{
-		auto levelLayer = TransitionCrossFade::create(1, LevelsLayer::createScene());
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
-			Director::getInstance()->replaceScene(levelLayer);
+			Director::getInstance()->replaceScene(LevelsLayer::createScene());
 			break;
 		case cocos2d::ui::Widget::TouchEventType::MOVED:
 			break;
@@ -225,6 +231,22 @@ void HubLayer::update(float delta)
 		lbVelocity->setString(Utils::to_string((int)this->player->getPhysicsBody()->getVelocity().x) + " m/s");
 		lbScore->setString("Score: " + Utils::to_string(this->player->getScore()));
 		EffectComponent* effectPlayer = (EffectComponent*)player->getEntityManager()->getComponentObjectByName("EffectComponent");
-		effectImage->loadTexture(effectPlayer->getEffectIcon());
+		if (effectPlayer->getAlive())
+		{
+			if (!effectImage->isVisible()){
+				effectImage->setVisible(true);
+				lbEffectTimer->setVisible(true);
+				effectImage->loadTexture(effectPlayer->getEffectIcon());
+				lbEffectTimer->setText(Utils::count2Timer((int)effectPlayer->getLifeTime()));
+			}
+		}else
+		{
+			if (effectImage->isVisible())
+			{
+				effectImage->setVisible(false);
+				lbEffectTimer->setVisible(false);
+			}
+		}
+		lbHealth->setText(Utils::to_string(player->getHealth()));
 	}
 }

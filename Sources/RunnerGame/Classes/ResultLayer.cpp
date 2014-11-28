@@ -35,7 +35,7 @@ bool ResultLayer::init()
 	resultPanel->addChild(resultLabel);
 
 	auto btnNext = Button::create("Icons/Forward_btn.png", "Icons/Forward_btn.png", "Icons/Forward_btn.png");
-	btnNext->setPosition(ccp(resultPanel->getContentSize().width*0.8f, resultPanel->getContentSize().height*0.2f));
+	btnNext->setPosition(ccp(resultPanel->getContentSize().width*0.75f, resultPanel->getContentSize().height*0.2f));
 	btnNext->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
 		ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
@@ -57,7 +57,7 @@ bool ResultLayer::init()
 	resultPanel->addChild(btnNext);
 
 	auto btnReturnLevel = Button::create("Icons/Menu_icon.png", "Icons/Menu_icon.png", "Icons/Menu_icon.png");
-	btnReturnLevel->setPosition(ccp(resultPanel->getContentSize().width*0.2f, resultPanel->getContentSize().height*0.2f));
+	btnReturnLevel->setPosition(ccp(resultPanel->getContentSize().width*0.25f, resultPanel->getContentSize().height*0.2f));
 	btnReturnLevel->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
 		switch (type)
@@ -77,36 +77,13 @@ bool ResultLayer::init()
 	});
 	resultPanel->addChild(btnReturnLevel);
 
-	auto btnReturnMenu = Button::create("star.png", "star.png", "star.png");
-	btnReturnMenu->setPosition(ccp(resultPanel->getContentSize().width*0.6f, resultPanel->getContentSize().height*0.2f));
-	btnReturnMenu->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
-	{
-		switch (type)
-		{
-		case cocos2d::ui::Widget::TouchEventType::BEGAN:
-			Director::getInstance()->replaceScene(MenuLayer::createScene());
-			break;
-		case cocos2d::ui::Widget::TouchEventType::MOVED:
-			break;
-		case cocos2d::ui::Widget::TouchEventType::ENDED:
-			break;
-		case cocos2d::ui::Widget::TouchEventType::CANCELED:
-			break;
-		default:
-			break;
-		}
-	});
-	resultPanel->addChild(btnReturnMenu);
-
 	auto btnReplay = Button::create("Icons/Reload_icon.png", "Icons/Reload_icon.png", "Icons/Reload_icon.png");
-	btnReplay->setPosition(ccp(resultPanel->getContentSize().width*0.4f, resultPanel->getContentSize().height*0.2f));
+	btnReplay->setPosition(ccp(resultPanel->getContentSize().width*0.5f, resultPanel->getContentSize().height*0.2f));
 	btnReplay->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
-		//ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterPred"), UserDefault::getInstance()->getIntegerForKey("LevelPred"));
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
-			//Director::getInstance()->replaceScene(PlayLayer::createScene(level["TmxPath"].asString()));
 			Director::getInstance()->replaceScene(LoadingLayer::createScene());
 			break;
 		case cocos2d::ui::Widget::TouchEventType::MOVED:

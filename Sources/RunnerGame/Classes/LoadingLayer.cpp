@@ -36,6 +36,5 @@ bool LoadingLayer::init()
 void LoadingLayer::update(float dt)
 {
 	auto selectedLevel = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
-	auto playLayer = PlayLayer::createScene(selectedLevel["TmxPath"].asString());
-	Director::getInstance()->replaceScene(playLayer);
+	Director::getInstance()->replaceScene(PlayLayer::createScene(selectedLevel["TmxPath"].asString()));
 }

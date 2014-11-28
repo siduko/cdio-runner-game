@@ -14,7 +14,7 @@ using namespace CocosDenshion;
 class HubLayer:public Layer
 {
 private:
-	Text* lbScore,*lbVelocity;
+	Text* lbScore, *lbVelocity, *lbEffectTimer,*lbHealth;
 	ImageView* effectImage;
 	Player* player;
 public:

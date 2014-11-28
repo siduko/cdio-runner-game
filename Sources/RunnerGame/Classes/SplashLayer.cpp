@@ -32,8 +32,7 @@ bool SplashLayer::init()
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audios/Mishief Stroll_bg.wav", true);
 
 	logo->runAction(Sequence::create(FadeOut::create(2), CallFunc::create([](){
-		auto scene = TransitionCrossFade::create(0.5, MenuLayer::createScene());
-		Director::getInstance()->replaceScene(scene);
+		Director::getInstance()->replaceScene(MenuLayer::createScene());
 	}), NULL));
 
 	return true;
