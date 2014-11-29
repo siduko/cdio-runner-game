@@ -17,16 +17,16 @@ bool HubLayer::init()
 		return false;
 	auto wSize = Director::getInstance()->getWinSize();
 
-	lbScore = Text::create("Score: 0", "fonts/Marker Felt.ttf", 30);
+	lbScore = Text::create("Score: 0", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 30);
 	lbScore->setPosition(ccp(wSize.width*0.25f, wSize.height*0.95f));
 	this->addChild(lbScore);
 
-	lbVelocity = Text::create("0 m/s", "fonts/Marker Felt.ttf", 30);
+	lbVelocity = Text::create("0 m/s", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 30);
 	lbVelocity->setColor(Color3B(255, 0, 0));
 	lbVelocity->setPosition(ccp(wSize.width*0.25f, wSize.height*0.85f));
 	this->addChild(lbVelocity);
 
-	lbHealth = Text::create("0", "fonts/Marker Felt.ttf", 30);
+	lbHealth = Text::create("0", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 30);
 	lbHealth->setPosition(ccp(wSize.width*0.4f, wSize.height*0.95f));
 	this->addChild(lbHealth);
 
@@ -34,7 +34,7 @@ bool HubLayer::init()
 	effectImage->setPosition(ccp(wSize.width*0.5f, wSize.height*0.9f));
 	this->addChild(effectImage);
 
-	lbEffectTimer = Text::create("00:00", "fonts/Marker Felt.ttf", 24);
+	lbEffectTimer = Text::create("00:00", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 24);
 	lbEffectTimer->setPosition(ccp(effectImage->getBoundingBox().size.width*0.5f, -30));
 	effectImage->addChild(lbEffectTimer);
 
@@ -213,6 +213,22 @@ bool HubLayer::init()
 		}
 	});
 	pausePanel->addChild(btnReplay);
+
+	auto keyboardListener = EventListenerKeyboard::create();
+	keyboardListener->onKeyPressed = [this](cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event){
+		if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE)
+		{
+			this->getPlayer()->unscheduleUpdate();
+			((Button*)this->getChildByName("btnMenu"))->setEnabled(false);
+			((Layout*) this->getChildByName("PausePanel"))->runAction(Spawn::createWithTwoActions(FadeIn::create(0.5), EaseBounceIn::create(MoveBy::create(0.5, ccp(0, 500)))));
+			((Layer*)this->getParent())->pause();
+		}
+	};
+	keyboardListener->onKeyReleased = [this](cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event *event){
+
+	};
+
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(keyboardListener, this);
 
 	scheduleUpdate();
 

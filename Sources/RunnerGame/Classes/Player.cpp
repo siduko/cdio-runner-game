@@ -15,6 +15,7 @@ Player::Player(ValueMap properties) : GameObject(properties)
 	_entityManager->addComponentObject("EffectComponent", EffectComponent::create());
 	_playerState = PlayerState::Running;
 	_acceleration = 100;
+	_autoControlVelocity = true;
 	_limitVelocity = DataController::getInstance()->getGameSettings()["PlayerVelocityLimit"].asInt();
 	_score = 0;
 	this->setMaxHealth(DataController::getInstance()->getGameSettings()["PlayerHealthMax"].asInt());

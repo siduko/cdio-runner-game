@@ -19,14 +19,18 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../Classes/EffectComponent.cpp \
 				   ../../Classes/EffectItem.cpp \
 				   ../../Classes/Enemy.cpp \
-				   ../../Classes/Enemy.cpp \
+				   ../../Classes/EntityManager.cpp \
 				   ../../Classes/GameObject.cpp \
 				   ../../Classes/HubLayer.cpp \
 				   ../../Classes/Item.cpp \
+				   ../../Classes/LevelsLayer.cpp \
+				   ../../Classes/LoadingLayer.cpp \
 				   ../../Classes/MenuLayer.cpp \
 				   ../../Classes/Player.cpp \
 				   ../../Classes/PlayLayer.cpp \
 				   ../../Classes/ResultLayer.cpp \
+				   ../../Classes/SplashLayer.cpp \
+				   ../../Classes/AboutLayer.cpp \
 				   ../../Classes/Utils.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

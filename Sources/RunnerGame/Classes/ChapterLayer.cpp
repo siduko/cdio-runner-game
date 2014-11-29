@@ -43,7 +43,7 @@ bool ChapterLayer::init()
 	this->addChild(chapterSelected);
 
 	ValueVector chapters = DataController::getInstance()->getChapters();
-	float lastPos = wSize.width / 2;
+	float lastPos = scrollView->getContentSize().width / 2;
 	float padding = 0.0f;
 	for (int i = 0; i < chapters.size();i++)
 	{
@@ -54,7 +54,7 @@ bool ChapterLayer::init()
 		layout->setContentSize(Size(250,212));
 		layout->setAnchorPoint(ccp(0.5, 0.5));
 
-		Text* chapterName = Text::create(chapter["Name"].asString(), "fonts/Marker Felt.ttf", 32);
+		Text* chapterName = Text::create(chapter["Name"].asString(), DataController::getInstance()->getGameSettings()["GameFont"].asString(), 32);
 		chapterName->setPosition(ccp(layout->getContentSize().width / 2, layout->getContentSize().height*0.9));
 		layout->addChild(chapterName);
 
@@ -65,16 +65,16 @@ bool ChapterLayer::init()
 		ss << DataController::getInstance()->getChapterScoreByIndex(i);
 		ss >> temp;
 		ss.clear();
-		Text* chapterScore = Text::create(temp, "fonts/Marker Felt.ttf", 20);
-		chapterScore->setPosition(ccp(layout->getContentSize().width * 0.25, layout->getContentSize().height*0.17));
+		Text* chapterScore = Text::create(temp, DataController::getInstance()->getGameSettings()["GameFont"].asString(), 20);
+		chapterScore->setPosition(ccp(layout->getContentSize().width * 0.5, layout->getContentSize().height*0.15));
 		layout->addChild(chapterScore);
 
-		ss << DataController::getInstance()->getChapterStarByIndex(i) << "/" << DataController::getInstance()->getChapterStarMaxByIndex(i);
+		/*ss << DataController::getInstance()->getChapterStarByIndex(i) << "/" << DataController::getInstance()->getChapterStarMaxByIndex(i);
 		ss >> temp;
 		ss.clear();
-		Text* chapterStar = Text::create(temp, "fonts/Marker Felt.ttf", 20);
+		Text* chapterStar = Text::create(temp, DataController::getInstance()->getGameSettings()["GameFont"].asString(), 20);
 		chapterStar->setPosition(ccp(layout->getContentSize().width * 0.7, layout->getContentSize().height*0.17));
-		layout->addChild(chapterStar);
+		layout->addChild(chapterStar);*/
 
 		if (chapter["Locked"].asInt())
 		{
@@ -131,7 +131,7 @@ bool ChapterLayer::init()
 		}
 	});
 	this->addChild(btnBack);
-
+	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audios/Mishief Stroll_bg.wav", true);
 	return true;
 }
 

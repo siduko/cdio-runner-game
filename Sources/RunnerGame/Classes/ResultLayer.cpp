@@ -105,7 +105,7 @@ bool ResultLayer::init()
 	ss << score;
 	string s;
 	ss >> s;
-	auto lbScore = Text::create(s, "fonts/Marker Felt.ttf", 32);
+	auto lbScore = Text::create(s, DataController::getInstance()->getGameSettings()["GameFont"].asString(), 32);
 	lbScore->setPosition(ccp(resultPanel->getContentSize().width*0.5f, resultPanel->getContentSize().height*0.5f));
 	resultPanel->addChild(lbScore);
 

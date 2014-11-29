@@ -18,7 +18,7 @@
                         <key>Name</key>
                         <string>1</string>
                         <key>Score</key>
-                        <integer>11500</integer>
+                        <integer>0</integer>
                         <key>StarMax</key>
                         <integer>3</integer>
                         <key>TmxPath</key>
@@ -30,7 +30,7 @@
                     </dict>
                     <dict>
                         <key>Name</key>
-                        <string>10</string>
+                        <string>2</string>
                         <key>Score</key>
                         <integer>0</integer>
                         <key>StarMax</key>
@@ -40,7 +40,7 @@
                         <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
-                        <integer>0</integer>
+                        <integer>1</integer>
                     </dict>
                     <dict>
                         <key>Name</key>
@@ -64,7 +64,7 @@
                 <key>ChapterImage</key>
                 <string>Chapters_chapterImage.png</string>
                 <key>Locked</key>
-                <integer>0</integer>
+                <integer>1</integer>
                 <key>Levels</key>
                 <array>
                     <dict>
@@ -79,7 +79,7 @@
                         <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
-                        <integer>0</integer>
+                        <integer>1</integer>
                     </dict>
 		<dict>
                         <key>Name</key>
@@ -93,7 +93,7 @@
                         <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
-                        <integer>0</integer>
+                        <integer>1</integer>
                     </dict>
                 </array>
             </dict>
@@ -103,7 +103,7 @@
                 <key>ChapterImage</key>
                 <string>Chapters_chapterImage.png</string>
                 <key>Locked</key>
-                <integer>0</integer>
+                <integer>1</integer>
                 <key>Levels</key>
                 <array>
                     <dict>
@@ -118,7 +118,7 @@
                         <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
-                        <integer>0</integer>
+                        <integer>1</integer>
                     </dict>
                 </array>
             </dict>
@@ -161,6 +161,8 @@
             <integer>-500</integer>
             <key>PlayerHurt</key>
 			<integer>-80</integer>
+			<key>GameFont</key>
+            <string>fonts/Carter One regular.ttf</string>
         </dict>
     </dict>
 </plist>

@@ -50,6 +50,7 @@ bool PlayLayer::onTouchBegan(Touch *touch, Event *unused_event)
 	vecJump = ccp(0, 0);
 	return true;
 }
+
 void PlayLayer::onTouchMoved(Touch *touch, Event *unused_event)
 {
 	Vec2 vecOut = ccpSub(touch->getLocation(), touch->getStartLocation());
@@ -71,14 +72,18 @@ void PlayLayer::onTouchEnded(Touch *touch, Event *unused_event)
 		player->setPlayerState(PlayerState::Jumping);
 		((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("jump", 2.0f, false, true);
 		if (player->getVelocity() <= 0)
-			player->setVelocity(30);
+			player->setVelocity(30); 
+		this->addEffect("smoke", "Effects/wind%d.png", 11, player->getPosition() - ccp(0, player->getBoundingBox().size.height*0.3), 1);
+		SimpleAudioEngine::getInstance()->playEffect("Audios/jump1.wav");
 	}else if (vecJump.y < DataController::getInstance()->getGameSettings()["PlayerJump"].asInt())
 	{
 		player->jump(ccp(DataController::getInstance()->getGameSettings()["PlayerJump"].asInt()*0.5f, DataController::getInstance()->getGameSettings()["PlayerJump"].asInt()));
 		player->setPlayerState(PlayerState::Jumping);
 		((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("jump", 2.0f, false, true);
 		if (player->getVelocity() <= 0)
-			player->setVelocity(30);
+			player->setVelocity(30); 
+		this->addEffect("smoke", "Effects/wind%d.png", 11, player->getPosition() - ccp(0, player->getBoundingBox().size.height*0.3), 1);
+		SimpleAudioEngine::getInstance()->playEffect("Audios/jump1.wav");
 	}
 	if (vecOut.x < 0){
 		float velocityPlayer = player->getVelocity();
@@ -87,7 +92,7 @@ void PlayLayer::onTouchEnded(Touch *touch, Event *unused_event)
 		else
 			player->setVelocity(20);
 	}
-	this->addEffect("smoke", "Effects/wind%d.png", 11, player->getPosition() - ccp(0, player->getBoundingBox().size.height*0.3), 1);
+	
 	player->setPlayerState(PlayerState::Running);
 	this->getHubLayer()->powerJump->setPercent(0);
 }
@@ -207,6 +212,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			this->addEffect("blast", "Effects/blast%d.png", 9, a->getNode()->getPosition(), 1);
 			a->getNode()->removeFromParentAndCleanup(true);
 		}
+		SimpleAudioEngine::getInstance()->playEffect("Audios/pickup1.wav");
 		return false;
 	}
 
@@ -295,6 +301,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			this->addEffect("lightningclaw", "Effects/lightningclaw%d.png", 16, enemy->getPosition(), 1);
 			enemy->setResetActionTimeout(true);
 			enemy->setEnemyState(Enemy::EnemyState::Dead);
+			SimpleAudioEngine::getInstance()->playEffect("Audios/lose4.wav");
 		}
 		return false;
 	}

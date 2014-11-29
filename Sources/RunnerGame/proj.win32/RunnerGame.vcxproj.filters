@@ -87,6 +87,9 @@
     <ClCompile Include="..\Classes\SplashLayer.cpp">
       <Filter>Classes\Layers</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\AboutLayer.cpp">
+      <Filter>Classes\Layers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -150,6 +153,9 @@
       <Filter>Classes\Layers</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SplashLayer.h">
+      <Filter>Classes\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AboutLayer.h">
       <Filter>Classes\Layers</Filter>
     </ClInclude>
   </ItemGroup>

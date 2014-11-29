@@ -63,23 +63,23 @@ bool LevelsLayer::init()
 		layout->setContentSize(Size(82, 93));
 		layout->setAnchorPoint(ccp(0.5, 0.5));
 
-		Text* levelName = Text::create(level["Name"].asString(), "fonts/Marker Felt.ttf", 32);
+		Text* levelName = Text::create(level["Name"].asString(), DataController::getInstance()->getGameSettings()["GameFont"].asString(), 32);
 		levelName->setPosition(ccp(layout->getContentSize().width / 2, layout->getContentSize().height*0.7));
 		layout->addChild(levelName);
 
 		ss << level["Score"].asString();
 		ss >> temp;
 		ss.clear();
-		Text* levelScore = Text::create(temp, "fonts/Marker Felt.ttf", 13);
-		levelScore->setPosition(ccp(layout->getContentSize().width * 0.25, layout->getContentSize().height*0.17));
+		Text* levelScore = Text::create(temp, DataController::getInstance()->getGameSettings()["GameFont"].asString(), 13);
+		levelScore->setPosition(ccp(layout->getContentSize().width * 0.5, layout->getContentSize().height*0.2));
 		layout->addChild(levelScore);
 
-		ss << level["Star"].asString() << "/" << level["StarMax"].asString();
+		/*ss << level["Star"].asString() << "/" << level["StarMax"].asString();
 		ss >> temp;
 		ss.clear();
-		Text* chapterStar = Text::create(temp, "fonts/Marker Felt.ttf", 20);
+		Text* chapterStar = Text::create(temp, DataController::getInstance()->getGameSettings()["GameFont"].asString(), 20);
 		chapterStar->setPosition(ccp(layout->getContentSize().width * 0.7, layout->getContentSize().height*0.17));
-		layout->addChild(chapterStar);
+		layout->addChild(chapterStar);*/
 
 		if (level["Locked"].asInt())
 		{
@@ -139,6 +139,6 @@ bool LevelsLayer::init()
 		}
 	});
 	this->addChild(btnBack);
-
+	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audios/Mishief Stroll_bg.wav", true);
 	return true;
 }
