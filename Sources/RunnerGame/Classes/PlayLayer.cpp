@@ -20,6 +20,7 @@ bool PlayLayer::init()
 	UserDefault::getInstance()->setIntegerForKey("ChapterPred", UserDefault::getInstance()->getIntegerForKey("ChapterSelected"));
 	UserDefault::getInstance()->setIntegerForKey("LevelPred", UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
 	UserDefault::getInstance()->setIntegerForKey("Score", 0);
+	UserDefault::getInstance()->setIntegerForKey("HighScore", DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"))["Score"].asInt());
 
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audios/playbg.wav", true);
 
@@ -130,7 +131,7 @@ bool PlayLayer::createMap(string tmxpath)
 			player = Player::create(properties);
 			player->setAcceleration(DataController::getInstance()->getGameSettings()["PlayerAcceleration"].asInt());
 			this->addChild(player, 10, DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt());
-			((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("idle");
+			//((Animator*)player->getEntityManager()->getComponentObjectByName("Animator"))->playActionByName("idle");
 			this->getHubLayer()->setPlayer(player);
 		}
 		if (properties["type"].asString() == "Floor")
@@ -229,7 +230,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			if (coldir == ccp(-1, 0) || coldir == ccp(1, 0))
 			{
 				player->setPlayerState(PlayerState::Hurt);
-				player->setActionTimeOut(2.0f);
+				player->setActionTimeOut(1.0f);
 			}
 		}
 		if (player->getPlayerState() == PlayerState::Jumping)
@@ -241,8 +242,6 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 		player->setAllowJump(true);
 		if (player->getPlayerState() == PlayerState::Jumping){
 			this->addEffect("smoke", "Effects/wind%d.png", 11, player->getPosition() - ccp(0, player->getBoundingBox().size.height*0.3),1);
-			player->setPlayerState(PlayerState::Running);
-			CCLOG("Jump to running");
 		}
 		player->setPlayerState(PlayerState::Running);
 		CCLOG("Collision with floor");
@@ -255,7 +254,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 		if (coldir == ccp(-1, 0) || coldir == ccp(1, 0))
 		{
 			player->setPlayerState(PlayerState::Hurt);
-			player->setActionTimeOut(2.0f);
+			player->setActionTimeOut(1.0f);
 			CCLOG("Hurt with floor");
 		}
 		return true;
@@ -289,7 +288,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 
 			enemy->setEnemyState(Enemy::EnemyState::BeHit);
 			player->setPlayerState(PlayerState::Hurt);
-			player->setActionTimeOut(2.0f);
+			player->setActionTimeOut(1.0f);
 			player->setHealth(player->getHealth() - 1);
 			if (player->getHealth() <= 0)
 			{

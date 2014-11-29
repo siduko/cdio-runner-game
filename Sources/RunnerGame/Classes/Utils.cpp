@@ -10,7 +10,7 @@ int Utils::randomValueBetween(int low, int high){
 
 Vec2 Utils::collisedDirection(Rect a, Rect b)
 {
-	if (a.getMinY()>b.getMaxY() && a.getMinY()>b.getMinY()+a.size.height)
+	if (a.getMinY()<b.getMaxY() && a.getMaxY()>b.getMinY())
 	{
 		//left or right
 		if (a.getMidX() <= b.getMinX())

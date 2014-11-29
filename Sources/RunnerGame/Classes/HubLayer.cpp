@@ -17,46 +17,53 @@ bool HubLayer::init()
 		return false;
 	auto wSize = Director::getInstance()->getWinSize();
 
-	lbScore = Text::create("Score: 0", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 30);
-	lbScore->setPosition(ccp(wSize.width*0.25f, wSize.height*0.95f));
+	auto coinIcon = ImageView::create("Icons/playerlayer_0000s_0005_hudCoin.png");
+	coinIcon->setPosition(ccp(wSize.width*0.1f, wSize.height*0.95f));
+	this->addChild(coinIcon);
+	lbScore = Text::create("0", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 30);
+	lbScore->setPosition(ccp(wSize.width*0.2f, wSize.height*0.95f));
+	lbScore->setColor(Color3B(241, 196, 15));
 	this->addChild(lbScore);
 
-	lbVelocity = Text::create("0 m/s", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 30);
-	lbVelocity->setColor(Color3B(255, 0, 0));
-	lbVelocity->setPosition(ccp(wSize.width*0.25f, wSize.height*0.85f));
-	this->addChild(lbVelocity);
-
+	auto healthIcon = ImageView::create("Icons/playerlayer_0000s_0001_heart_full.png");
+	healthIcon->setPosition(ccp(wSize.width*0.4f, wSize.height*0.95f));
+	this->addChild(healthIcon);
 	lbHealth = Text::create("0", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 30);
-	lbHealth->setPosition(ccp(wSize.width*0.4f, wSize.height*0.95f));
+	lbHealth->setPosition(ccp(wSize.width*0.5f, wSize.height*0.95f));
+	lbHealth->setColor(Color3B(231, 76, 60));
 	this->addChild(lbHealth);
 
-	effectImage = ImageView::create("effectIcon1.png");
-	effectImage->setPosition(ccp(wSize.width*0.5f, wSize.height*0.9f));
-	this->addChild(effectImage);
-
-	lbEffectTimer = Text::create("00:00", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 24);
-	lbEffectTimer->setPosition(ccp(effectImage->getBoundingBox().size.width*0.5f, -30));
-	effectImage->addChild(lbEffectTimer);
+	lbVelocity = Text::create("0 m/s", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 30);
 
 	auto avatar = Sprite::create("Icons/playerlayer_0000s_0000s_0003_avatar.png");
 	auto meterBar = Sprite::create("Icons/playerlayer_0000s_0000s_0000_bar.png");
 	powerJump = LoadingBar::create("Icons/playerlayer_0000s_0000s_0002_process.png");
 	angleJump = Sprite::create("Icons/playerlayer_0000s_0000s_0001_needle.png");
+	effectImage = ImageView::create("effectIcon1.png");
+	lbEffectTimer = Text::create("00:00", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 18);
+
 	meterBar->setAnchorPoint(ccp(0, 0));
 	meterBar->setPosition(ccp(wSize.width*0.01, wSize.height*0.01));
 	avatar->setPosition(ccp(meterBar->getContentSize().width*0.12f, meterBar->getContentSize().height*0.42f));
 	angleJump->setPosition(ccp(meterBar->getContentSize().width*0.12f, meterBar->getContentSize().height*0.42f));
 	powerJump->setPosition(ccp(meterBar->getContentSize().width*0.25f, meterBar->getContentSize().height*0.42f));
+	lbVelocity->setPosition(ccp(meterBar->getContentSize().width*0.4f, meterBar->getContentSize().height*0.8f));
+	effectImage->setPosition(ccp(wSize.width*0.7f, wSize.height*0.93f));
+	lbEffectTimer->setPosition(ccp(wSize.width*0.7f, wSize.height*0.85f));
+	lbEffectTimer->setColor(Color3B(52, 73, 94));
 	powerJump->setAnchorPoint(ccp(0, 0.5f));
 	angleJump->setAnchorPoint(ccp(0,0.5));
 	this->addChild(avatar);
 	this->addChild(powerJump);
 	this->addChild(angleJump);
 	this->addChild(meterBar);
+	this->addChild(lbVelocity);
+	this->addChild(effectImage);
+	this->addChild(lbEffectTimer);
 
 	auto btnMenu = Button::create("Icons/Pause_icon.png", "Icons/Pause_icon.png", "Icons/Pause_icon_disabled.png");
 	btnMenu->setName("btnMenu");
-	btnMenu->setPosition(ccp(wSize.width*0.8f, wSize.height*0.85f));
+	btnMenu->setPosition(ccp(wSize.width*0.9f, wSize.height*0.9f));
 	btnMenu->addTouchEventListener([this](Ref *pSender, ui::Button::TouchEventType type)
 	{
 		switch (type)
@@ -245,7 +252,7 @@ void HubLayer::update(float delta)
 	if (player)
 	{
 		lbVelocity->setString(Utils::to_string((int)this->player->getPhysicsBody()->getVelocity().x) + " m/s");
-		lbScore->setString("Score: " + Utils::to_string(this->player->getScore()));
+		lbScore->setString(Utils::to_string(this->player->getScore()));
 		EffectComponent* effectPlayer = (EffectComponent*)player->getEntityManager()->getComponentObjectByName("EffectComponent");
 		if (effectPlayer->getAlive())
 		{
@@ -253,6 +260,7 @@ void HubLayer::update(float delta)
 				effectImage->setVisible(true);
 				lbEffectTimer->setVisible(true);
 				effectImage->loadTexture(effectPlayer->getEffectIcon());
+				effectImage->runAction(Sequence::createWithTwoActions(DelayTime::create((int)(effectPlayer->getLifeTime()*0.3)), RepeatForever::create(Blink::create(1, 5))));
 			}else
 				lbEffectTimer->setText(Utils::count2Timer((int)effectPlayer->getLifeTime()));
 		}else
@@ -264,5 +272,12 @@ void HubLayer::update(float delta)
 			}
 		}
 		lbHealth->setText(Utils::to_string(player->getHealth()));
+		if (player->getVelocity() < DataController::getInstance()->getGameSettings()["PlayerVelocityLimit"].asInt()*30/100)
+			lbVelocity->setColor(Color3B(243, 156, 18));
+		else if (player->getVelocity() < DataController::getInstance()->getGameSettings()["PlayerVelocityLimit"].asInt() * 60 / 100)
+			lbVelocity->setColor(Color3B(211, 84, 0));
+		else
+			lbVelocity->setColor(Color3B(192, 57, 43));
+
 	}
 }

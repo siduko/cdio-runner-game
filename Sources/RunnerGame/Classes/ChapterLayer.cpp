@@ -55,7 +55,7 @@ bool ChapterLayer::init()
 		layout->setAnchorPoint(ccp(0.5, 0.5));
 
 		Text* chapterName = Text::create(chapter["Name"].asString(), DataController::getInstance()->getGameSettings()["GameFont"].asString(), 32);
-		chapterName->setPosition(ccp(layout->getContentSize().width / 2, layout->getContentSize().height*0.9));
+		chapterName->setPosition(ccp(layout->getContentSize().width / 2, layout->getContentSize().height*0.85));
 		layout->addChild(chapterName);
 
 		ImageView* chapterImage = ImageView::create(chapter["ChapterImage"].asString());

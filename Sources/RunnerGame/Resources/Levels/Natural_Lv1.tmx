@@ -2874,43 +2874,7 @@
     <property name="MovingPath" value="bee_fly%d.png"/>
    </properties>
   </object>
-  <object name="FlyEnemy" type="Enemy" x="3817.45" y="866.909" width="56" height="48">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="bee_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="bee_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="1"/>
-    <property name="GravityEnable" value="false"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="bee%d.png"/>
-    <property name="MoveTimeout" value="4"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="bee_fly%d.png"/>
-   </properties>
-  </object>
   <object name="FlyEnemy" type="Enemy" x="4760" y="840" width="56" height="48">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="bee_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="bee_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="1"/>
-    <property name="GravityEnable" value="false"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="bee%d.png"/>
-    <property name="MoveTimeout" value="4"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="bee_fly%d.png"/>
-   </properties>
-  </object>
-  <object name="FlyEnemy" type="Enemy" x="6529.58" y="791.152" width="56" height="48">
    <properties>
     <property name="BeHitCount" value="2"/>
     <property name="BeHitPath" value="bee_hit%d.png"/>
@@ -3054,7 +3018,7 @@
     <property name="MovingPath" value="bee_fly%d.png"/>
    </properties>
   </object>
-  <object name="FlyEnemy" type="Enemy" x="16753.8" y="718.424" width="56" height="48">
+  <object name="FlyEnemy" type="Enemy" x="17083.8" y="537.424" width="56" height="48">
    <properties>
     <property name="BeHitCount" value="2"/>
     <property name="BeHitPath" value="bee_hit%d.png"/>
@@ -3234,7 +3198,7 @@
     <property name="MovingPath" value="bee_fly%d.png"/>
    </properties>
   </object>
-  <object name="FlyEnemy" type="Enemy" x="34378.1" y="600.242" width="56" height="48">
+  <object name="FlyEnemy" type="Enemy" x="34379.1" y="712.242" width="56" height="48">
    <properties>
     <property name="BeHitCount" value="2"/>
     <property name="BeHitPath" value="bee_hit%d.png"/>
@@ -3306,7 +3270,7 @@
     <property name="MovingPath" value="barnacle_bite%d.png"/>
    </properties>
   </object>
-  <object name="StandEnemy" type="Enemy" x="15753.3" y="777.061" width="51" height="58">
+  <object name="StandEnemy" type="Enemy" x="16397.3" y="778.061" width="51" height="58">
    <properties>
     <property name="BeHitCount" value="2"/>
     <property name="BeHitPath" value="barnacle_hit%d.png"/>
@@ -3324,25 +3288,7 @@
     <property name="MovingPath" value="barnacle_bite%d.png"/>
    </properties>
   </object>
-  <object name="StandEnemy" type="Enemy" x="18098.7" y="922.515" width="51" height="58">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="barnacle_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="barnacle_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="2"/>
-    <property name="GravityEnable" value="true"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="barnacle%d.png"/>
-    <property name="MoveTimeout" value="0.5"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="barnacle_bite%d.png"/>
-   </properties>
-  </object>
-  <object name="StandEnemy" type="Enemy" x="18426" y="919.485" width="51" height="58">
+  <object name="StandEnemy" type="Enemy" x="18293" y="917.485" width="51" height="58">
    <properties>
     <property name="BeHitCount" value="2"/>
     <property name="BeHitPath" value="barnacle_hit%d.png"/>
@@ -3397,42 +3343,6 @@
    </properties>
   </object>
   <object name="StandEnemy" type="Enemy" x="29744.2" y="777.061" width="51" height="58">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="barnacle_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="barnacle_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="2"/>
-    <property name="GravityEnable" value="true"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="barnacle%d.png"/>
-    <property name="MoveTimeout" value="0.5"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="barnacle_bite%d.png"/>
-   </properties>
-  </object>
-  <object name="StandEnemy" type="Enemy" x="30280.6" y="777.061" width="51" height="58">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="barnacle_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="barnacle_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="2"/>
-    <property name="GravityEnable" value="true"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="barnacle%d.png"/>
-    <property name="MoveTimeout" value="0.5"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="barnacle_bite%d.png"/>
-   </properties>
-  </object>
-  <object name="StandEnemy" type="Enemy" x="32044.2" y="571" width="51" height="58">
    <properties>
     <property name="BeHitCount" value="2"/>
     <property name="BeHitPath" value="barnacle_hit%d.png"/>

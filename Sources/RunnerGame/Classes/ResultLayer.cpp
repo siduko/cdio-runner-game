@@ -35,7 +35,7 @@ bool ResultLayer::init()
 	resultPanel->addChild(resultLabel);
 
 	auto btnNext = Button::create("Icons/Forward_btn.png", "Icons/Forward_btn.png", "Icons/Forward_btn.png");
-	btnNext->setPosition(ccp(resultPanel->getContentSize().width*0.75f, resultPanel->getContentSize().height*0.2f));
+	btnNext->setPosition(ccp(resultPanel->getContentSize().width*0.75f,0));
 	btnNext->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
 		ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
@@ -57,7 +57,7 @@ bool ResultLayer::init()
 	resultPanel->addChild(btnNext);
 
 	auto btnReturnLevel = Button::create("Icons/Menu_icon.png", "Icons/Menu_icon.png", "Icons/Menu_icon.png");
-	btnReturnLevel->setPosition(ccp(resultPanel->getContentSize().width*0.25f, resultPanel->getContentSize().height*0.2f));
+	btnReturnLevel->setPosition(ccp(resultPanel->getContentSize().width*0.25f, 0));
 	btnReturnLevel->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
 		switch (type)
@@ -78,7 +78,7 @@ bool ResultLayer::init()
 	resultPanel->addChild(btnReturnLevel);
 
 	auto btnReplay = Button::create("Icons/Reload_icon.png", "Icons/Reload_icon.png", "Icons/Reload_icon.png");
-	btnReplay->setPosition(ccp(resultPanel->getContentSize().width*0.5f, resultPanel->getContentSize().height*0.2f));
+	btnReplay->setPosition(ccp(resultPanel->getContentSize().width*0.5f,0));
 	btnReplay->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
 		switch (type)
@@ -105,9 +105,18 @@ bool ResultLayer::init()
 	ss << score;
 	string s;
 	ss >> s;
-	auto lbScore = Text::create(s, DataController::getInstance()->getGameSettings()["GameFont"].asString(), 32);
-	lbScore->setPosition(ccp(resultPanel->getContentSize().width*0.5f, resultPanel->getContentSize().height*0.5f));
+
+	auto lbScore = Text::create(s, DataController::getInstance()->getGameSettings()["GameFont"].asString(), 150);
+	lbScore->setTextHorizontalAlignment(TextHAlignment::CENTER);
+	lbScore->setPosition(ccp(resultPanel->getContentSize().width*0.5f, resultPanel->getContentSize().height*0.6f));
+	lbScore->setColor(Color3B(215, 170, 116));
 	resultPanel->addChild(lbScore);
+
+	auto lbHighScore = Text::create("High Score\n" + Utils::to_string(UserDefault::getInstance()->getIntegerForKey("HighScore")), DataController::getInstance()->getGameSettings()["GameFont"].asString(), 32);
+	lbHighScore->setTextHorizontalAlignment(TextHAlignment::CENTER);
+	lbHighScore->setPosition(ccp(resultPanel->getContentSize().width*0.5f, resultPanel->getContentSize().height*0.3f));
+	lbHighScore->setColor(Color3B(215, 170, 116));
+	resultPanel->addChild(lbHighScore);
 
 	return true;
 }
