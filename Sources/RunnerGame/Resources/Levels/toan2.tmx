@@ -1,0 +1,2474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="400" height="20" tilewidth="70" tileheight="70">
+ <tileset firstgid="1" name="tiles_spritesheet" tilewidth="70" tileheight="70" spacing="2">
+  <image source="platformerGraphicsDeluxe_Updated/Tiles/tiles_spritesheet.png" width="914" height="936"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="400" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztm89qFTEUxiNXwZ34BIIIRQQ37oRa3Ai2O0FxW/oWpd3eCl1d8YGdgYQbjzmTc5Kcydzw/eBbzDCTPyc5+ZJpr3MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgLV5NulX70YAMBAvKwX60mNM1q7zbtIfxTWoZ+cFAEeLvIePbIsWnt973/DgVcpPotrnRmbnlr0CHgJStF4Dtuoj916j8N2rlCUPaOEPXyNpqfUNYAM8BKxFbx/J+YXET14zAjZszTdGOpNcTDqLrs/8PS07olf1TfuP60gjMu+pnriyvVUtl16ngoWPzP23mLczbwTqwRbPdD354Y658KlzW7YI9QvK1aQPDeq5dXa5SBnZU2KunY2Hzrly45XyEDpnrvxz8Ty5XJCk/jW8izsXXLhjDG6drY+szdI+l3rHaP+3ULq/187HB0ZbJOQuzV+OF5N+m7aIJ+RiydrQep2k5eSut8Bb4/LD2NwQ1aznYS1e2qNw7bBkzoP5XMzlAo1BPHclbbt3sm9XXya9F5RXyijfRXoS5oCEJZ/Yqodo+rcFTu3bSG/euWPMLPfBdM2kKoUba24etJ4fIX5c7J56xWj6L/UKyudJ3yZ9VL7Xkvk3CmF/PMJvFeJcifcs4cyc+96SQjr/Jf7Qy0OWzhmp/mnPJbVt0NLDQ2rOFKl3U/fOhfdyxLHeu3/3wVIPoec1GnN6nfOPUg/h3qPnG4k0hLUkxE8Tu5b+GROPq7WsaNEmqz7vDfprtT9fe/y5fmjv18CVqZ3Da+XQKYnCreGlf0ui40bHUuIfJfMp5x8axeTW4n3ifWnsrPyDKzv2UWkscs8/Gqlk3GibSt6Nx1ZSR+v+9oqjtN+5OLS6bxFL7Vhy8dHGqIWk9bZo21JdmvlFv8cHHZh4HxJ11OS0ds60WodalBFip83ttdeNVH5o3ntupFwbl9qZKqN17lv116pcq3VP2g/tfYtYasfSOndqxqRHnZqY5nRIKFUHvWeVo9zzPWOU60NtnzVl/wVg+b9/
+  </data>
+ </layer>
+ <objectgroup name="Objects">
+  <object name="Player" type="Player" x="213.485" y="1092.18" width="66" height="92">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="ClimbCount" value="2"/>
+    <property name="ClimbPath" value="alienBlue_climb%d.png"/>
+    <property name="CollisionBitmask" value="2"/>
+    <property name="DuckCount" value="1"/>
+    <property name="DuckPath" value="alienBlue_duck%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="HurtCount" value="1"/>
+    <property name="HurtPath" value="alienBlue_hurt%d.png"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="alienBlue_idle%d.png"/>
+    <property name="JumpCount" value="1"/>
+    <property name="JumpPath" value="alienBlue_jump%d.png"/>
+    <property name="RunCount" value="2"/>
+    <property name="RunPath" value="alienBlue_walk%d.png"/>
+    <property name="SwimCount" value="2"/>
+    <property name="SwimPath" value="alienBlue_swim%d.png"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="0" y="1190" width="1540" height="210">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="1540" y="1330" width="1540" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="1801.33" y="760.939" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="1524" y="1056.36">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="EndGame" type="EndGame" x="27930" y="980" width="70" height="140">
+   <properties>
+    <property name="AnimationDelay" value="0.5"/>
+    <property name="CollisionBitmask" value="5"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="2"/>
+    <property name="ImagePath" value="flagBlue%d.png"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="1610" y="1050" width="142" height="42">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="1890" y="980" width="146" height="48">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="2170" y="1120" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="2380" y="980" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="2450" y="910" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="2660" y="980" width="210" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="2730" y="770" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="3010" y="630" width="350" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="3290" y="700" width="630" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="3850" y="770" width="210" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="3080" y="1190" width="1050" height="210">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="4270" y="1190" width="1610" height="210">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="4340" y="770" width="210" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="4480" y="700" width="630" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="5040" y="630" width="350" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="5530" y="770" width="210" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="5880" y="1120" width="210" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="6230" y="1120" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="6300" y="980" width="73.6364" height="40.7879">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="6440" y="840" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="6580" y="770" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="6720" y="700" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="7000" y="630" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="7280" y="630" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="7560" y="630" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="7210" y="910" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="7280" y="980" width="140" height="420">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="7840" y="700" width="282.424" height="45.7576">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="8260" y="560" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="8120" y="980" width="420" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="8050" y="1050" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="7984.55" y="1125.61" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="8540" y="1050" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="8610" y="1120" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="8540" y="700" width="288.485" height="51.8182">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="8960" y="840" width="212.727" height="48.7879">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="8820" y="1190" width="1680" height="210">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="10710" y="1120" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="10780" y="1190" width="140" height="210">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="11130" y="980" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="11200" y="1050" width="140" height="350">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="11550" y="1120" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="11620" y="1190" width="140" height="210">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="11970" y="980" width="136.97" height="42.7273">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="12254.2" y="913.485" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="12530" y="840" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="12810" y="840" width="140" height="140">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="13020" y="1120" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="13090" y="1190" width="140" height="210">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="13090" y="700" width="209.697" height="36.6667">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="13510" y="630" width="136.97" height="48.7879">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="13636.1" y="692.273" width="91.5152" height="45.7576">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="13720" y="770" width="75.3939" height="42.6061">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="13790" y="840" width="279.636" height="45.1515">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="14070" y="910" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="13510" y="1190" width="420" height="210">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="14140" y="980" width="210" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="14280" y="1050" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="14350" y="1120" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="14350" y="1190" width="4830" height="210">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="15190" y="980" width="210" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="15540" y="840" width="210" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="15960" y="910" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="16380" y="1120" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="16590" y="980" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="16870" y="980" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="17150" y="980" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="17430" y="1120" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="17780" y="1120" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="18130" y="1120" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="18480" y="1120" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="19390" y="1120" width="490" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="19670" y="1050" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="19460" y="1190" width="490" height="210">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="19950" y="1260" width="490" height="140">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="19460" y="840" width="210" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="20020" y="910" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="20580" y="1120" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="20440" y="1330" width="490" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="20790" y="1260" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="20860" y="1120" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="20860" y="1190" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="21140" y="1120" width="140" height="280">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="21420" y="980" width="560" height="420">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="21630" y="840" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="21560" y="910" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="21980" y="1190" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="21980" y="1260" width="210" height="140">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="21980" y="1120" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="22120" y="910" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="22400" y="910" width="210" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="22750" y="910" width="490" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="22890" y="980" width="210" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="22960" y="1050" width="70" height="350">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="23030" y="700" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="23100" y="630" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="23170" y="560" width="1120" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="24290" y="630" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="24430" y="700" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="24570" y="770" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="24710" y="840" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="23380" y="1050" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="23380" y="1120" width="910" height="280">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="23800" y="910" width="140" height="210">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="24500" y="1190" width="980" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="24570" y="1260" width="1050" height="140">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="25130" y="1120" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="25270" y="1050" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="25550" y="980" width="209.212" height="39.0909">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="25760" y="1050" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="26040" y="910" width="350" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="26110" y="980" width="560" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="26110" y="1050" width="350" height="350">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="26815.7" y="808.515" width="136" height="36">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="27088" y="739" width="142" height="36">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="26878" y="1087" width="216" height="40">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="27228" y="1013" width="220" height="44">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="27366" y="801" width="146" height="50">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="27650" y="1120" width="354" height="72">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="27942" y="19" width="52" height="962">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="27720" y="1190" width="280" height="210">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="26180" y="840" width="70" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="46" y="15" width="27899.3" height="56">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="4130" y="1330" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="5880" y="1330" width="1400" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="7420" y="1330" width="1400" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="10500" y="1330" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="10920" y="1330" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="11340" y="1330" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="11760" y="1330" width="1330" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="13230" y="1330" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="13930" y="1330" width="420" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="19180" y="1330" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="20930" y="1330" width="210" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="21280" y="1330" width="140" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="22190" y="1330" width="770" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="23030" y="1330" width="350" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="24290" y="1330" width="280" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="25620" y="1330" width="490" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Water" type="DieZone" x="26460" y="1330" width="1260" height="70">
+   <properties>
+    <property name="CollisionBitmask" value="1"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="5847" y="1153" width="102" height="36.6667">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="14024.3" y="873" width="79.3333" height="34">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="14093.7" y="945.667" width="79.3333" height="34">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="19632.3" y="1084.33" width="79.3333" height="34">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="19767" y="1084.33" width="79.3333" height="34">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="19835" y="1153.67" width="79.3333" height="34">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="19901.7" y="1223" width="79.3333" height="34">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="25233.7" y="1083" width="140.667" height="36.6667">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="25093.7" y="1153.67" width="79.3333" height="34">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="25364.3" y="1153.67" width="79.3333" height="34">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="25435" y="1225.67" width="79.3333" height="34">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="26204.3" y="873.667" width="79.3333" height="34">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="26341.7" y="945.667" width="79.3333" height="34">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+    <property name="Rotation" value="0.00"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="3108" y="969" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="3724" y="493" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="4440" y="971" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="5268" y="515" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="6094" y="833" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="7932" y="455" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="9716" y="1047" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="11534" y="775" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="14640" y="873" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="15278" y="843" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="16874" y="845" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="18488" y="915" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="20226" y="789" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="22460" y="715" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="FlyEnemy" type="Enemy" x="25284" y="845" width="64" height="66">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="bee_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="bee_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="1"/>
+    <property name="GravityEnable" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="bee%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="bee_fly%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="3574" y="1138.5" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="2"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="4966" y="1134.5" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="2"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="5600" y="714.5" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="2"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="9174" y="1138.5" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="2"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="15882" y="1136.5" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="2"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="23104" y="854.5" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="2"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="StandEnemy" type="Enemy" x="4760" y="630" width="70" height="70" rotation="0.296262">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="barnacle_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="barnacle_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="2"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="barnacle%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="barnacle_bite%d.png"/>
+   </properties>
+  </object>
+  <object name="StandEnemy" type="Enemy" x="7280" y="840" width="70" height="70" rotation="0.296262">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="barnacle_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="barnacle_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="2"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="barnacle%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="barnacle_bite%d.png"/>
+   </properties>
+  </object>
+  <object name="StandEnemy" type="Enemy" x="13790" y="1120" width="70" height="70" rotation="0.296262">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="barnacle_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="barnacle_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="2"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="barnacle%d.png"/>
+    <property name="MoveTimeout" value="4"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="barnacle_bite%d.png"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="1660" y="994">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="1708" y="996">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="1940" y="924">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="1972" y="924">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="2782" y="920">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="2844" y="914">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="3354" y="524">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="3414" y="542">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="3484" y="602">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="3570" y="1026">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="3608" y="1022">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="3650" y="1024">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="4514" y="574">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="4578" y="556">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="4664" y="550">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="4758" y="538">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="4846" y="540">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="4932" y="544">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="4882" y="1038">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="5020" y="1040">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="5124" y="1034">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="6506" y="736">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="6572" y="708">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="6638" y="678">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="6716" y="652">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="6802" y="620">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="6354" y="880">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="7102" y="486">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="7176" y="474">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="7252" y="472">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="7346" y="472">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="7430" y="474">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="7492" y="474">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="7550" y="474">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="7602" y="474">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="7664" y="474">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="7762" y="516">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="7814" y="562">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="8248" y="886">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="8374" y="886">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="8308" y="880">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="8440" y="886">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="8988" y="1084">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="9078" y="1080">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="9176" y="1036">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="9214" y="1036">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="9322" y="1074">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="9400" y="1074">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="10816" y="1018">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="10884" y="1010">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="11260" y="800">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="11312" y="796">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="11524" y="966">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="12624" y="744">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="12736" y="734">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="12828" y="734">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="12902" y="736">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="13112" y="1000">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="13200" y="992">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="13198" y="936">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="13114" y="936">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="13548" y="522">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="13614" y="524">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="13722" y="568">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="13780" y="616">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="13844" y="686">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="13890" y="718">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="13950" y="750">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="14018" y="746">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="14102" y="760">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="15168" y="1090">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="15232" y="1092">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="15304" y="1092">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="15376" y="1092">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="15428" y="1084">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="16630" y="892">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="17184" y="896">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="17746" y="1020">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="17796" y="1022">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="17854" y="1014">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="17902" y="1024">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="20052" y="842">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="20110" y="842">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="20176" y="842">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="20616" y="1026">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="20682" y="1026">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="22094" y="1078">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="22168" y="1126">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="22860" y="798">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="22924" y="800">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="22986" y="670">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="23054" y="602">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="23126" y="516">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="23228" y="472">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="23342" y="470">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="23446" y="468">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="23658" y="992">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="23718" y="946">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="24948" y="808">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="25034" y="862">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="25080" y="958">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="25778" y="830">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="25850" y="824">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+  <object name="Item" type="Item" x="25922" y="824">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="4"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="10"/>
+    <property name="ImagePath" value="coin%d.png"/>
+    <property name="Score" value="100"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

@@ -14,7 +14,7 @@ Player::Player(ValueMap properties) : GameObject(properties)
 	animator->addAction("swim", properties["SwimCount"].asInt(), properties["SwimPath"].asString());
 	_entityManager->addComponentObject("EffectComponent", EffectComponent::create());
 	_playerState = PlayerState::Running;
-	_acceleration = 100;
+	_acceleration = DataController::getInstance()->getGameSettings()["PlayerAcceleration"].asInt();
 	_autoControlVelocity = true;
 	_limitVelocity = DataController::getInstance()->getGameSettings()["PlayerVelocityLimit"].asInt();
 	_score = 0;
@@ -63,8 +63,8 @@ void Player::update(float dt)
 				this->setVelocity(this->getVelocity() + _acceleration * dt);
 			else
 				this->setVelocity(_limitVelocity);
-			ani->getPlayingAction()->setSpeed(this->getVelocity() / 30);
 		}
+		ani->getPlayingAction()->setSpeed(this->getVelocity() / 30);
 		break;
 	case Jumping:
 		ani->playActionByName("jump", 1.2f);

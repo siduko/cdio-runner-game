@@ -32,7 +32,7 @@ bool PlayLayer::init()
 Scene* PlayLayer::createScene(string tmxpath, Color4B skyColor /*= Color4B(64, 62, 60, 254)*/)
 {
 	auto scene = Scene::createWithPhysics();
-	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+	//scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
 	scene->getPhysicsWorld()->setGravity(ccp(0, DataController::getInstance()->getGameSettings()["WorldGravity"].asInt()));
 	//auto bglayer = LayerColor::create(Color4B(204, 220,235,254));
 	//bglayer->runAction(RepeatForever::create(Sequence::createWithTwoActions( TintTo::create(10, 64, 62, 60), TintTo::create(120, 204, 220, 235))));
@@ -102,16 +102,20 @@ bool PlayLayer::createMap(string tmxpath)
 {
 	auto parallaxLayer = ParallaxNode::create();
 	auto bg = Node::create();
-	auto bg1 = Sprite::create("blue_desert.png");
+	string bgPath = "bg" + Utils::to_string(Utils::randomValueBetween(1, 8)) + ".png";
+	auto bg1 = Sprite::create(bgPath);
 	auto bg1width = bg1->getContentSize().width;
 
 	map = TMXTiledMap::create(tmxpath);
+	parallaxLayer->addChild(bg, -100, Vec2(0.5f, 0.5f), Vec2::ZERO);
+	parallaxLayer->addChild(map, 1, Vec2(1.0f, 1.0f), Vec2::ZERO);
+	this->addChild(parallaxLayer, -10);
 	//this->addChild(map);
 	auto sizemap = map->getMapSize().width*map->getTileSize().width;
 	float temp = 0;
 	for (int i = 0; i*bg1width < sizemap; i++)
 	{
-		auto bg2 = Sprite::create("blue_desert.png");
+		auto bg2 = Sprite::create(bgPath);
 		bg2->setAnchorPoint(ccp(0, 0));
 		bg2->setPosition(ccp(i*bg1width, 0));
 		bg->addChild(bg2);
@@ -191,9 +195,6 @@ bool PlayLayer::createMap(string tmxpath)
 			this->addChild(node);
 		}
 	}
-	parallaxLayer->addChild(bg, -100, Vec2(0.5f, 0.5f), Vec2::ZERO);
-	parallaxLayer->addChild(map, 1, Vec2(1.0f, 1.0f), Vec2::ZERO);
-	this->addChild(parallaxLayer, -10);
 	return true;
 }
 
@@ -244,18 +245,15 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			this->addEffect("smoke", "Effects/wind%d.png", 11, player->getPosition() - ccp(0, player->getBoundingBox().size.height*0.3),1);
 		}
 		player->setPlayerState(PlayerState::Running);
-		CCLOG("Collision with floor");
 		Vec2 coldir;
 		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt())
 			coldir = Utils::collisedDirection(a->getNode()->getBoundingBox(), b->getNode()->getBoundingBox());
 		else
 			coldir = Utils::collisedDirection(b->getNode()->getBoundingBox(), a->getNode()->getBoundingBox());
-		CCLOG("Collition at: %f %f", coldir.x, coldir.y);
 		if (coldir == ccp(-1, 0) || coldir == ccp(1, 0))
 		{
 			player->setPlayerState(PlayerState::Hurt);
 			player->setActionTimeOut(1.0f);
-			CCLOG("Hurt with floor");
 		}
 		return true;
 	}
@@ -281,7 +279,18 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			enemy = (Enemy*)b->getNode();
 			coldir = Utils::collisedDirection(a->getNode()->getBoundingBox(), b->getNode()->getBoundingBox());
 		}
-		CCLOG("Collition with %d at: %f %f", enemy->getEnemyType(), coldir.x, coldir.y);
+		EffectComponent* effectPlayer = (EffectComponent*)player->getEntityManager()->getComponentObjectByName("EffectComponent");
+		if (effectPlayer->getAlive())
+		{
+			if (effectPlayer->getRunningEffect() == EffectType::UnlimitHealth)
+			{ 
+				this->addEffect("lightningclaw", "Effects/lightningclaw%d.png", 16, enemy->getPosition(), 1);
+				enemy->setResetActionTimeout(true);
+				enemy->setEnemyState(Enemy::EnemyState::Dead);
+				SimpleAudioEngine::getInstance()->playEffect("Audios/lose4.wav");
+				return false;
+			}
+		}
 		if (coldir == ccp(1, 0) || coldir == ccp(-1, 0) || coldir == ccp(0, -1))
 		{
 			enemy->setResetActionTimeout(true);

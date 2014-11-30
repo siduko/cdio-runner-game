@@ -260,7 +260,8 @@ void HubLayer::update(float delta)
 				effectImage->setVisible(true);
 				lbEffectTimer->setVisible(true);
 				effectImage->loadTexture(effectPlayer->getEffectIcon());
-				effectImage->runAction(Sequence::createWithTwoActions(DelayTime::create((int)(effectPlayer->getLifeTime()*0.3)), RepeatForever::create(Blink::create(1, 5))));
+				effectImage->runAction(Sequence::createWithTwoActions(DelayTime::create((int)(effectPlayer->getLifeTime()-2)), RepeatForever::create(Blink::create(1, 1))));
+				
 			}else
 				lbEffectTimer->setText(Utils::count2Timer((int)effectPlayer->getLifeTime()));
 		}else

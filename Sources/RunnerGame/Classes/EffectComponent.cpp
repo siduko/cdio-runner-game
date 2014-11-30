@@ -77,24 +77,37 @@ void EffectComponent::update(float dt)
 
 void EffectComponent::runEffect(EffectType type)
 {
+	Player* _parent = (Player*)this->getParent();
+	GameObject* effect = GameObject::create();
+	effect->setPosition(ccp(_parent->getBoundingBox().size.width / 2, _parent->getBoundingBox().size.height / 2));
+	Animator* ani = Animator::create();
 	switch (type)
 	{
 	case SlowEffect:
 		_effectIcon = "effectIcon25.png";
+		ani->addAction("effect", 16, "Effects/torrentacle%d.png");
 		_lifeTime = 10.0f;
 		break;
 	case FastEffect:
 		_effectIcon = "effectIcon13.png";
+		ani->addAction("effect", 16, "Effects/iceshield%d.png");
 		_lifeTime = 5.0f;
 		break;
 	case UnlimitHealth:
 		_effectIcon = "effectIcon21.png";
+		ani->addAction("effect", 16, "Effects/iceshield%d.png");
 		_lifeTime = 5.0f;
 		break;
 	}
 	CCLOG("%d",_runningEffect);
 	_runningEffect = type;
 	_isAlive = true;
+	effect->getEntityManager()->addComponentObject("Animator", ani);
+	effect->runAction(Sequence::createWithTwoActions(DelayTime::create(_lifeTime), CallFunc::create([effect](){
+		effect->removeFromParentAndCleanup(true);
+	})));
+	_parent->addChild(effect);
+	ani->playActionByName("effect", 1, true);
 }
 
 void EffectComponent::runRandomEffect()

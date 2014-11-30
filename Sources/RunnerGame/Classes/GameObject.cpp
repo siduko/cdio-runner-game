@@ -20,7 +20,7 @@ GameObject::GameObject(ValueMap properties)
 	this->addChild(_entityManager);
 	scheduleUpdate();
 
-	PhysicsBody* spriteBody = PhysicsBody::createBox(Size(properties["width"].asFloat(), properties["height"].asFloat()), PhysicsMaterial(1.0f, 0.0f, 0.0f));
+	PhysicsBody* spriteBody = PhysicsBody::createBox(Size(properties["width"].asFloat(), properties["height"].asFloat()), PHYSICSBODY_MATERIAL_DEFAULT);
 	spriteBody->setDynamic(properties["DynamicBody"].asBool());
 	spriteBody->setGravityEnable(properties["GravityEnable"].asBool());
 	spriteBody->setCollisionBitmask(properties["CollisionBitmask"].asInt());
@@ -28,6 +28,7 @@ GameObject::GameObject(ValueMap properties)
 	spriteBody->setRotationEnable(false);
 	this->setPhysicsBody(spriteBody);
 	this->setPosition(ccp(properties["x"].asFloat() + properties["width"].asFloat() / 2, properties["y"].asFloat() + properties["height"].asFloat() / 2));
+	this->setAnchorPoint(ccp(0,0.5));
 }
 
 
