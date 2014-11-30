@@ -17,12 +17,12 @@
                     <dict>
                         <key>Name</key>
                         <string>1</string>
-                        <key>Score</key>
-                        <integer>0</integer>
-                        <key>StarMax</key>
-                        <integer>3</integer>
                         <key>TmxPath</key>
                         <string>Levels/Natural_Lv1.tmx</string>
+                        <key>StarMax</key>
+                        <integer>3</integer>
+                        <key>Score</key>
+                        <integer>26129</integer>
                         <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
@@ -31,22 +31,50 @@
                     <dict>
                         <key>Name</key>
                         <string>2</string>
-                        <key>Score</key>
-                        <integer>0</integer>
+                        <key>TmxPath</key>
+                        <string>Levels/Natural_Lv2.tmx</string>
                         <key>StarMax</key>
                         <integer>3</integer>
-                        <key>TmxPath</key>
-                        <string>Levels/Natural_Lv10.tmx</string>
+                        <key>Score</key>
+                        <integer>0</integer>
                         <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                     </dict>
                     <dict>
                         <key>Name</key>
                         <string>3</string>
+                        <key>Score</key>
+                        <integer>0</integer>
+                        <key>StarMax</key>
+                        <integer>3</integer>
                         <key>TmxPath</key>
-                        <string>Levels/Natural.tmx</string>
+                        <string>Levels/Natural_Lv3.tmx</string>
+                        <key>Star</key>
+                        <integer>0</integer>
+                        <key>Locked</key>
+                        <integer>0</integer>
+                    </dict>
+                    <dict>
+                        <key>Name</key>
+                        <string>4</string>
+                        <key>Score</key>
+                        <integer>0</integer>
+                        <key>StarMax</key>
+                        <integer>3</integer>
+                        <key>TmxPath</key>
+                        <string>Levels/Natural_Lv4.tmx</string>
+                        <key>Star</key>
+                        <integer>0</integer>
+                        <key>Locked</key>
+                        <integer>0</integer>
+                    </dict>
+                    <dict>
+                        <key>Name</key>
+                        <string>5</string>
+                        <key>TmxPath</key>
+                        <string>Levels/Natural_Lv5.tmx</string>
                         <key>StarMax</key>
                         <integer>3</integer>
                         <key>Score</key>
@@ -54,7 +82,7 @@
                         <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
                     </dict>
                 </array>
             </dict>
@@ -75,13 +103,13 @@
                         <key>StarMax</key>
                         <integer>3</integer>
                         <key>TmxPath</key>
-                        <string>Levels/map1.tmx</string>
+                        <string>Levels/toan1.tmx</string>
                         <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
                         <integer>1</integer>
                     </dict>
-		<dict>
+                    <dict>
                         <key>Name</key>
                         <string>2</string>
                         <key>Score</key>
@@ -89,7 +117,35 @@
                         <key>StarMax</key>
                         <integer>3</integer>
                         <key>TmxPath</key>
-                        <string>Levels/map2.tmx</string>
+                        <string>Levels/toan2.tmx</string>
+                        <key>Star</key>
+                        <integer>0</integer>
+                        <key>Locked</key>
+                        <integer>1</integer>
+                    </dict>
+                    <dict>
+                        <key>Name</key>
+                        <string>3</string>
+                        <key>Score</key>
+                        <integer>0</integer>
+                        <key>StarMax</key>
+                        <integer>3</integer>
+                        <key>TmxPath</key>
+                        <string>Levels/toan3.tmx</string>
+                        <key>Star</key>
+                        <integer>0</integer>
+                        <key>Locked</key>
+                        <integer>1</integer>
+                    </dict>
+                    <dict>
+                        <key>Name</key>
+                        <string>4</string>
+                        <key>Score</key>
+                        <integer>0</integer>
+                        <key>StarMax</key>
+                        <integer>3</integer>
+                        <key>TmxPath</key>
+                        <string>Levels/toan4.tmx</string>
                         <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
@@ -103,7 +159,7 @@
                 <key>ChapterImage</key>
                 <string>Chapters_chapterImage.png</string>
                 <key>Locked</key>
-                <integer>1</integer>
+                <integer>0</integer>
                 <key>Levels</key>
                 <array>
                     <dict>
@@ -118,27 +174,50 @@
                         <key>Star</key>
                         <integer>0</integer>
                         <key>Locked</key>
-                        <integer>1</integer>
+                        <integer>0</integer>
+                    </dict>
+                </array>
+            </dict>
+            <dict>
+                <key>Name</key>
+                <string>4. Testing</string>
+                <key>ChapterImage</key>
+                <string>Chapters_chapterImage.png</string>
+                <key>Locked</key>
+                <integer>0</integer>
+                <key>Levels</key>
+                <array>
+                    <dict>
+                        <key>Name</key>
+                        <string>1</string>
+                        <key>TmxPath</key>
+                        <string>Levels/level1.tmx</string>
+                        <key>StarMax</key>
+                        <integer>3</integer>
+                        <key>Score</key>
+                        <integer>0</integer>
+                        <key>Star</key>
+                        <integer>0</integer>
+                        <key>Locked</key>
+                        <integer>0</integer>
                     </dict>
                 </array>
             </dict>
         </array>
         <key>GameSettings</key>
         <dict>
+            <key>PlayerJump</key>
+            <integer>180000</integer>
             <key>CONTACT_DieZone</key>
             <integer>1</integer>
-            <key>PlayerJump</key>
-            <integer>1800000</integer>
             <key>CONTACT_PLAYER</key>
             <integer>2</integer>
             <key>CONTACT_FLOOR</key>
             <integer>3</integer>
-            <key>PlayerSpeed</key>
-            <integer>700000</integer>
-            <key>CONTACT_ITEM</key>
-            <integer>4</integer>
             <key>CONTACT_EndGame</key>
             <integer>5</integer>
+            <key>CONTACT_ITEM</key>
+            <integer>4</integer>
             <key>CONTACT_EffectItem</key>
             <integer>6</integer>
             <key>CONTACT_BLOCK</key>
@@ -147,21 +226,21 @@
             <integer>8</integer>
             <key>PlayerVelocityLimit</key>
             <integer>300</integer>
-			<key>PlayerAcceleration</key>
+            <key>PlayerAcceleration</key>
             <integer>150</integer>
-			<key>PlayerHealthMax</key>
+            <key>PlayerHealthMax</key>
             <integer>5</integer>
             <key>TargetDetectedDistance</key>
             <integer>100</integer>
             <key>JumpLimit</key>
-            <integer>2000000</integer>
+            <integer>200000</integer>
             <key>JumpStep</key>
             <integer>10000</integer>
             <key>WorldGravity</key>
             <integer>-500</integer>
             <key>PlayerHurt</key>
-			<integer>-80</integer>
-			<key>GameFont</key>
+            <integer>-80</integer>
+            <key>GameFont</key>
             <string>fonts/Carter One regular.ttf</string>
         </dict>
     </dict>
