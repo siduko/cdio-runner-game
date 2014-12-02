@@ -18,7 +18,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLView::create("Egg Catcher");
+        glview = GLView::create("Alpha Runner");
         director->setOpenGLView(glview);
     }
 
