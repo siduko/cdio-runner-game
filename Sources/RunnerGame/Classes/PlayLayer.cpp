@@ -21,7 +21,7 @@ bool PlayLayer::init()
 	UserDefault::getInstance()->setIntegerForKey("LevelPred", UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
 	UserDefault::getInstance()->setIntegerForKey("Score", 0);
 	UserDefault::getInstance()->setIntegerForKey("HighScore", DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"))["Score"].asInt());
-
+	UserDefault::getInstance()->setBoolForKey("LevelCompleted", false);
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audios/playbg.wav", true);
 
 	scheduleUpdate();
@@ -263,7 +263,6 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt()){
 		UserDefault::getInstance()->setIntegerForKey("Score", player->getScore());
 		UserDefault::getInstance()->setIntegerForKey("Star", player->getScore());
-		Director::getInstance()->replaceScene(ResultLayer::createScene());
 		return false;
 	}
 
@@ -322,11 +321,12 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 
 		int selectedLevel = UserDefault::getInstance()->getIntegerForKey("LevelSelected");
 		int selectedChapter = UserDefault::getInstance()->getIntegerForKey("ChapterSelected");
-
+		UserDefault::getInstance()->setBoolForKey("LevelCompleted", true);
 		if (level["Score"].asInt() < player->getScore()){
 			level["Score"] = player->getScore();
 			//CCLOG("Score %d", level)["Score"].asInt());
 			DataController::getInstance()->setLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"), level);
+			UserDefault::getInstance()->setIntegerForKey("HighScore", player->getScore());
 		}
 
 		if (selectedLevel + 1 < DataController::getInstance()->getLevelsInChapterByIndex(selectedChapter).size()){
@@ -348,6 +348,8 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			}
 		}
 		DataController::getInstance()->saveGameData();
+		//UserDefault::getInstance()->setIntegerForKey("HighScore", DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"))["Score"].asInt());
+		Director::getInstance()->replaceScene(ResultLayer::createScene());
 		Director::getInstance()->replaceScene(ResultLayer::createScene());
 		return false;
 	}

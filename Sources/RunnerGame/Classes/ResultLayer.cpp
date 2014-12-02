@@ -34,28 +34,29 @@ bool ResultLayer::init()
 	resultLabel->setPosition(ccp(resultPanel->getContentSize().width*0.5f, resultPanel->getContentSize().height));
 	resultPanel->addChild(resultLabel);
 
-	auto btnNext = Button::create("Icons/Forward_btn.png", "Icons/Forward_btn.png", "Icons/Forward_btn.png");
-	btnNext->setPosition(ccp(resultPanel->getContentSize().width*0.75f,0));
-	btnNext->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
-	{
-		ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
-		switch (type)
+	if (UserDefault::getInstance()->getBoolForKey("LevelCompleted")){
+		auto btnNext = Button::create("Icons/Forward_btn.png", "Icons/Forward_btn.png", "Icons/Forward_btn.png");
+		btnNext->setPosition(ccp(resultPanel->getContentSize().width*0.75f, 0));
+		btnNext->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 		{
-		case cocos2d::ui::Widget::TouchEventType::BEGAN:
-			Director::getInstance()->replaceScene(PlayLayer::createScene(level["TmxPath"].asString()));
-			break;
-		case cocos2d::ui::Widget::TouchEventType::MOVED:
-			break;
-		case cocos2d::ui::Widget::TouchEventType::ENDED:
-			break;
-		case cocos2d::ui::Widget::TouchEventType::CANCELED:
-			break;
-		default:
-			break;
-		}
-	});
-	resultPanel->addChild(btnNext);
-
+			ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
+			switch (type)
+			{
+			case cocos2d::ui::Widget::TouchEventType::BEGAN:
+				Director::getInstance()->replaceScene(PlayLayer::createScene(level["TmxPath"].asString()));
+				break;
+			case cocos2d::ui::Widget::TouchEventType::MOVED:
+				break;
+			case cocos2d::ui::Widget::TouchEventType::ENDED:
+				break;
+			case cocos2d::ui::Widget::TouchEventType::CANCELED:
+				break;
+			default:
+				break;
+			}
+		});
+		resultPanel->addChild(btnNext);
+	}
 	auto btnReturnLevel = Button::create("Icons/Menu_icon.png", "Icons/Menu_icon.png", "Icons/Menu_icon.png");
 	btnReturnLevel->setPosition(ccp(resultPanel->getContentSize().width*0.25f, 0));
 	btnReturnLevel->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
@@ -78,7 +79,7 @@ bool ResultLayer::init()
 	resultPanel->addChild(btnReturnLevel);
 
 	auto btnReplay = Button::create("Icons/Reload_icon.png", "Icons/Reload_icon.png", "Icons/Reload_icon.png");
-	btnReplay->setPosition(ccp(resultPanel->getContentSize().width*0.5f,0));
+	btnReplay->setPosition(ccp(resultPanel->getContentSize().width*0.5f, 0));
 	btnReplay->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
 		switch (type)

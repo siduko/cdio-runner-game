@@ -108,7 +108,7 @@ bool HubLayer::init()
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
-			this->getPlayer()->unscheduleUpdate();
+			this->getPlayer()->scheduleUpdate();
 			((Button*)this->getChildByName("btnMenu"))->setEnabled(true);
 			pausePanel->runAction(Spawn::createWithTwoActions(FadeOut::create(0.5), EaseBounceOut::create(MoveBy::create(0.5, ccp(0, -500)))));
 			((Layer*)this->getParent())->resume();

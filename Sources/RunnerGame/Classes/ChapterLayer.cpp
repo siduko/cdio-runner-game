@@ -87,7 +87,7 @@ bool ChapterLayer::init()
 		layout->setTouchEnabled(true);
 		layout->addTouchEventListener([i](Ref *pSender, ui::Layout::TouchEventType type)
 		{
-			ValueMap chapter = DataController::getInstance()->getChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"));
+			ValueMap chapter = DataController::getInstance()->getChapterByIndex(i);
 			switch (type)
 			{
 			case cocos2d::ui::Widget::TouchEventType::BEGAN:
