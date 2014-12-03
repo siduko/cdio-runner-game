@@ -29,7 +29,7 @@ bool SplashLayer::init()
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Audios/Mishief Stroll_bg.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("Audios/jump1.wav");
 	SimpleAudioEngine::getInstance()->preloadEffect("Audios/lose4.wav");
-	SimpleAudioEngine::getInstance()->preloadEffect("Audios/pickup1.wav");
+	SimpleAudioEngine::getInstance()->preloadEffect("Audios/coin10.wav");
 
 	logo->runAction(Sequence::create(FadeOut::create(2), CallFunc::create([](){
 		Director::getInstance()->replaceScene(MenuLayer::createScene());

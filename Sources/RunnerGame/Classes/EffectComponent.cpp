@@ -86,17 +86,17 @@ void EffectComponent::runEffect(EffectType type)
 	case SlowEffect:
 		_effectIcon = "effectIcon25.png";
 		ani->addAction("effect", 16, "Effects/torrentacle%d.png");
-		_lifeTime = 10.0f;
+		_lifeTime = 5.0f;
 		break;
 	case FastEffect:
 		_effectIcon = "effectIcon13.png";
-		ani->addAction("effect", 16, "Effects/iceshield%d.png");
-		_lifeTime = 5.0f;
+		ani->addAction("effect", 0, "Effects/iceshield%d.png");
+		_lifeTime = 10.0f;
 		break;
 	case UnlimitHealth:
 		_effectIcon = "effectIcon21.png";
 		ani->addAction("effect", 16, "Effects/iceshield%d.png");
-		_lifeTime = 5.0f;
+		_lifeTime = 7.0f;
 		break;
 	}
 	CCLOG("%d",_runningEffect);

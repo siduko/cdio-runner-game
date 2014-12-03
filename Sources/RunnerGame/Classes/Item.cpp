@@ -3,6 +3,7 @@
 
 Item::Item(ValueMap properties) : GameObject(properties)
 {
+	//_score = atoi(properties["Score"].asString().c_str());
 	_score = properties["Score"].asInt();
 	_entityManager->addComponentObject("Animator", Animator::create());
 	Animator* animator = (Animator*)this->getEntityManager()->getComponentObjectByName("Animator");

@@ -22,6 +22,9 @@ bool PlayLayer::init()
 	UserDefault::getInstance()->setIntegerForKey("Score", 0);
 	UserDefault::getInstance()->setIntegerForKey("HighScore", DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"))["Score"].asInt());
 	UserDefault::getInstance()->setBoolForKey("LevelCompleted", false);
+	int k = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"))["Score"].asInt();
+	if (k>0) 
+		UserDefault::getInstance()->setBoolForKey("LevelCompleted", true);
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audios/playbg.wav", true);
 
 	scheduleUpdate();
@@ -214,7 +217,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			this->addEffect("blast", "Effects/blast%d.png", 9, a->getNode()->getPosition(), 1);
 			a->getNode()->removeFromParentAndCleanup(true);
 		}
-		SimpleAudioEngine::getInstance()->playEffect("Audios/pickup1.wav");
+		SimpleAudioEngine::getInstance()->playEffect("Audios/coin10.wav");
 		return false;
 	}
 
@@ -263,6 +266,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_DieZone"].asInt()){
 		UserDefault::getInstance()->setIntegerForKey("Score", player->getScore());
 		UserDefault::getInstance()->setIntegerForKey("Star", player->getScore());
+		Director::getInstance()->replaceScene(ResultLayer::createScene());
 		return false;
 	}
 
@@ -318,7 +322,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 		UserDefault::getInstance()->setIntegerForKey("Score", player->getScore());
 		UserDefault::getInstance()->setIntegerForKey("Star", player->getScore());
 		ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
-
+		
 		int selectedLevel = UserDefault::getInstance()->getIntegerForKey("LevelSelected");
 		int selectedChapter = UserDefault::getInstance()->getIntegerForKey("ChapterSelected");
 		UserDefault::getInstance()->setBoolForKey("LevelCompleted", true);
@@ -349,7 +353,6 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 		}
 		DataController::getInstance()->saveGameData();
 		//UserDefault::getInstance()->setIntegerForKey("HighScore", DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"))["Score"].asInt());
-		Director::getInstance()->replaceScene(ResultLayer::createScene());
 		Director::getInstance()->replaceScene(ResultLayer::createScene());
 		return false;
 	}
@@ -392,7 +395,7 @@ HubLayer* PlayLayer::getHubLayer()
 void PlayLayer::update(float dt)
 {
 	this->setViewPointCenter(player->getPosition());
-	if (player->getPlayerState() == PlayerState::Running && abs(player->getVelocity())>200)
+	if (player->getPlayerState() == PlayerState::Running && abs(player->getVelocity())>300)
 		this->addEffect("smoke", "Effects/smokeEffect%d.png", 11, player->getPosition() - ccp(0, player->getBoundingBox().size.height*0.5), dt*abs( player->getVelocity()) / 20);
 }
 

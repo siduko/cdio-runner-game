@@ -43,7 +43,8 @@ bool ResultLayer::init()
 			switch (type)
 			{
 			case cocos2d::ui::Widget::TouchEventType::BEGAN:
-				Director::getInstance()->replaceScene(PlayLayer::createScene(level["TmxPath"].asString()));
+				Director::getInstance()->replaceScene(LoadingLayer::createScene());
+				//Director::getInstance()->replaceScene(PlayLayer::createScene(level["TmxPath"].asString()));
 				break;
 			case cocos2d::ui::Widget::TouchEventType::MOVED:
 				break;
@@ -85,6 +86,8 @@ bool ResultLayer::init()
 		switch (type)
 		{
 		case cocos2d::ui::Widget::TouchEventType::BEGAN:
+			UserDefault::getInstance()->setIntegerForKey("ChapterSelected", UserDefault::getInstance()->getIntegerForKey("ChapterPred"));
+			UserDefault::getInstance()->setIntegerForKey("LevelSelected", UserDefault::getInstance()->getIntegerForKey("LevelPred"));
 			Director::getInstance()->replaceScene(LoadingLayer::createScene());
 			break;
 		case cocos2d::ui::Widget::TouchEventType::MOVED:

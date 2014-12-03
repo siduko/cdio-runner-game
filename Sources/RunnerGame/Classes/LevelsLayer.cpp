@@ -52,7 +52,7 @@ bool LevelsLayer::init()
 	this->addChild(lbLevelSelect);
 
 	ValueVector levels = DataController::getInstance()->getLevelsInChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"));
-	float lastPos = wSize.width / 2;
+	float lastPos = wSize.width / 2-100;
 	float padding = 0.0f;
 	for (int i = 0; i < levels.size(); i++)
 	{
