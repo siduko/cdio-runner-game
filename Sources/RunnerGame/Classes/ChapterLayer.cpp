@@ -22,14 +22,13 @@ bool ChapterLayer::init()
 
 	auto bg = Sprite::create("Icons/background.png");
 	bg->setPosition(ccp(wSize.width / 2, wSize.height / 2));
-	this->addChild(bg);
+	this->addChild(bg, 1);
 
 	auto panelBorder = Sprite::create("Icons/BaseNewBorder.png");
 	panelBorder->setPosition(ccp(wSize.width / 2, wSize.height / 2));
 
 	auto chapterSelected = Sprite::create("Icons/ChapterSelect.png");
 	chapterSelected->setPosition(ccp(wSize.width*0.5f, wSize.height*0.85f));
-
 	ScrollView* scrollView = ScrollView::create();
 	scrollView->setDirection(ScrollView::Direction::HORIZONTAL);
 	scrollView->setContentSize(Size(615, 369));
@@ -38,9 +37,9 @@ bool ChapterLayer::init()
 	scrollView->setPosition(ccp(wSize.width / 2, wSize.height / 2));
 	scrollView->setAnchorPoint(ccp(0.5, 0.5));
 
-	this->addChild(scrollView);
-	this->addChild(panelBorder);
-	this->addChild(chapterSelected);
+	this->addChild(scrollView, 2);
+	this->addChild(panelBorder, 3);
+	this->addChild(chapterSelected, 3);
 
 	ValueVector chapters = DataController::getInstance()->getChapters();
 	float lastPos = scrollView->getContentSize().width / 2;

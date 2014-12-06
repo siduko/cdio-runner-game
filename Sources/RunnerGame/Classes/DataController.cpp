@@ -1,9 +1,13 @@
 #include "DataController.h"
-
+#include "fstream"
 
 DataController::DataController()
 {
-	string path = FileUtils::getInstance()->fullPathForFilename("Levels/GameData.plist");
+	FileUtils::getInstance()->getWritablePath();
+	string path = FileUtils::getInstance()->getWritablePath() + "GameData.plist";
+	std::ifstream f(path);
+	if(!f)
+		path = FileUtils::getInstance()->fullPathForFilename("Levels/GameData.plist");
 	_gameData = FileUtils::getInstance()->getValueMapFromFile(path);
 	_chapters = _gameData["Chapters"].asValueVector();
 }
@@ -86,7 +90,9 @@ cocos2d::ValueMap DataController::getLevelByChapterIndex(int chapterIndex, int l
 
 void DataController::saveGameData()
 {
-	string path = FileUtils::getInstance()->fullPathForFilename("Levels/GameData.plist");
+
+	//string path = FileUtils::getInstance()->fullPathForFilename(FileUtils::getInstance()->getWritablePath() + "Levels/GameData.plist");
+	string path = FileUtils::getInstance()->getWritablePath() + "GameData.plist";
 	FileUtils::getInstance()->writeToFile(_gameData, path);
 }
 
