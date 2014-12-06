@@ -1,5 +1,5 @@
 #include "ResultLayer.h"
-
+#include "AdmobHelper.h"
 
 
 ResultLayer::ResultLayer()
@@ -78,7 +78,24 @@ bool ResultLayer::init()
 		}
 	});
 	resultPanel->addChild(btnReturnLevel);
+	//admod
+		auto listener = EventListenerTouchOneByOne::create();
 
+		listener->setSwallowTouches(true);
+
+		listener->onTouchBegan = [](Touch* touch, Event* event)
+		{
+			if (AdmobHelper::isAdShowing)
+				AdmobHelper::hideAd();
+			else
+				AdmobHelper::showAd();
+
+			return true;
+
+		};
+
+		_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+		//end admod
 	auto btnReplay = Button::create("Icons/Reload_icon.png", "Icons/Reload_icon.png", "Icons/Reload_icon.png");
 	btnReplay->setPosition(ccp(resultPanel->getContentSize().width*0.5f, 0));
 	btnReplay->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
@@ -121,6 +138,7 @@ bool ResultLayer::init()
 	lbHighScore->setPosition(ccp(resultPanel->getContentSize().width*0.5f, resultPanel->getContentSize().height*0.3f));
 	lbHighScore->setColor(Color3B(215, 170, 116));
 	resultPanel->addChild(lbHighScore);
+
 
 	return true;
 }

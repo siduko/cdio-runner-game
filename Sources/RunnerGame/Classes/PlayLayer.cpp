@@ -304,6 +304,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			player->setHealth(player->getHealth() - 1);
 			if (player->getHealth() <= 0)
 			{
+				UserDefault::getInstance()->setIntegerForKey("Score", player->getScore());
 				Director::getInstance()->replaceScene(ResultLayer::createScene());
 			}
 		}

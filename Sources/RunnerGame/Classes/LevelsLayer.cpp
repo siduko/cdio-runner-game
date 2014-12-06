@@ -120,7 +120,7 @@ bool LevelsLayer::init()
 	scrollView->setInnerContainerSize(Size(lastPos, wSize.height));
 
 	auto btnBack = Button::create("Icons/Arrow_icon.png", "Icons/Arrow_icon.png", "Icons/Arrow_icon_disabled.png");
-	btnBack->setPosition(ccp(wSize.width*0.5f, wSize.height*0.1f));
+	btnBack->setPosition(ccp(wSize.width*0.1f, wSize.height*0.1f));
 	btnBack->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 	{
 		switch (type)

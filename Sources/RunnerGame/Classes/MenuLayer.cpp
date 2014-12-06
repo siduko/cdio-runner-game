@@ -1,7 +1,6 @@
 #include "MenuLayer.h"
 #include "AboutLayer.h"
 
-
 bool MenuLayer::init()
 {
 	if (!Layer::init())
@@ -60,7 +59,7 @@ bool MenuLayer::init()
 
 	auto btnQuit = Button::create("Icons/Shape_1.png", "Icons/Shape_1.png", "Icons/Shape_1_disabled.png");
 	btnQuit->setName("btnQuit");
-	btnQuit->setPosition(ccp(wSize.width*0.9f, wSize.height*0.9f));
+	btnQuit->setPosition(ccp(wSize.width*0.9f, wSize.height*0.85f));
 	btnQuit->addTouchEventListener([this](Ref *pSender, ui::Button::TouchEventType type)
 	{
 		switch (type)
@@ -99,7 +98,14 @@ bool MenuLayer::init()
 	btnOk->setPosition(ccp(exitPanel->getContentSize().width*0.25, 0));
 	exitPanel->addChild(btnOk);
 	btnOk->addTouchEventListener([this](Ref *pSender, ui::Button::TouchEventType type){
-		Director::getInstance()->end();
+		#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
+				MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.", "Alert");
+		#else
+			Director::getInstance()->end();
+		#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+				exit(0);
+		#endif
+		#endif
 	});
 
 	auto btnCancel = Button::create("Icons/Shape_1.png", "Icons/Shape_1.png", "Icons/Shape_1_disabled.png");
@@ -126,6 +132,7 @@ bool MenuLayer::init()
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(keyboardListener, this);
 	
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audios/Mishief Stroll_bg.wav", true);
+
 	return true;
 }
 

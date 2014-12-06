@@ -18,18 +18,18 @@ bool HubLayer::init()
 	auto wSize = Director::getInstance()->getWinSize();
 
 	auto coinIcon = ImageView::create("Icons/playerlayer_0000s_0005_hudCoin.png");
-	coinIcon->setPosition(ccp(wSize.width*0.1f, wSize.height*0.95f));
+	coinIcon->setPosition(ccp(wSize.width*0.1f, wSize.height*0.85f));
 	this->addChild(coinIcon);
 	lbScore = Text::create("0", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 30);
-	lbScore->setPosition(ccp(wSize.width*0.2f, wSize.height*0.95f));
+	lbScore->setPosition(ccp(wSize.width*0.2f, wSize.height*0.85f));
 	lbScore->setColor(Color3B(241, 196, 15));
 	this->addChild(lbScore);
 
 	auto healthIcon = ImageView::create("Icons/playerlayer_0000s_0001_heart_full.png");
-	healthIcon->setPosition(ccp(wSize.width*0.4f, wSize.height*0.95f));
+	healthIcon->setPosition(ccp(wSize.width*0.4f, wSize.height*0.85f));
 	this->addChild(healthIcon);
 	lbHealth = Text::create("0", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 30);
-	lbHealth->setPosition(ccp(wSize.width*0.5f, wSize.height*0.95f));
+	lbHealth->setPosition(ccp(wSize.width*0.5f, wSize.height*0.85f));
 	lbHealth->setColor(Color3B(231, 76, 60));
 	this->addChild(lbHealth);
 
@@ -48,8 +48,8 @@ bool HubLayer::init()
 	angleJump->setPosition(ccp(meterBar->getContentSize().width*0.12f, meterBar->getContentSize().height*0.42f));
 	powerJump->setPosition(ccp(meterBar->getContentSize().width*0.25f, meterBar->getContentSize().height*0.42f));
 	lbVelocity->setPosition(ccp(meterBar->getContentSize().width*0.4f, meterBar->getContentSize().height*0.8f));
-	effectImage->setPosition(ccp(wSize.width*0.7f, wSize.height*0.93f));
-	lbEffectTimer->setPosition(ccp(wSize.width*0.7f, wSize.height*0.85f));
+	effectImage->setPosition(ccp(wSize.width*0.7f, wSize.height*0.85f));
+	lbEffectTimer->setPosition(ccp(wSize.width*0.7f, wSize.height*0.75f));
 	lbEffectTimer->setColor(Color3B(52, 73, 94));
 	powerJump->setAnchorPoint(ccp(0, 0.5f));
 	angleJump->setAnchorPoint(ccp(0,0.5));
@@ -63,7 +63,7 @@ bool HubLayer::init()
 
 	auto btnMenu = Button::create("Icons/Pause_icon.png", "Icons/Pause_icon.png", "Icons/Pause_icon_disabled.png");
 	btnMenu->setName("btnMenu");
-	btnMenu->setPosition(ccp(wSize.width*0.9f, wSize.height*0.9f));
+	btnMenu->setPosition(ccp(wSize.width*0.9f, wSize.height*0.85f));
 	btnMenu->addTouchEventListener([this](Ref *pSender, ui::Button::TouchEventType type)
 	{
 		switch (type)

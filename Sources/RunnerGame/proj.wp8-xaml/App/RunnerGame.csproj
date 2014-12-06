@@ -19,7 +19,7 @@
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>AlphaRunner_Debug_x86.xap</XapFilename>
+    <XapFilename>AlphaRunner_Release_x86.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
     <SilverlightAppEntry>PhoneDirect3DXamlAppInterop.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
