@@ -45,6 +45,24 @@ bool ResultLayer::init()
 		btnNext->setPosition(ccp(resultPanel->getContentSize().width*0.75f, 0));
 		btnNext->addTouchEventListener([](Ref *pSender, ui::Button::TouchEventType type)
 		{
+
+			if(UserDefault::getInstance()->getIntegerForKey("ChapterPred") == UserDefault::getInstance()->getIntegerForKey("ChapterSelected") && UserDefault::getInstance()->getIntegerForKey("LevelPred") == UserDefault::getInstance()->getIntegerForKey("LevelSelected")){
+
+				if (UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1 < DataController::getInstance()->getLevelsInChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected")).size()){
+					ValueMap nextLevel = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
+					UserDefault::getInstance()->setIntegerForKey("LevelSelected", UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
+				}
+				else
+				{
+					if (UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1 < DataController::getInstance()->getChapters().size()){
+						ValueMap nextChapter = DataController::getInstance()->getChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1);
+						ValueMap nextLevel = nextChapter["Levels"].asValueVector()[0].asValueMap();
+						UserDefault::getInstance()->setIntegerForKey("ChapterSelected", UserDefault::getInstance()->getIntegerForKey("ChapterSelected") + 1);
+						UserDefault::getInstance()->setIntegerForKey("LevelSelected", UserDefault::getInstance()->getIntegerForKey("LevelSelected") + 1);
+					}
+				}
+			}
+
 			ValueMap level = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
 			switch (type)
 			{
