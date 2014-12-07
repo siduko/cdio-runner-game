@@ -292,12 +292,13 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 		EffectComponent* effectPlayer = (EffectComponent*)player->getEntityManager()->getComponentObjectByName("EffectComponent");
 		if (effectPlayer->getAlive())
 		{
-			if (effectPlayer->getRunningEffect() == EffectType::UnlimitHealth)
+			if (effectPlayer->getRunningEffect() == EffectType::UnlimitHealth || effectPlayer->getRunningEffect() == EffectType::FastEffect)
 			{ 
 				this->addEffect("lightningclaw", "Effects/lightningclaw%d.png", 16, enemy->getPosition(), 1);
 				enemy->setResetActionTimeout(true);
 				enemy->setEnemyState(Enemy::EnemyState::Dead);
 				SimpleAudioEngine::getInstance()->playEffect("Audios/lose4.wav");
+				this->getHubLayer()->addScoreChangeEffect(500);
 				return false;
 			}
 		}
@@ -407,7 +408,10 @@ void PlayLayer::update(float dt)
 {
 	this->setViewPointCenter(player->getPosition());
 	if (player->getPlayerState() == PlayerState::Running && abs(player->getVelocity())>300)
-		this->addEffect("smoke", "Effects/smokeEffect%d.png", 11, player->getPosition() - ccp(0, player->getBoundingBox().size.height*0.5), dt*abs( player->getVelocity()) / 20);
+		if (player->getPlayerState() == PlayerState::Running && abs(player->getVelocity())>350)
+			this->addEffect("airblast", "Effects/air-blast%d.png", 10, player->getPosition() - ccp(0, player->getBoundingBox().size.height*0.5), dt*abs( player->getVelocity()) / 20);
+		else
+			this->addEffect("smoke", "Effects/smokeEffect%d.png", 11, player->getPosition() - ccp(0, player->getBoundingBox().size.height*0.5), dt*abs( player->getVelocity()) / 20);
 }
 
 void PlayLayer::addEffect(string name, string imagePath, int imageCount, Point pos, float timeRemove)

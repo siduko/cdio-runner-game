@@ -30,6 +30,8 @@ bool ResultLayer::init()
 	resultPanel->setAnchorPoint(ccp(0.5, 0.5));
 	this->addChild(resultPanel);
 
+
+
 	auto resultLabel = ImageView::create("Icons/Level_Failed.png");
 	resultLabel->setPosition(ccp(resultPanel->getContentSize().width*0.5f, resultPanel->getContentSize().height*0.9f));
 	resultPanel->addChild(resultLabel);
@@ -143,6 +145,12 @@ bool ResultLayer::init()
 	lbHighScore->setColor(Color3B(215, 170, 116));
 	resultPanel->addChild(lbHighScore);
 
+	string strLevel = Utils::to_string(UserDefault::getInstance()->getIntegerForKey("ChapterPred")+1) + "-" + Utils::to_string(UserDefault::getInstance()->getIntegerForKey("LevelPred")+1);
+	auto lbCurrentLevel = Text::create(strLevel, DataController::getInstance()->getGameSettings()["GameFont"].asString(), 30);
+	lbCurrentLevel->setColor(Color3B(215, 170, 116));
+	lbCurrentLevel->setTextHorizontalAlignment(TextHAlignment::CENTER);
+	lbCurrentLevel->setPosition(ccp(resultPanel->getContentSize().width*0.5f, resultPanel->getContentSize().height*0.78f));
+	resultPanel->addChild(lbCurrentLevel);
 
 	return true;
 }
