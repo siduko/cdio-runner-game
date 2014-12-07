@@ -15,6 +15,7 @@ public:
 	LevelsLayer();
 	~LevelsLayer();
 	static Scene* createScene();
+	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
 	virtual bool init();
 	CREATE_FUNC(LevelsLayer);
 };

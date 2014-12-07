@@ -22,20 +22,20 @@ bool LevelsLayer::init()
 {
 	if (!Layer::init())
 		return false;
-
+	this->setKeyboardEnabled(true);
 	auto wsize = Director::getInstance()->getWinSize();
 
 	stringstream ss;
 	string temp;
 	auto wSize = Director::getInstance()->getWinSize();
 
-	auto bg = Sprite::create("Icons/background.png");
-	bg->setPosition(ccp(wSize.width / 2, wSize.height / 2));
-	this->addChild(bg);
+	//auto bg = Sprite::create("Icons/background.png");
+	//bg->setPosition(ccp(wSize.width / 2, wSize.height / 2));
+	//this->addChild(bg);
 
 
 	auto lbLevelSelect = ImageView::create("Icons/Level_Select.png");
-	lbLevelSelect->setPosition(ccp(wSize.width*0.5f, wSize.height*0.85f));
+	lbLevelSelect->setPosition(ccp(wSize.width*0.5f, wSize.height*0.8f));
 
 	auto panelBorder = Sprite::create("Icons/BaseNewBorder.png");
 	panelBorder->setPosition(ccp(wSize.width / 2, wSize.height / 2));
@@ -44,11 +44,11 @@ bool LevelsLayer::init()
 	scrollView->setDirection(ScrollView::Direction::HORIZONTAL);
 	scrollView->setContentSize(Size(624,369));
 	scrollView->setClippingEnabled(true);
-	scrollView->setBackGroundImage("Icons/BaseNew.png");
+	scrollView->setBackGroundImage("Icons/background.png");
 	scrollView->setPosition(ccp(wSize.width / 2, wSize.height / 2));
 	scrollView->setAnchorPoint(ccp(0.5, 0.5));
 	this->addChild(scrollView);
-	this->addChild(panelBorder);
+	//this->addChild(panelBorder);
 	this->addChild(lbLevelSelect);
 
 	ValueVector levels = DataController::getInstance()->getLevelsInChapterByIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"));
@@ -97,15 +97,16 @@ bool LevelsLayer::init()
 			switch (type)
 			{
 			case cocos2d::ui::Widget::TouchEventType::BEGAN:
-				UserDefault::getInstance()->setIntegerForKey("LevelSelected", i); 
-				selectedLevel = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
-				if (selectedLevel["Locked"].asInt() == 0){
-					Director::getInstance()->replaceScene(LoadingLayer::createScene());
-				}
+
 				break;
 			case cocos2d::ui::Widget::TouchEventType::MOVED:
 				break;
 			case cocos2d::ui::Widget::TouchEventType::ENDED:
+				UserDefault::getInstance()->setIntegerForKey("LevelSelected", i);
+								selectedLevel = DataController::getInstance()->getLevelByChapterIndex(UserDefault::getInstance()->getIntegerForKey("ChapterSelected"), UserDefault::getInstance()->getIntegerForKey("LevelSelected"));
+								if (selectedLevel["Locked"].asInt() == 0){
+									Director::getInstance()->replaceScene(LoadingLayer::createScene());
+								}
 				break;
 			case cocos2d::ui::Widget::TouchEventType::CANCELED:
 				break;
@@ -141,4 +142,13 @@ bool LevelsLayer::init()
 	this->addChild(btnBack);
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audios/Mishief Stroll_bg.wav", true);
 	return true;
+}
+void LevelsLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event *event)
+{
+    if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) {
+    	Director::getInstance()->replaceScene(ChapterLayer::createScene());
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_MENU)
+    {
+    }
 }

@@ -32,6 +32,9 @@ bool PlayLayer::init()
 	return true;
 }
 
+
+
+
 Scene* PlayLayer::createScene(string tmxpath, Color4B skyColor /*= Color4B(64, 62, 60, 254)*/)
 {
 	auto scene = Scene::createWithPhysics();
@@ -207,14 +210,16 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 	auto b = contact.getShapeB()->getBody();
 
 	if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ITEM"].asInt() || b->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt() && a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_ITEM"].asInt()){
-		player->setScore(player->getScore() + ((Item*)b->getNode())->getScore());
+
 		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt()){
 			this->addEffect("blast", "Effects/blast%d.png", 9, b->getNode()->getPosition(), 1);
+			player->setScore(player->getScore() + ((Item*)b->getNode())->getScore());
 			b->getNode()->removeFromParentAndCleanup(true);
 		}
 		else
 		{
 			this->addEffect("blast", "Effects/blast%d.png", 9, a->getNode()->getPosition(), 1);
+			player->setScore(player->getScore() + ((Item*)a->getNode())->getScore());
 			a->getNode()->removeFromParentAndCleanup(true);
 		}
 		SimpleAudioEngine::getInstance()->playEffect("Audios/coin10.wav");
@@ -314,6 +319,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			enemy->setResetActionTimeout(true);
 			enemy->setEnemyState(Enemy::EnemyState::Dead);
 			SimpleAudioEngine::getInstance()->playEffect("Audios/lose4.wav");
+			player->setScore(player->getScore() + 500);
 		}
 		return false;
 	}

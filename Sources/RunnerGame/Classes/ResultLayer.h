@@ -20,6 +20,7 @@ public:
 	Label *lbLevelInfo, *lbScore, *lbStar;
 	static Scene* createScene();
 	virtual bool init();
+	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
 	ResultLayer();
 	~ResultLayer();
 	CREATE_FUNC(ResultLayer);

@@ -242,6 +242,10 @@ bool HubLayer::init()
 	return true;
 }
 
+
+
+
+
 void HubLayer::setScore(string value)
 {
 	lbScore->setString(value);

@@ -14,6 +14,7 @@ public:
 	ChapterLayer();
 	~ChapterLayer();
 	virtual bool init();
+	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
 	CREATE_FUNC(ChapterLayer);
 	static Scene* createScene();
 };

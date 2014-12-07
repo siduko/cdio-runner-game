@@ -5,7 +5,7 @@ bool MenuLayer::init()
 {
 	if (!Layer::init())
 		return false;
-
+	this->setKeypadEnabled(true);
 	auto wSize = Director::getInstance()->getWinSize();
 
 	auto bg = Sprite::create("bgmenu.png");
@@ -59,7 +59,7 @@ bool MenuLayer::init()
 
 	auto btnQuit = Button::create("Icons/Shape_1.png", "Icons/Shape_1.png", "Icons/Shape_1_disabled.png");
 	btnQuit->setName("btnQuit");
-	btnQuit->setPosition(ccp(wSize.width*0.9f, wSize.height*0.85f));
+	btnQuit->setPosition(ccp(wSize.width*0.9f, wSize.height*0.8f));
 	btnQuit->addTouchEventListener([this](Ref *pSender, ui::Button::TouchEventType type)
 	{
 		switch (type)
@@ -135,7 +135,18 @@ bool MenuLayer::init()
 
 	return true;
 }
-
+void MenuLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event *event)
+{
+    if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) {
+    	((Button*)this->getChildByName("BtnPlay"))->setEnabled(false);
+		((Button*)this->getChildByName("btnQuit"))->setEnabled(false);
+		(Layout*) this->getChildByName("ExitPanel")->runAction(FadeIn::create(0.5));
+}
+    else if(keyCode == EventKeyboard::KeyCode::KEY_MENU)
+    {
+    	Director::getInstance()->replaceScene(AboutLayer::createScene());
+    }
+}
 Scene* MenuLayer::createScene()
 {
 	auto scene = Scene::create();

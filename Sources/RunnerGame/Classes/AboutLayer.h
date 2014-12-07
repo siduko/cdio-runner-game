@@ -15,6 +15,7 @@ public:
 	AboutLayer();
 	~AboutLayer();
 	static Scene* createScene();
+	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
 	CREATE_FUNC(AboutLayer);
 };
 #endif // AboutLayer_h__

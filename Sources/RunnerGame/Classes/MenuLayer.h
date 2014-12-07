@@ -11,6 +11,7 @@ class MenuLayer:public Layer
 public:
 	static Scene* createScene();
 	virtual bool init();
+	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
 	CREATE_FUNC(MenuLayer);
 };
 

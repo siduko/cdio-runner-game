@@ -14,32 +14,32 @@ bool ChapterLayer::init()
 {
 	if (!Layer::init())
 		return false;
-
+	this->setKeyboardEnabled(true);
 	stringstream ss;
 	string temp;
 
 	auto wSize = Director::getInstance()->getWinSize();
 
-	auto bg = Sprite::create("Icons/background.png");
-	bg->setPosition(ccp(wSize.width / 2, wSize.height / 2));
-	this->addChild(bg, 1);
+	//auto bg = Sprite::create("Icons/background.png");
+	//bg->setPosition(ccp(wSize.width / 2, wSize.height / 2));
+	//this->addChild(bg, 1);
 
 	auto panelBorder = Sprite::create("Icons/BaseNewBorder.png");
 	panelBorder->setPosition(ccp(wSize.width / 2, wSize.height / 2));
 
 	auto chapterSelected = Sprite::create("Icons/ChapterSelect.png");
-	chapterSelected->setPosition(ccp(wSize.width*0.5f, wSize.height*0.85f));
+	chapterSelected->setPosition(ccp(wSize.width*0.5f, wSize.height*0.8f));
 	ScrollView* scrollView = ScrollView::create();
 	scrollView->setDirection(ScrollView::Direction::HORIZONTAL);
 	scrollView->setContentSize(Size(615, 369));
-	scrollView->setBackGroundImage("Icons/BaseNew.png");
+	scrollView->setBackGroundImage("Icons/background.png");
 	scrollView->setClippingEnabled(true);
 	scrollView->setPosition(ccp(wSize.width / 2, wSize.height / 2));
 	scrollView->setAnchorPoint(ccp(0.5, 0.5));
 
-	this->addChild(scrollView, 2);
-	this->addChild(panelBorder, 3);
-	this->addChild(chapterSelected, 3);
+	this->addChild(scrollView);
+	//this->addChild(panelBorder, 3);
+	this->addChild(chapterSelected);
 
 	ValueVector chapters = DataController::getInstance()->getChapters();
 	float lastPos = scrollView->getContentSize().width / 2;
@@ -49,7 +49,7 @@ bool ChapterLayer::init()
 		ValueMap chapter = chapters[i].asValueMap();
 		Layout* layout = Layout::create();
 		layout->setBackGroundImage("Chapters_chapterBackground.png");
-		layout->setPosition(ccp(lastPos + padding, wSize.height*0.6));
+		layout->setPosition(ccp(lastPos + padding, wSize.height*0.55));
 		layout->setContentSize(Size(250,212));
 		layout->setAnchorPoint(ccp(0.5, 0.5));
 
@@ -90,13 +90,14 @@ bool ChapterLayer::init()
 			switch (type)
 			{
 			case cocos2d::ui::Widget::TouchEventType::BEGAN:
-				UserDefault::getInstance()->setIntegerForKey("ChapterSelected", i);
-				if (chapter["Locked"].asInt()==0)
-					Director::getInstance()->replaceScene(LevelsLayer::createScene());
+
 				break;
 			case cocos2d::ui::Widget::TouchEventType::MOVED:
 				break;
 			case cocos2d::ui::Widget::TouchEventType::ENDED:
+				UserDefault::getInstance()->setIntegerForKey("ChapterSelected", i);
+								if (chapter["Locked"].asInt()==0)
+									Director::getInstance()->replaceScene(LevelsLayer::createScene());
 				break;
 			case cocos2d::ui::Widget::TouchEventType::CANCELED:
 				break;
@@ -133,7 +134,15 @@ bool ChapterLayer::init()
 	SimpleAudioEngine::getInstance()->playBackgroundMusic("Audios/Mishief Stroll_bg.wav", true);
 	return true;
 }
-
+void ChapterLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event *event)
+{
+    if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) {
+    	Director::getInstance()->replaceScene(MenuLayer::createScene());
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_MENU)
+    {
+    }
+}
 Scene* ChapterLayer::createScene()
 {
 	auto scene = Scene::create();

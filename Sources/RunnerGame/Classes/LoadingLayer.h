@@ -14,7 +14,11 @@ public:
 	static Scene* createScene();
 	bool init();
 	void update(float dt);
+	virtual bool onTouchBegan(Touch *touch, Event *unused_event);
+	virtual void onTouchEnded(Touch *touch, Event *unused_event);
 	CREATE_FUNC(LoadingLayer);
+private:
+	bool isLoaded;
 };
 #endif // LoadingLayer_h__
 
