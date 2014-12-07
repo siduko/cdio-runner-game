@@ -90,6 +90,9 @@
     <ClCompile Include="..\Classes\AboutLayer.cpp">
       <Filter>Classes\Layers</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\AdmobHelper.cpp">
+      <Filter>Classes\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\AboutLayer.h">
       <Filter>Classes\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AdmobHelper.h">
+      <Filter>Classes\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

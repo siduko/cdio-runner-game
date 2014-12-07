@@ -2,7 +2,6 @@
 
 
 float Utils::randomValueBetween(float low, float high){
-	srand(time(NULL));
 	return (((float)rand() / RAND_MAX) * (high - low)) + low;
 }
 int Utils::randomValueBetween(int low, int high){

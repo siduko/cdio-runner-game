@@ -15,10 +15,16 @@ bool HubLayer::init()
 {
 	if (!Layer::init())
 		return false;
+	this->setKeyboardEnabled(true);
 	auto wSize = Director::getInstance()->getWinSize();
-
+	string strLevel = "Level " + Utils::to_string(UserDefault::getInstance()->getIntegerForKey("ChapterSelected")+1) + "-" + Utils::to_string(UserDefault::getInstance()->getIntegerForKey("LevelSelected")+1);
+	auto lbCurrentLevel = Text::create(strLevel, DataController::getInstance()->getGameSettings()["GameFont"].asString(), 30);
+	//lbCurrentLevel->setColor(ccc3(149, 165, 166));
+	lbCurrentLevel->setPosition(ccp(wSize.width*0.75f, wSize.height*0.1f));
+	this->addChild(lbCurrentLevel);
 	auto coinIcon = ImageView::create("Icons/playerlayer_0000s_0005_hudCoin.png");
 	coinIcon->setPosition(ccp(wSize.width*0.1f, wSize.height*0.85f));
+	coinIcon->setName("coinIcon");
 	this->addChild(coinIcon);
 	lbScore = Text::create("0", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 30);
 	lbScore->setPosition(ccp(wSize.width*0.2f, wSize.height*0.85f));
@@ -27,6 +33,7 @@ bool HubLayer::init()
 
 	auto healthIcon = ImageView::create("Icons/playerlayer_0000s_0001_heart_full.png");
 	healthIcon->setPosition(ccp(wSize.width*0.4f, wSize.height*0.85f));
+	healthIcon->setName("healthIcon");
 	this->addChild(healthIcon);
 	lbHealth = Text::create("0", DataController::getInstance()->getGameSettings()["GameFont"].asString(), 30);
 	lbHealth->setPosition(ccp(wSize.width*0.5f, wSize.height*0.85f));
@@ -250,13 +257,84 @@ void HubLayer::setScore(string value)
 {
 	lbScore->setString(value);
 }
+void HubLayer::addScoreChangeEffect(int score)
+{
+	this->score = score;
+	auto winSize = Director::getInstance()->getWinSize();
+	auto point_label = Sprite::create("Icons/playerlayer_0000s_0005_hudCoin.png");
+	//point_label->setColor(ccc3(149, 165, 166));
+	point_label->setScale(0.7f);
+	point_label->setVisible(false);
+	this->addChild(point_label);
+	point_label->setPosition(Vec2(winSize.width / 2, winSize.height / 2));
+	point_label->setVisible(true);
+	ccBezierConfig bezier;
+	bezier.controlPoint_1 = Point(Utils::randomValueBetween(winSize.width*0.3f, winSize.width*0.8f), Utils::randomValueBetween(winSize.height*0.3f, winSize.height*0.5f));
+	bezier.endPosition = this->getChildByName("coinIcon")->getPosition();
+	auto action = Sequence::create(BezierTo::create(2, bezier), CallFuncN::create([this](Object* pSender){
+		this->player->setScore(this->player->getScore() + this->score);
+		this->lbScore->setString(Utils::to_string(this->player->getScore()));
+		Node* point_label_score = (Node*)pSender;
+		point_label_score->removeFromParentAndCleanup(true);
+	}), NULL);
+	point_label->runAction(action);
+}
+void HubLayer::subHeartChangeEffect()
+{
+	auto winSize = Director::getInstance()->getWinSize();
+	auto point_label = Sprite::create("Icons/playerlayer_0000s_0001_heart_full.png");
+	//point_label->setColor(ccc3(230, 80, 80));
+	point_label->setScale(0.9f);
+	point_label->setVisible(false);
+	this->addChild(point_label);
+	point_label->setPosition(this->getChildByName("healthIcon")->getPosition());
+	point_label->setVisible(true);
+	auto fallingAction = EaseBounceIn::create(MoveBy::create(1.5f, Vec2(0, -winSize.height / 2)));
+
+	auto action = Sequence::create(Spawn::createWithTwoActions(fallingAction, FadeOut::create(1.5f)), CallFuncN::create([this](Object* pSender){
+		Node* point_label_score = (Node*)pSender;
+		point_label_score->removeFromParentAndCleanup(true);
+	}), NULL);
+	point_label->runAction(action);
+}
+
+void HubLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event *event)
+{
+    if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) {
+    	if(((Button*)this->getChildByName("btnMenu"))->isEnabled()){
+			this->getPlayer()->unscheduleUpdate();
+			((Button*)this->getChildByName("btnMenu"))->setEnabled(false);
+			((Layout*) this->getChildByName("PausePanel"))->runAction(Spawn::createWithTwoActions(FadeIn::create(0.5), EaseBounceIn::create(MoveBy::create(0.5, ccp(0, 500)))));
+			((Layer*)this->getParent())->pause();
+    	}else{
+    		this->getPlayer()->scheduleUpdate();
+			((Button*)this->getChildByName("btnMenu"))->setEnabled(true);
+			((Layout*) this->getChildByName("PausePanel"))->runAction(Spawn::createWithTwoActions(FadeOut::create(0.5), EaseBounceOut::create(MoveBy::create(0.5, ccp(0, -500)))));
+			((Layer*)this->getParent())->resume();
+    	}
+    }
+    else if(keyCode == EventKeyboard::KeyCode::KEY_MENU)
+    {
+    	if(((Button*)this->getChildByName("btnMenu"))->isEnabled()){
+			this->getPlayer()->unscheduleUpdate();
+			((Button*)this->getChildByName("btnMenu"))->setEnabled(false);
+			((Layout*) this->getChildByName("PausePanel"))->runAction(Spawn::createWithTwoActions(FadeIn::create(0.5), EaseBounceIn::create(MoveBy::create(0.5, ccp(0, 500)))));
+			((Layer*)this->getParent())->pause();
+		}else{
+			this->getPlayer()->scheduleUpdate();
+			((Button*)this->getChildByName("btnMenu"))->setEnabled(true);
+			((Layout*) this->getChildByName("PausePanel"))->runAction(Spawn::createWithTwoActions(FadeOut::create(0.5), EaseBounceOut::create(MoveBy::create(0.5, ccp(0, -500)))));
+			((Layer*)this->getParent())->resume();
+		}
+    }
+}
 
 void HubLayer::update(float delta)
 {
 	if (player)
 	{
 		lbVelocity->setString(Utils::to_string((int)this->player->getPhysicsBody()->getVelocity().x) + " m/s");
-		lbScore->setString(Utils::to_string(this->player->getScore()));
+		//lbScore->setString(Utils::to_string(this->player->getScore()));
 		EffectComponent* effectPlayer = (EffectComponent*)player->getEntityManager()->getComponentObjectByName("EffectComponent");
 		if (effectPlayer->getAlive())
 		{

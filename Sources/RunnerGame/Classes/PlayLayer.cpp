@@ -213,13 +213,15 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 
 		if (a->getCollisionBitmask() == DataController::getInstance()->getGameSettings()["CONTACT_PLAYER"].asInt()){
 			this->addEffect("blast", "Effects/blast%d.png", 9, b->getNode()->getPosition(), 1);
-			player->setScore(player->getScore() + ((Item*)b->getNode())->getScore());
+			//player->setScore(player->getScore() + ((Item*)b->getNode())->getScore());
+			this->getHubLayer()->addScoreChangeEffect(((Item*)b->getNode())->getScore());
 			b->getNode()->removeFromParentAndCleanup(true);
 		}
 		else
 		{
 			this->addEffect("blast", "Effects/blast%d.png", 9, a->getNode()->getPosition(), 1);
-			player->setScore(player->getScore() + ((Item*)a->getNode())->getScore());
+			//player->setScore(player->getScore() + ((Item*)a->getNode())->getScore());
+			this->getHubLayer()->addScoreChangeEffect(((Item*)a->getNode())->getScore());
 			a->getNode()->removeFromParentAndCleanup(true);
 		}
 		SimpleAudioEngine::getInstance()->playEffect("Audios/coin10.wav");
@@ -307,6 +309,7 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			player->setPlayerState(PlayerState::Hurt);
 			player->setActionTimeOut(1.0f);
 			player->setHealth(player->getHealth() - 1);
+			this->getHubLayer()->subHeartChangeEffect();
 			if (player->getHealth() <= 0)
 			{
 				UserDefault::getInstance()->setIntegerForKey("Score", player->getScore());
@@ -319,7 +322,8 @@ bool PlayLayer::onContactBegin(PhysicsContact &contact)
 			enemy->setResetActionTimeout(true);
 			enemy->setEnemyState(Enemy::EnemyState::Dead);
 			SimpleAudioEngine::getInstance()->playEffect("Audios/lose4.wav");
-			player->setScore(player->getScore() + 500);
+			//player->setScore(player->getScore() + 500);
+			this->getHubLayer()->addScoreChangeEffect(500);
 		}
 		return false;
 	}

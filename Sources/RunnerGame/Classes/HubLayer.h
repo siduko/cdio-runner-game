@@ -17,11 +17,15 @@ private:
 	Text* lbScore, *lbVelocity, *lbEffectTimer,*lbHealth;
 	ImageView* effectImage;
 	Player* player;
+	int score;
 public:
 	LoadingBar* powerJump;
 	Sprite* angleJump;
 	virtual bool init();
 	void setScore(string value);
+	void addScoreChangeEffect(int score);
+	void subHeartChangeEffect();
+	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, cocos2d::Event *event);
 	inline void setPlayer(Player* player){ this->player = player; }
 	inline Player* getPlayer(){
 		return this->player;
