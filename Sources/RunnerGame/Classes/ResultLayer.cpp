@@ -117,7 +117,6 @@ bool ResultLayer::init()
 			return true;
 
 		};
-
 		_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 		//end admod
 	auto btnReplay = Button::create("Icons/Reload_icon.png", "Icons/Reload_icon.png", "Icons/Reload_icon.png");

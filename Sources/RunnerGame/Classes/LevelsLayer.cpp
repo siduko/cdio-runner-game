@@ -42,7 +42,8 @@ bool LevelsLayer::init()
 
 	ScrollView* scrollView = ScrollView::create();
 	scrollView->setDirection(ScrollView::Direction::HORIZONTAL);
-	scrollView->setContentSize(Size(624,369));
+	//scrollView->setContentSize(Size(624,369));
+	scrollView->setContentSize(wSize);
 	scrollView->setClippingEnabled(true);
 	scrollView->setBackGroundImage("Icons/background.png");
 	scrollView->setPosition(ccp(wSize.width / 2, wSize.height / 2));
@@ -59,7 +60,7 @@ bool LevelsLayer::init()
 		ValueMap level = levels[i].asValueMap();
 		Layout* layout = Layout::create();
 		layout->setBackGroundImage("Icons/Base_1.png");
-		layout->setPosition(ccp(lastPos + padding, wSize.height*0.6));
+		layout->setPosition(ccp(lastPos + padding, wSize.height*0.5));
 		layout->setContentSize(Size(82, 93));
 		layout->setAnchorPoint(ccp(0.5, 0.5));
 

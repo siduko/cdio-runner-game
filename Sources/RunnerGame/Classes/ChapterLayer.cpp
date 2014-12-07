@@ -31,7 +31,7 @@ bool ChapterLayer::init()
 	chapterSelected->setPosition(ccp(wSize.width*0.5f, wSize.height*0.8f));
 	ScrollView* scrollView = ScrollView::create();
 	scrollView->setDirection(ScrollView::Direction::HORIZONTAL);
-	scrollView->setContentSize(Size(615, 369));
+	scrollView->setContentSize(wSize);
 	scrollView->setBackGroundImage("Icons/background.png");
 	scrollView->setClippingEnabled(true);
 	scrollView->setPosition(ccp(wSize.width / 2, wSize.height / 2));
@@ -49,7 +49,7 @@ bool ChapterLayer::init()
 		ValueMap chapter = chapters[i].asValueMap();
 		Layout* layout = Layout::create();
 		layout->setBackGroundImage("Chapters_chapterBackground.png");
-		layout->setPosition(ccp(lastPos + padding, wSize.height*0.55));
+		layout->setPosition(ccp(lastPos + padding, wSize.height*0.4));
 		layout->setContentSize(Size(250,212));
 		layout->setAnchorPoint(ccp(0.5, 0.5));
 

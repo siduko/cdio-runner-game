@@ -80,6 +80,9 @@
     <ClCompile Include="..\..\Classes\Utils.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Classes\AdmobHelper.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -162,6 +165,9 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Classes\Utils.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Classes\AdmobHelper.h">
       <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>

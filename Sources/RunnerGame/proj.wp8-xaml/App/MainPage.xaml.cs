@@ -25,6 +25,7 @@ using Windows.UI.Input;
 using System.Windows.Threading;
 using Microsoft.Phone.Info;
 using Windows.Graphics.Display;
+using GoogleAds;
 
 namespace PhoneDirect3DXamlAppInterop
 {
@@ -43,6 +44,18 @@ namespace PhoneDirect3DXamlAppInterop
         public MainPage()
         {
             InitializeComponent();
+
+            AdView bannerAd = new AdView
+            {
+                Format = AdFormats.SmartBanner,
+                AdUnitID = "MY_AD_UNIT_ID"
+            };
+            AdRequest adRequest = new AdRequest();
+            // Assumes we've defined a Grid that has a name
+            // directive of ContentPanel.
+            DrawingSurfaceBackground.Children.Add(bannerAd);
+            bannerAd.LoadAd(adRequest);
+
 #if DISPLAY_MEMORY
             StartTimer();
 #else
