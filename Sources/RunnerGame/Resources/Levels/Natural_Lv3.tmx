@@ -5,7 +5,7 @@
  </tileset>
  <layer name="Tile Layer 1" width="500" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt2s1Nw0AQBtC0g5QmuFAAd86BAiiAMuiWE5JlmR/H9n674/ek74QVDbPDTkRyuQAAAAAAAAAAAAAAAADA/Z7SBQAA//L4y8+em1UBAG28Dpq3hd/lY+VrAMCoqu+0zxUBgFFU399z9jkAFZxtf8/Z5wD32/pZ6F6vNbX2s9QqObs99vnDwTVW8375eR5fgnXtKf137R44hz3Ou+rMrLnbq+Ts1vTq6Dt16Tt7VVWcx5HuurmRa++R91956d1qn7eX7v/8LCr/n2j6fuWveRyxD1Wk+zhy6Ef6PrfP20v3f+ks0nW0mLUtz/SaKtJ9HDn0Iz0L5q+9dP+XziJdR4tZ2/JMr6ki3ceRQz/Ss2D+2kv3f+ks0nUcldskW57pNbciSfdx5KTPTs49x+mep5Pu/zTf0nUcleskW57pNdciSfdx5KTPTs49x+mep7OmV18p1Y3l
+   eJzt2sFNw0AQBdC0gxRRADcuFMCdc6AACqAMuuWEZFkOsDj23x2/J/1TLGsyO9mN4pxOAAAAAAAAAAAAAAAAAPB/T+kCAIA/efzhtefdqgCAfbwOmreF9/LReA8AGFX1M+2zIQAwiurn95zzHIAKjnZ+z7Wc5/ehGgF6tfZZ6K3uNdX6LLVKjq7lPH+4co+77css5f10fR5fgnXdUvpzbR84hlusd9WZadnbq+ToWnq19Z669J+9qirO40h73dzItffI96+89NnqPN9fuv/ztaj8O9H0+8pv8zhiH6pI93Hk0I/0fu4831+6/0trka5jj1lbc02vqSLdx5FDP9KzYP72l+7/0lqk69hj1tZc02uqSPdx5NCP9CyYv/2l+7+0Fuk6tsplkjXX9JpLkaT7OHLSayfHnuN0z9NJ93+ab+k6tsp5kjXX9JpzkaT7OHLSayfHnuN0z9Np6dUXyg6OTQ==
   </data>
  </layer>
  <objectgroup name="Objects">
@@ -66,7 +66,7 @@
     <property name="CollisionBitmask" value="3"/>
    </properties>
   </object>
-  <object name="Floor" type="Floor" x="1750" y="1050" width="3920" height="70">
+  <object name="Floor" type="Floor" x="1680" y="1050" width="3990" height="70">
    <properties>
     <property name="CollisionBitmask" value="3"/>
    </properties>
@@ -166,7 +166,7 @@
     <property name="CollisionBitmask" value="3"/>
    </properties>
   </object>
-  <object name="Floor" type="Floor" x="35002.1" y="0" width="584.556" height="24.714" rotation="-270.396">
+  <object name="Floor" type="Floor" x="35002.1" y="0" width="1390.58" height="33.3153" rotation="-270.396">
    <properties>
     <property name="CollisionBitmask" value="3"/>
    </properties>
@@ -1836,7 +1836,7 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="Item" type="Item" x="25516" y="751">
+  <object name="Item" type="Item" x="25538.7" y="771">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
     <property name="CollisionBitmask" value="4"/>
@@ -1846,7 +1846,7 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="Item" type="Item" x="25583.3" y="688.334">
+  <object name="Item" type="Item" x="25606" y="708.334">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
     <property name="CollisionBitmask" value="4"/>
@@ -1856,7 +1856,7 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="Item" type="Item" x="25443.3" y="688.334">
+  <object name="Item" type="Item" x="25466" y="708.334">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
     <property name="CollisionBitmask" value="4"/>
@@ -1866,7 +1866,7 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="Item" type="Item" x="25446" y="785.664">
+  <object name="Item" type="Item" x="25468.7" y="805.664">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
     <property name="CollisionBitmask" value="4"/>
@@ -1876,7 +1876,7 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="Item" type="Item" x="25584" y="719.667">
+  <object name="Item" type="Item" x="25606.7" y="739.667">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
     <property name="CollisionBitmask" value="4"/>
@@ -1886,7 +1886,7 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="Item" type="Item" x="25516" y="785.664">
+  <object name="Item" type="Item" x="25538.7" y="805.664">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
     <property name="CollisionBitmask" value="4"/>
@@ -1896,7 +1896,7 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="Item" type="Item" x="25513.3" y="688.334">
+  <object name="Item" type="Item" x="25536" y="708.334">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
     <property name="CollisionBitmask" value="4"/>
@@ -1906,7 +1906,7 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="Item" type="Item" x="25444" y="719.667">
+  <object name="Item" type="Item" x="25466.7" y="739.667">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
     <property name="CollisionBitmask" value="4"/>
@@ -1916,7 +1916,7 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="Item" type="Item" x="25446" y="751">
+  <object name="Item" type="Item" x="25468.7" y="771">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
     <property name="CollisionBitmask" value="4"/>
@@ -1926,7 +1926,7 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="Item" type="Item" x="25514" y="719.667">
+  <object name="Item" type="Item" x="25536.7" y="739.667">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
     <property name="CollisionBitmask" value="4"/>
@@ -1936,7 +1936,7 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="Item" type="Item" x="25586" y="785.664">
+  <object name="Item" type="Item" x="25608.7" y="805.664">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
     <property name="CollisionBitmask" value="4"/>
@@ -1946,7 +1946,7 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="Item" type="Item" x="25586" y="751">
+  <object name="Item" type="Item" x="25608.7" y="771">
    <properties>
     <property name="AnimationDelay" value="0.1"/>
     <property name="CollisionBitmask" value="4"/>
@@ -2676,7 +2676,7 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
-  <object name="StandEnemy" type="Enemy" x="918.5" y="907" width="51" height="58">
+  <object name="StandEnemy" type="Enemy" x="774.5" y="917" width="51" height="58">
    <properties>
     <property name="BeHitCount" value="2"/>
     <property name="BeHitPath" value="barnacle_hit%d.png"/>
@@ -2694,7 +2694,7 @@
     <property name="MovingPath" value="barnacle_bite%d.png"/>
    </properties>
   </object>
-  <object name="StandEnemy" type="Enemy" x="1066.5" y="915" width="51" height="58">
+  <object name="StandEnemy" type="Enemy" x="1208.5" y="915" width="51" height="58">
    <properties>
     <property name="BeHitCount" value="2"/>
     <property name="BeHitPath" value="barnacle_hit%d.png"/>
@@ -2712,7 +2712,7 @@
     <property name="MovingPath" value="barnacle_bite%d.png"/>
    </properties>
   </object>
-  <object name="StandEnemy" type="Enemy" x="2741.17" y="977.061" width="51" height="58">
+  <object name="StandEnemy" type="Enemy" x="24360.5" y="777" width="51" height="58">
    <properties>
     <property name="BeHitCount" value="2"/>
     <property name="BeHitPath" value="barnacle_hit%d.png"/>
@@ -2730,7 +2730,7 @@
     <property name="MovingPath" value="barnacle_bite%d.png"/>
    </properties>
   </object>
-  <object name="StandEnemy" type="Enemy" x="4132.08" y="971" width="51" height="58">
+  <object name="StandEnemy" type="Enemy" x="33110.5" y="497.667" width="51" height="58">
    <properties>
     <property name="BeHitCount" value="2"/>
     <property name="BeHitPath" value="barnacle_hit%d.png"/>
@@ -2748,205 +2748,7 @@
     <property name="MovingPath" value="barnacle_bite%d.png"/>
    </properties>
   </object>
-  <object name="StandEnemy" type="Enemy" x="7077.53" y="986.152" width="51" height="58">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="barnacle_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="barnacle_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="2"/>
-    <property name="GravityEnable" value="true"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="barnacle%d.png"/>
-    <property name="MoveTimeout" value="0.5"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="barnacle_bite%d.png"/>
-   </properties>
-  </object>
-  <object name="StandEnemy" type="Enemy" x="8932.08" y="980.091" width="51" height="58">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="barnacle_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="barnacle_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="2"/>
-    <property name="GravityEnable" value="true"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="barnacle%d.png"/>
-    <property name="MoveTimeout" value="0.5"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="barnacle_bite%d.png"/>
-   </properties>
-  </object>
-  <object name="StandEnemy" type="Enemy" x="10629" y="834.636" width="51" height="58">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="barnacle_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="barnacle_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="2"/>
-    <property name="GravityEnable" value="true"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="barnacle%d.png"/>
-    <property name="MoveTimeout" value="0.5"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="barnacle_bite%d.png"/>
-   </properties>
-  </object>
-  <object name="StandEnemy" type="Enemy" x="14291.6" y="988.212" width="51" height="58">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="barnacle_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="barnacle_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="2"/>
-    <property name="GravityEnable" value="true"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="barnacle%d.png"/>
-    <property name="MoveTimeout" value="0.5"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="barnacle_bite%d.png"/>
-   </properties>
-  </object>
-  <object name="StandEnemy" type="Enemy" x="16485.5" y="980.212" width="51" height="58">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="barnacle_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="barnacle_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="2"/>
-    <property name="GravityEnable" value="true"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="barnacle%d.png"/>
-    <property name="MoveTimeout" value="0.5"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="barnacle_bite%d.png"/>
-   </properties>
-  </object>
-  <object name="StandEnemy" type="Enemy" x="19630.5" y="895" width="51" height="58">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="barnacle_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="barnacle_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="2"/>
-    <property name="GravityEnable" value="true"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="barnacle%d.png"/>
-    <property name="MoveTimeout" value="0.5"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="barnacle_bite%d.png"/>
-   </properties>
-  </object>
-  <object name="StandEnemy" type="Enemy" x="22170.5" y="835" width="51" height="58">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="barnacle_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="barnacle_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="2"/>
-    <property name="GravityEnable" value="true"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="barnacle%d.png"/>
-    <property name="MoveTimeout" value="0.5"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="barnacle_bite%d.png"/>
-   </properties>
-  </object>
-  <object name="StandEnemy" type="Enemy" x="24422.5" y="767" width="51" height="58">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="barnacle_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="barnacle_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="2"/>
-    <property name="GravityEnable" value="true"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="barnacle%d.png"/>
-    <property name="MoveTimeout" value="0.5"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="barnacle_bite%d.png"/>
-   </properties>
-  </object>
-  <object name="StandEnemy" type="Enemy" x="26466.5" y="763" width="51" height="58">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="barnacle_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="barnacle_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="2"/>
-    <property name="GravityEnable" value="true"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="barnacle%d.png"/>
-    <property name="MoveTimeout" value="0.5"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="barnacle_bite%d.png"/>
-   </properties>
-  </object>
-  <object name="StandEnemy" type="Enemy" x="30066.5" y="619" width="51" height="58">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="barnacle_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="barnacle_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="2"/>
-    <property name="GravityEnable" value="true"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="barnacle%d.png"/>
-    <property name="MoveTimeout" value="0.5"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="barnacle_bite%d.png"/>
-   </properties>
-  </object>
-  <object name="StandEnemy" type="Enemy" x="33022.5" y="487" width="51" height="58">
-   <properties>
-    <property name="BeHitCount" value="2"/>
-    <property name="BeHitPath" value="barnacle_hit%d.png"/>
-    <property name="CollisionBitmask" value="8"/>
-    <property name="DeadCount" value="1"/>
-    <property name="DeadPath" value="barnacle_dead%d.png"/>
-    <property name="DynamicBody" value="true"/>
-    <property name="EnemyType" value="2"/>
-    <property name="GravityEnable" value="true"/>
-    <property name="ImageCount" value="1"/>
-    <property name="ImagePath" value="barnacle%d.png"/>
-    <property name="MoveTimeout" value="0.5"/>
-    <property name="MoveVelocity" value="30"/>
-    <property name="MovingCount" value="2"/>
-    <property name="MovingPath" value="barnacle_bite%d.png"/>
-   </properties>
-  </object>
-  <object name="FlyEnemy" type="Enemy" x="5781.58" y="682.303" width="56" height="48">
+  <object name="FlyEnemy" type="Enemy" x="5710.91" y="650.303" width="56" height="48">
    <properties>
     <property name="BeHitCount" value="2"/>
     <property name="BeHitPath" value="bee_hit%d.png"/>
@@ -2959,7 +2761,7 @@
     <property name="ImageCount" value="1"/>
     <property name="ImagePath" value="bee%d.png"/>
     <property name="MoveTimeout" value="4"/>
-    <property name="MoveVelocity" value="30"/>
+    <property name="MoveVelocity" value="50"/>
     <property name="MovingCount" value="2"/>
     <property name="MovingPath" value="bee_fly%d.png"/>
    </properties>
@@ -3000,7 +2802,7 @@
     <property name="MovingPath" value="bee_fly%d.png"/>
    </properties>
   </object>
-  <object name="FlyEnemy" type="Enemy" x="18812" y="776" width="56" height="48">
+  <object name="FlyEnemy" type="Enemy" x="18690" y="700" width="56" height="48">
    <properties>
     <property name="BeHitCount" value="2"/>
     <property name="BeHitPath" value="bee_hit%d.png"/>
@@ -3013,7 +2815,7 @@
     <property name="ImageCount" value="1"/>
     <property name="ImagePath" value="bee%d.png"/>
     <property name="MoveTimeout" value="4"/>
-    <property name="MoveVelocity" value="30"/>
+    <property name="MoveVelocity" value="50"/>
     <property name="MovingCount" value="2"/>
     <property name="MovingPath" value="bee_fly%d.png"/>
    </properties>
@@ -3075,6 +2877,360 @@
    </properties>
   </object>
   <object name="Floor" type="Floor" x="18550" y="1120" width="280" height="70" rotation="-270">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+   </properties>
+  </object>
+  <object name="EffectItem" type="EffectItem" x="1657.5" y="769.5" width="93" height="93">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="6"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="effectIcon%d.png"/>
+   </properties>
+  </object>
+  <object name="EffectItem" type="EffectItem" x="5971.5" y="771.5" width="93" height="93">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="6"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="effectIcon%d.png"/>
+   </properties>
+  </object>
+  <object name="EffectItem" type="EffectItem" x="12874.7" y="838.348" width="93" height="93">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="6"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="effectIcon%d.png"/>
+   </properties>
+  </object>
+  <object name="EffectItem" type="EffectItem" x="25690" y="700" width="93" height="93">
+   <properties>
+    <property name="AnimationDelay" value="0.1"/>
+    <property name="CollisionBitmask" value="6"/>
+    <property name="DynamicBody" value="false"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="effectIcon%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="2722.67" y="994.5" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="3"/>
+    <property name="MoveVelocity" value="50"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="4142.79" y="992.682" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="3"/>
+    <property name="MoveVelocity" value="50"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="6860" y="996.5" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="3"/>
+    <property name="MoveVelocity" value="50"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="6999" y="996.5" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="3"/>
+    <property name="MoveVelocity" value="50"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="9651" y="925.5" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="10"/>
+    <property name="MoveVelocity" value="50"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="10812" y="852.5" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="3"/>
+    <property name="MoveVelocity" value="50"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="10710" y="851.167" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="3"/>
+    <property name="MoveVelocity" value="50"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="14318.5" y="989.652" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="3"/>
+    <property name="MoveVelocity" value="50"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="16406.4" y="983.591" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="3"/>
+    <property name="MoveVelocity" value="50"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="19714" y="918.5" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="3"/>
+    <property name="MoveVelocity" value="50"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="22122" y="848.5" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="3"/>
+    <property name="MoveVelocity" value="50"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="StandEnemy" type="Enemy" x="24424.5" y="777" width="51" height="58">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="barnacle_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="barnacle_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="2"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="barnacle%d.png"/>
+    <property name="MoveTimeout" value="0.5"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="barnacle_bite%d.png"/>
+   </properties>
+  </object>
+  <object name="StandEnemy" type="Enemy" x="24876.5" y="777" width="51" height="58">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="barnacle_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="barnacle_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="2"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="barnacle%d.png"/>
+    <property name="MoveTimeout" value="0.5"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="barnacle_bite%d.png"/>
+   </properties>
+  </object>
+  <object name="StandEnemy" type="Enemy" x="24812.5" y="777" width="51" height="58">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="barnacle_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="barnacle_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="2"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="barnacle%d.png"/>
+    <property name="MoveTimeout" value="0.5"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="barnacle_bite%d.png"/>
+   </properties>
+  </object>
+  <object name="MoveEnemy" type="Enemy" x="26389.3" y="781.167" width="72" height="51">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="spider_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="spider_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="0"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="spider%d.png"/>
+    <property name="MoveTimeout" value="3"/>
+    <property name="MoveVelocity" value="50"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="spider_walk%d.png"/>
+   </properties>
+  </object>
+  <object name="StandEnemy" type="Enemy" x="29940.5" y="709" width="51" height="58">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="barnacle_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="barnacle_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="2"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="barnacle%d.png"/>
+    <property name="MoveTimeout" value="0.5"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="barnacle_bite%d.png"/>
+   </properties>
+  </object>
+  <object name="StandEnemy" type="Enemy" x="33174.5" y="497.667" width="51" height="58">
+   <properties>
+    <property name="BeHitCount" value="2"/>
+    <property name="BeHitPath" value="barnacle_hit%d.png"/>
+    <property name="CollisionBitmask" value="8"/>
+    <property name="DeadCount" value="1"/>
+    <property name="DeadPath" value="barnacle_dead%d.png"/>
+    <property name="DynamicBody" value="true"/>
+    <property name="EnemyType" value="2"/>
+    <property name="GravityEnable" value="true"/>
+    <property name="ImageCount" value="1"/>
+    <property name="ImagePath" value="barnacle%d.png"/>
+    <property name="MoveTimeout" value="0.5"/>
+    <property name="MoveVelocity" value="30"/>
+    <property name="MovingCount" value="2"/>
+    <property name="MovingPath" value="barnacle_bite%d.png"/>
+   </properties>
+  </object>
+  <object name="EndGame" type="EndGame" x="34860" y="0" width="140" height="630">
+   <properties>
+    <property name="AnimationDelay" value="0.5"/>
+    <property name="CollisionBitmask" value="5"/>
+    <property name="DynamicBody" value="false"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="-14.1818" y="1397.58" width="1399.98" height="38" rotation="-89.9564">
    <properties>
     <property name="CollisionBitmask" value="3"/>
    </properties>

@@ -473,5 +473,15 @@
     <property name="DynamicBody" value="false"/>
    </properties>
   </object>
+  <object name="Floor" type="Floor" x="-6.9697" y="1403.03" width="1396.77" height="21.5283" rotation="-89.7588">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+   </properties>
+  </object>
+  <object name="Floor" type="Floor" x="0" y="0" width="3504.85" height="30.6061">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
