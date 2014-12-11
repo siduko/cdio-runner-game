@@ -61,7 +61,7 @@ void EffectComponent::update(float dt)
 				_runningEffect = None;
 				break;
 			case FastEffect:
-				_parent->setVelocity(100);
+				_parent->setVelocity(200);
 				_parent->setAutoControlVelocity(true);
 				_runningEffect = None;
 				break;

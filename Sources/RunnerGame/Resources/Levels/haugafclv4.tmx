@@ -1901,5 +1901,10 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
+  <object name="Floor" type="Floor" x="34926.8" y="220.909" width="70" height="490">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

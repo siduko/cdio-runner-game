@@ -2234,5 +2234,10 @@
     <property name="Score" value="100"/>
    </properties>
   </object>
+  <object name="Floor" type="Floor" x="34930" y="210" width="70" height="350">
+   <properties>
+    <property name="CollisionBitmask" value="3"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
